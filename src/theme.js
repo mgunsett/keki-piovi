@@ -23,7 +23,7 @@ const brand = {
   bone:       '#F3EEE3', // crema de la camiseta (texto principal)
   boneWarm:   '#D8C088', // dorado suave (detalles)
   rec:        '#EF2D38', // rojo del indicador REC
-  bgRef:      '#B89B5E1a', // bg de hover en cajas (dorado sutil)
+  bgRef:      '#d9be7e21', // bg de hover en cajas (dorado sutil)
   accent:     '#EF2D38', // rojo pincha (scrollbar y acentos)
   accentMid:  '#C4151F', // rojo medio (gradientes)
   accentDeep: '#7C0E15', // rojo profundo (gradientes)

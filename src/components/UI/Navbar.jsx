@@ -116,7 +116,7 @@ export default function Navbar() {
                 onClick={(e) => handleLink(e, link.href)}
                 position="relative"
                 px={4}
-                py={'5px'}
+                py={'4px'}
                 cursor="pointer"
               >
                 {isActive && (
@@ -126,7 +126,7 @@ export default function Navbar() {
                     inset={0}
                     borderRadius="10px"
                     bg="brand.amber2"
-                    boxShadow="0 4px 18px rgba(239,45,56,0.35)"
+                    // boxShadow="0 4px 18px rgba(239,45,56,0.35)"
                     transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                   />
                 )}
