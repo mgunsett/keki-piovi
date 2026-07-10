@@ -6,7 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import MatchBox from './MatchBox'
 import { playerData } from '../../data/playerData'
 import useMatches from '../../hooks/useMatches'
-import heroBg from '@assets/polaco3.png'
+import heroBg from '@assets/polaco3.webp'
 import '../../styles/globals.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -25,7 +25,7 @@ function PlayerPanel() {
       <Text
         className="player-number"
         fontFamily="heading"
-        fontSize={{ base: '120px', md: '100px' }}
+        fontSize={{ base: '90px', md: '100px' }}
         ml={{ base: '-10px', md: 0 }}
         lineHeight={0.9}
         borderColor={'brand.amber'}
@@ -53,7 +53,7 @@ function PlayerPanel() {
           </Text>
         </Flex>
         <Flex justifyContent='flex-start' alignItems={'flex-end'} gap={{base:'8px',md:'10px'}} spacing={1} mt={'3px'} ml={-1}>
-          <Image src={playerData.logoCurrentClub} ml={{base:'2px',md:'none'}} w={{ base: '20px', md: '28px' }} h={{base:'20px',md:'30px'}} />
+          <Image src={playerData.logoCurrentClub} ml={{base:'2px',md:'none'}} w={{ base: '16px', md: '24px' }} h={{base:'20px',md:'30px'}} />
           <Text fontFamily="mono" fontSize={{base:'xs',md:"md"}} color="brand.amber" letterSpacing="wider">
             {playerData.currentClub}
           </Text>
@@ -130,7 +130,7 @@ export default function Hero() {
           display="flex"
           justifyContent="center"
           alignItems={{ base: 'flex-end', md: 'flex-start' }}
-          mt={{ base: 10, md: 12 }}
+          mt={{ base: 12, md: 12 }}
           ml={{ base: '0%', md: '4%' }}
           sx={{
             maskImage:
@@ -145,7 +145,7 @@ export default function Hero() {
             aria-hidden="true"
             draggable={false}
             // Controlá el tamaño acá 👇
-            w={{ base: '100vw', md: '62vw' }}
+            w={{ base: '100vw', md: '28vw' }}
             h={{ base: '100vh', md: 'auto' }}
             objectFit={{ base: 'cover', md: 'contain' }}
             objectPosition={{ base: 'center', md: 'center top' }}
@@ -160,10 +160,11 @@ export default function Hero() {
           position="absolute"
           inset={0}
           zIndex={{base: 3, md: 5,  lg:9}}
-          pl={{ base: '27%', lg: '10%' }}
+          pl={{ base: '18%', lg: '0%' }}
           pt={{ base: '24%', lg: '5%' }}
+          pr={{ base: '0%', lg: '15%' }}
           display="flex"
-          justifyContent={{ base: 'flex-start', lg: 'flex-start' }}
+          justifyContent={{ base: 'flex-start', lg: 'flex-end' }}
           alignItems={{ base: 'flex-start', lg: 'flex-start' }}
           pointerEvents="none"
         >
@@ -177,7 +178,7 @@ export default function Hero() {
               src={playerData.image}
               alt={`${playerData.displayName}, ${playerData.position.toLowerCase()} profesional de ${playerData.currentClub}`}
               h={{ base: '90%', lg: '100%' }}
-              w={{ base: '58vw', lg: '30vw' }}
+              w={{ base: '82vw', lg: '30vw' }}
               objectFit="contain"
               objectPosition="bottom center"
               draggable={false}
@@ -193,7 +194,7 @@ export default function Hero() {
           pointerEvents="none"
           display="flex"
           flexDir="column"
-          alignItems='center'
+          alignItems='flex-start'
           justifyContent={{ base: 'flex-start', md: 'center' }}
           pl={{ base: 0, lg: '15%' }}
           pt={{ base: '22%', lg: '0%' }}
@@ -238,8 +239,8 @@ export default function Hero() {
         <Box
           className="player-info"
           position="absolute"
-          bottom={{ base: '37%', lg: '22%' }}
-          left={{ base: '5%', lg: '35%' }}
+          bottom={{ base: '40%', lg: '22%' }}
+          left={{ base: '5%', lg: '15%' }}
           zIndex={15}
         >
           <PlayerPanel />

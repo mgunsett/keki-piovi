@@ -3,20 +3,18 @@ import { FaXTwitter } from 'react-icons/fa6'
 import { IoMdStats } from 'react-icons/io'
 
 //Hero
-import polaco1 from '@assets/polaco1.png'
+import polaco1 from '@assets/polaco1.webp'
 
 import argentina from '@assets/argentina.webp'
 import universitario from '@assets/escudo_univ.webp'
 //Escudos trayectoria
-import escudoAtlParana from '@assets/escudos/escudo_atlparana.webp'
-import escudoNewells from '@assets/escudos/escudo_newells.webp'
-import escudoAlhali from '@assets/escudos/escudo_alhali.webp'
-import escudoCentralCordoba from '@assets/escudos/escudo_centralcordoba.webp'
-import escudoChaco from '@assets/escudos/escudo_chaco.webp'
+import escudoEstudiantes from '@assets/escudos/escudo_estudiantes.webp'
 import escudoLigadequito from '@assets/escudos/escudo_ligadequito.webp'
-import escudoSanjose from '@assets/escudos/escudo_sanjose.webp'
-import escudoUcatolica from '@assets/escudos/escudo_ucatolica.webp'
-import escudoAucas from '@assets/escudos/escudo_aucas.webp'
+import escudoAlmagro from '@assets/escudos/escudo_almagro.webp'
+import escudoArsenal from '@assets/escudos/escudo_arsenal.webp'
+import escudoFenix from '@assets/escudos/escudo_fenix.webp'
+import escudoLamadrid from '@assets/escudos/escudo_lamadrid.webp'
+import escudoMessina from '@assets/escudos/escudo_messina.webp'
 //Gallery
 import image1 from '@assets/gallery/image1.webp'
 import image2 from '@assets/gallery/image2.webp'
@@ -37,15 +35,15 @@ import ledsports from '@assets/contact3.webp'
 import moon from '@assets/contact4.webp'
 
 
-const name = 'LISANDRO'
-const fullName = 'ALZUGARAY'
+const name = 'EZEQUIEL'
+const fullName = 'PIOVI'
 
 export const playerData = {
   name,
   fullName,
   initials: `${name[0]}${fullName[0]}`, // iniciales para logos (PF)
   displayName: `${name} ${fullName}`,   // nombre completo para textos legales / alt
-  number: 30,
+  number: 21,
   position: 'Mediocampista',
   positionShort: 'MID',
   nationality: 'Argentina',
@@ -55,9 +53,9 @@ export const playerData = {
   weight: '70kg',
   foot: 'Izquierdo',
   birthDate: '17 / 04 / 1990',
-  birthPlace: 'Viale, Argentina',
-  currentClub: 'Universitario',
-  logoCurrentClub: universitario,
+  birthPlace: 'Morón, Buenos Aires, Argentina',
+  currentClub: 'Estudiantes de La Plata',
+  logoCurrentClub: escudoEstudiantes,
   image: polaco1,
   
 
@@ -82,82 +80,58 @@ export const playerData = {
 
   clubs: [
     {
-      name:    'Universitario',
-      country: 'Perú',
-      years:   '2026 — Actualidad',
-      logo:    universitario,
-      titles:  [],
+      name:    'Estudiantes de La Plata',
+      country: 'Argentina',
+      years:   '2025 — Actualidad',
+      logo:    escudoEstudiantes,
+      titles:  ['Torneo Clausura 2025', 'Trofeo de Campeones 2025'],
       info:    '',
     },
     {
       name:    'Liga de Quito',
       country: 'Ecuador',
-      years:   '2023 — 2025',
+      years:   '2020 — 2024',
       logo:    escudoLigadequito,
-      titles:  ['Serie A Ecuador 2023','Copa Sudamericana 2023', 'Serie A Ecuador 2024', 'Supercopa Ecuador 2024'],
-      info:    '',
+      titles:  ['Supercopa Ecuador 2021','Serie A Ecuador 2023','Copa Sudamericana 2023', 'Serie A Ecuador 2024'],
+      info:    ['Once ideal de la Copa Sudamericana 2023','Mejor volante central de la LigaPro Serie A 2023', 'Once ideal de la LigaPro Serie A 2023', 'Mejor volante defensivo de la LigaPro Serie A 2024', 'Once ideal de la LigaPro Serie A 2024', 'Once ideal de la LigaPro Serie A 2024'],
     },
     {
-      name:    'Al-Hali Saudi',
-      country: 'Arabia Saudita',
-      years:   '2022',
-      logo:    escudoAlhali,
+      name:    'Arsenal de Sarandí',
+      country: 'Argentina',
+      years:   '2016 - 2019',
+      logo:    escudoArsenal,
       titles:  [],
       info:    '',
     },
     {
-      name:    'Universidad Católica',
-      country: 'Ecuador',
+      name:    'Almagro',
+      country: 'Argentina',
       years:   '2021 — 2022',
-      logo:    escudoUcatolica,
-      titles:  [],
-      info:    '11 ideal de la Serie A de Ecuador 2021',
-    },
-    {
-      name:    'S.D Aucas',
-      country: 'Ecuador',
-      years:   '2020',
-      logo:    escudoAucas,
+      logo:    escudoAlmagro,
       titles:  [],
       info:    '',
     },
     {
-      name:    'Central Córdoba',
+      name:    'Fénix',
       country: 'Argentina',
-      years:   '2019',
-      logo:    escudoCentralCordoba,
+      years:   '2015 - 2016',
+      logo:    escudoFenix,
       titles:  [],
       info:    '',
     },
     {
-      name:    'Newell\'s Old Boys',
+      name:    'General Lamadrid',
       country: 'Argentina',
-      years:   '2018',
-      logo:    escudoNewells,
+      years:   '2014',
+      logo:    escudoLamadrid,
       titles:  [],
       info:    '',
     },
     {
-      name:    'Chaco For Ever',
-      country: 'Argentina',
-      years:   '2013-2014 / 2017',
-      logo:    escudoChaco,
-      titles:  [],
-      info:    '',
-    },
-    {
-      name:    'San José',
-      country: 'Argentina',
-      years:   '2016 — 2017',
-      logo:    escudoSanjose,
-      titles:  [],
-      info:    '',
-    },
-    {
-      name:    'Atlético Paraná',
-      country: 'Argentina',
-      years:   '2011-2013 / 2015',
-      logo:    escudoAtlParana,
+      name:    'A.C.R Messina',
+      country: 'Italia',
+      years:   '2013 - 2014',
+      logo:    escudoMessina,
       titles:  [],
       info:    '',
     },
@@ -167,36 +141,36 @@ export const playerData = {
     {
       id: 'v1',
       // instagramId: código del reel. En https://www.instagram.com/reel/DXXXXXXXXXX/ es "DXXXXXXXXXX"
-      instagramId: 'DXvelmBtUmJ',
-      title: 'Libertadores 26',
-      fullTitle: 'Lisandro Alzugaray | Jugadas destacadas 2026',
-      season: 'GOL VS NACIONAL',
-      league: 'CONMEBOL Libertadores 2026',
+      instagramId: 'DS5j1OFkXzC',
+      title: 'Resumen 2025',
+      fullTitle: 'Keki Piovi | Jugadas destacadas',
+      season: 'Highlights',
+      league: 'Temporada 2025',
       thumbnail: image7,
       cover: image7,
       category: 'Highlights',
     },
     {
       id: 'v2',
-      instagramId: 'DWEUMU0AL2f',
-      title: '2026',
-      fullTitle: 'Lisandro Alzugaray | Compilado de goles',
-      season: 'Compilado',
-      league: 'CONMEBOL Libertadores 2025',
+      instagramId: 'DSi6ZzcETed',
+      title: 'Campeonato Estudiantes 2025',
+      fullTitle: 'Keki Piovi | Compilado',
+      season: 'Campeonato 2025',
+      league: 'Campeon Liga Argentina',
       thumbnail: image1,
       cover: image1,
       category: 'Goles',
     },
     {
       id: 'v3',
-      instagramId: 'DTlGApKkWzo',
-      title: 'Temporada 2025',
-      fullTitle: 'Lisandro Alzugaray | Asistencias y juego',
-      season: 'Liga de Quito',
-      league: 'Liga de Quito',
+      instagramId: 'DC2GDxaRMKs',
+      title: 'Temporada 2024',
+      fullTitle: 'Keki Piovi | Asistencias y Gol',
+      season: 'Liga de Quito 2024',
+      league: 'Temporada 2024',
       thumbnail: image4,
       cover: image4,
-      category: 'Asistencias',
+      category: 'Liga de Quito',
     },
   ],
 

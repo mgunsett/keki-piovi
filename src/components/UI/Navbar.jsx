@@ -1,25 +1,29 @@
 import { useState, useEffect, useRef } from 'react'
-import { Box, Flex, Text, HStack, VStack } from '@chakra-ui/react'
+import { Box, Flex, Text, HStack } from '@chakra-ui/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { gsap } from 'gsap'
 import { playerData } from '../../data/playerData'
+import { useActiveSection } from '../../hooks/useActiveSection'
+import { MobileMenu } from './MobileMenu'
 
 const MotionBox = motion(Box)
 
-const navLinks = [
-  { label: 'Home', href: '#hero'},
+export const navLinks = [
+  { label: 'Home',         href: '#hero' },
   { label: 'Estadísticas', href: '#estadisticas' },
   { label: 'Videos',       href: '#videos' },
   { label: 'Galería',      href: '#galeria' },
   { label: 'Prensa',       href: '#prensa' },
 ]
 
-const mobileLinks = [
+export const mobileLinks = [
   ...navLinks,
   { label: 'Contacto', href: '#contact' },
 ]
 
-function scrollTo(href) {
+const sectionHrefs = mobileLinks.map((l) => l.href)
+
+export function scrollTo(href) {
   const target = document.querySelector(href)
   if (!target) return
   if (window.__lenis) {
@@ -30,15 +34,20 @@ function scrollTo(href) {
 }
 
 export default function Navbar() {
-  const [scrolled, setScrolled]   = useState(false)
-  const [menuOpen, setMenuOpen]   = useState(false)
-  const navRef                    = useRef(null)
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const navRef                  = useRef(null)
+  const active                  = useActiveSection(sectionHrefs)
 
   useEffect(() => {
-    gsap.fromTo(navRef.current,
-      { y: -60, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.9, ease: 'expo.out', delay: 0.5 }
-    )
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const tween = reduced
+      ? gsap.set(navRef.current, { opacity: 1 })
+      : gsap.fromTo(navRef.current,
+          { y: -60, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.9, ease: 'expo.out', delay: 0.5 }
+        )
+    return () => tween.kill()
   }, [])
 
   useEffect(() => {
@@ -47,6 +56,12 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handler)
   }, [])
 
+  // Bloquear el scroll del body mientras el menú fullscreen está abierto
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [menuOpen])
+
   const handleLink = (e, href) => {
     e.preventDefault()
     setMenuOpen(false)
@@ -54,213 +69,139 @@ export default function Navbar() {
   }
 
   return (
-    <Box
-      ref={navRef}
-      as="nav"
-      position="fixed"
-      top={{ base: 3, lg: 2  }}
-      left={0}
-      right={0}
-      zIndex={1000}
-      px={{ base: 4, lg: 4 }}
-      style={{ opacity: 0 }}
-    >
+    <Box ref={navRef} as="nav" position="fixed" top={0} left={0} right={0} zIndex={1000} style={{ opacity: 0 }}>
+      <AnimatePresence>
+        {menuOpen && <MobileMenu onNavigate={handleLink} active={active} />}
+      </AnimatePresence>
+
       <Flex
+        position="relative"
+        zIndex={2}
         align="center"
         justify="space-between"
-        maxW="1100px"
+        maxW="1200px"
         mx="auto"
-        px={{ base: 4, lg: 7 }}
-        py={{ base: 1.5, lg: 1 }}
-        borderRadius={{ base: '18px', lg: '10px' }}
-        border="1px solid"
-        borderColor={'brand.amber'}
-        bg={'brand.dark3'}
-        backdropFilter="blur(10px) saturate(140%)"
-        boxShadow={scrolled
-          ? '0 10px 34px rgba(0,0,0,0.40)'
-          : '0 6px 26px rgba(0,0,0,0.22)'}
-        transition="background 0.35s, border-color 0.35s, box-shadow 0.35s"
+        px={{ base: 4, lg: 8 }}
+        py={{ base: 3, lg: 3 }}
+        bg={scrolled || menuOpen ? 'brand.dark3' : 'transparent'}
+        backdropFilter={scrolled || menuOpen ? 'blur(14px) saturate(140%)' : 'none'}
+        borderBottom="1px solid"
+        borderColor={scrolled && !menuOpen ? 'brand.amberLight' : 'transparent'}
+        transition="background 0.35s, border-color 0.35s, backdrop-filter 0.35s"
       >
-        {/* Logo */}
-        <Text
-          fontFamily="heading"
-          fontSize="2xl"
-          letterSpacing="wider"
-          color="brand.amber"
-          cursor="pointer"
-          onClick={(e) => handleLink(e, '#hero')}
-          _hover={{ color: 'brand.brown' }}
-          transition="color 0.2s"
-        >
-          {playerData.initials}<Box as="span" color="brand.boneWarm">_</Box>
-        </Text>
+        {/* Logo: bastón rojo + iniciales + guión dorado */}
+        <Flex align="center" gap={2.5} cursor="pointer" onClick={(e) => handleLink(e, '#hero')} role="group">
+          <Box
+            w="5px"
+            h="22px"
+            bg="brand.amber"
+            transform="skewX(-12deg)"
+            transition="background 0.25s"
+            _groupHover={{ bg: 'brand.dorado' }}
+          />
+          <Text fontFamily="heading" fontSize="2xl" letterSpacing="wider" color="brand.bone" lineHeight={1}>
+            {playerData.initials}<Box as="span" color="brand.dorado">_</Box>
+          </Text>
+        </Flex>
 
-        {/* Desktop links */}
+        {/* Links desktop con indicador deslizante de sección activa */}
         <HStack spacing={1} display={{ base: 'none', lg: 'flex' }}>
-          {navLinks.map((link) => (
-            <Text
-              key={link.href}
-              as="a"
-              href={link.href}
-              onClick={(e) => handleLink(e, link.href)}
-              position="relative"
-              px={4}
-              py={2}
-              borderRadius="10px"
-              fontFamily="mono"
-              fontSize="2xs"
-              fontWeight="500"
-              letterSpacing="wider"
-              textTransform="uppercase"
-              color="brand.amber"
-              cursor="pointer"
-              transition="color 0.25s"
-              _before={{
-                content: '""',
-                position: 'absolute',
-                inset: 0,
-                borderRadius: '10px',
-                bg: 'linear-gradient(135deg, rgba(77,147,214,0.22) 0%, rgba(30,95,168,0.10) 100%)',
-                opacity: 0,
-                transform: 'scale(0.92)',
-                transition: 'opacity 0.25s, transform 0.25s',
-                pointerEvents: 'none',
-              }}   
-              _hover={{
-                color: 'white',
-                _before: { opacity: 1, transform: 'scale(1)' },
-                _after: { width: '40%' },
-              }}
-            >
-              <Box as="span" position="relative" zIndex={1}>
-                {link.label}
+          {navLinks.map((link) => {
+            const isActive = active === link.href
+            return (
+              <Box
+                key={link.href}
+                as="a"
+                href={link.href}
+                onClick={(e) => handleLink(e, link.href)}
+                position="relative"
+                px={4}
+                py={'5px'}
+                cursor="pointer"
+              >
+                {isActive && (
+                  <MotionBox
+                    layoutId="nav-active-pill"
+                    position="absolute"
+                    inset={0}
+                    borderRadius="10px"
+                    bg="brand.amber2"
+                    boxShadow="0 4px 18px rgba(239,45,56,0.35)"
+                    transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                  />
+                )}
+                <Text
+                  as="span"
+                  position="relative"
+                  zIndex={1}
+                  fontFamily="mono"
+                  fontSize="2xs"
+                  fontWeight="600"
+                  letterSpacing="wider"
+                  textTransform="uppercase"
+                  color={isActive ? 'brand.bone' : 'brand.gray'}
+                  transition="color 0.25s"
+                  _hover={{ color: isActive ? 'brand.bone' : 'brand.boneWarm' }}
+                >
+                  {link.label}
+                </Text>
               </Box>
-            </Text>
-          ))}
+            )
+          })}
         </HStack>
 
-        {/* CTA desktop */}
+        {/* CTA desktop: contorno dorado que se enciende en rojo */}
         <Box
           as="a"
           href="#contact"
           onClick={(e) => handleLink(e, '#contact')}
           display={{ base: 'none', lg: 'block' }}
-          px={'10px'}
-          py={'5px'}
-          bg="brand.amber"
+          px={4}
+          py={1.5}
           border="1px solid"
-          borderColor= 'brand.amberLight'
-          borderRadius={'5px'}
+          borderColor="brand.dorado"
+          borderRadius="full"
           fontFamily="mono"
           fontSize="2xs"
           fontWeight="600"
           letterSpacing="wider"
           textTransform="uppercase"
-          color="brand.gray2"
+          color="brand.boneWarm"
           cursor="pointer"
-          transition="all 0.2s"
-          _hover={{ bg: 'brand.brown', color: 'white' }}
+          transition="all 0.25s"
+          _hover={{ bg: 'brand.amber', borderColor: 'brand.amber', color: 'brand.bone' }}
         >
           Contacto
         </Box>
 
-        {/* Hamburger mobile */}
-        <Box
+        {/* Hamburguesa mobile */}
+        <Flex
           display={{ base: 'flex', lg: 'none' }}
-          flexDir="column"
+          direction="column"
           gap="5px"
           cursor="pointer"
           onClick={() => setMenuOpen(!menuOpen)}
           p={2}
+          aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
         >
           {[0, 1, 2].map((i) => (
             <Box
               key={i}
               w="22px"
-              h="1.5px"
-              bg="white"
+              h="2px"
+              bg={menuOpen ? 'brand.amber' : 'brand.bone'}
               transition="all 0.25s"
               transform={
                 menuOpen
-                  ? i === 0 ? 'rotate(45deg) translate(4.5px, 4.5px)'
+                  ? i === 0 ? 'rotate(45deg) translate(5px, 5px)'
                   : i === 1 ? 'scaleX(0)'
-                  : 'rotate(-45deg) translate(4.5px, -4.5px)'
+                  : 'rotate(-45deg) translate(5px, -5px)'
                   : 'none'
               }
             />
           ))}
-        </Box>
+        </Flex>
       </Flex>
-
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <MotionBox
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            display={{ base: 'block', lg: 'none' }}
-            maxW="1400px"
-            mx="auto"
-            mt={3}
-            borderRadius="18px"
-            border="1px solid rgba(255,255,255,0.12)"
-            bg="rgba(5,11,20,0.65)"
-            backdropFilter="blur(20px) saturate(140%)"
-            boxShadow="0 10px 34px rgba(0,0,0,0.40)"
-            overflow="hidden"
-          >
-            <VStack align="stretch" spacing={0} py={2} px={2}>
-              {mobileLinks.map((link, i) => (
-                <MotionBox
-                  key={link.href}
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.06 }}
-                  w="full"
-                >
-                  <Flex
-                    as="a"
-                    href={link.href}
-                    onClick={(e) => handleLink(e, link.href)}
-                    align="center"
-                    gap={3}
-                    py={3}
-                    px={3}
-                    borderRadius="12px"
-                    _hover={{ color: 'brand.brown', bg: 'whiteAlpha.50' }}
-                    transition="color 0.2s, background 0.2s"
-                    cursor="pointer"
-                  >
-                    <Text
-                      as="span"
-                      fontFamily="mono"
-                      fontSize="2xs"
-                      fontWeight="600"
-                      letterSpacing="wider"
-                      color="brand.amberLight"
-                    >
-                      {String(i + 1).padStart(2, '0')}
-                    </Text>
-                    <Text
-                      fontFamily="mono"
-                      fontSize="lg"
-                      fontWeight="600"
-                      letterSpacing="wider"
-                      textTransform="uppercase"
-                      color="whiteAlpha.800"
-                    >
-                      {link.label}
-                    </Text>
-                  </Flex>
-                </MotionBox>
-              ))}
-            </VStack>
-          </MotionBox>
-        )}
-      </AnimatePresence>
     </Box>
   )
 }

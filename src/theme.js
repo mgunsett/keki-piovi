@@ -1,27 +1,34 @@
 import { extendTheme } from '@chakra-ui/react'
 
 // Paleta de marca — fuente única de verdad para los colores del proyecto
+// Basada en la identidad de Estudiantes de La Plata: rojo pincha,
+// crema de los bastones y dorado kaki del borde/estrella del escudo
 const brand = {
-  brown:      '#141516', // azul principal
-  brownDark:  '#0B2A4A', // azul profundo
-  brownLight: '#4D93D6', // azul claro
-  amber:      '#bda78e', // detalle rojizo/dorado
-  amber2:     '#993f3f8e',
-  amberDark:  '#7A1F1F', // detalle rojizo/dorado oscuro
-  amberLight: '#bda78e4f', // detalle rojizo/dorado claro
-  dorado:     '#c0ab32', // dorado
-  orange:     '#a36b2c', // naranja (hover de botones)
-  orangeDark: '#7a4e1f', // naranja oscuro (hover de botones)
-  orangeLight:'#c08b4a', // naranja claro (hover de botones)
-  dark:       '#2324249f',//'#532626', // azul casi negro (fondo)
-  dark3:      '#232424a1',
-  dark2:      '#a5a4a4',
-  gray:       '#7A8CA3', // azul grisáceo (texto secundario)
-  gray2:      '#884545',
-  bone:       '#FFFFFF', // blanco (texto principal)
-  boneWarm:   '#3083e2', // blanco azulado (detalles)
-  rec:        '#E5484D', // rojo del indicador REC
-  bgRef:      '#bda78e1a'// bg de hover en cajas
+  brown:      '#191314', // negro carbón cálido (fondo de cajas/footer)
+  brownDark:  '#3A0E13', // bordó profundo (paneles)
+  brownLight: '#D9BE7E', // dorado claro (acentos secundarios)
+  amber:      '#EF2D38', // rojo pincha — acento principal
+  amber2:     '#EF2D388e', // rojo translúcido medio
+  amberDark:  '#7C0E15', // rojo profundo
+  amberLight: '#EF2D3852', // rojo translúcido suave (bordes)
+  dorado:     '#B89B5E', // dorado kaki del escudo (estrella/borde)
+  orange:     '#C4151F', // rojo oscuro (hover de botones)
+  orangeDark: '#8A0F16', // rojo muy oscuro (hover de botones)
+  orangeLight:'#F4646B', // rojo claro (hover de botones)
+  dark:       '#1512129f', // negro carbón cálido (fondo global)
+  dark3:      '#151212a1',
+  dark2:      '#A9A29B',
+  gray:       '#A39B92', // gris cálido (texto secundario)
+  gray2:      '#ebebeb', // bordó apagado (bordes sutiles)
+  bone:       '#F3EEE3', // crema de la camiseta (texto principal)
+  boneWarm:   '#D8C088', // dorado suave (detalles)
+  rec:        '#EF2D38', // rojo del indicador REC
+  bgRef:      '#B89B5E1a', // bg de hover en cajas (dorado sutil)
+  accent:     '#EF2D38', // rojo pincha (scrollbar y acentos)
+  accentMid:  '#C4151F', // rojo medio (gradientes)
+  accentDeep: '#7C0E15', // rojo profundo (gradientes)
+  rose:       '#F4646B', // rojo claro rosado
+  panel:      '#1E1717', // fondo de paneles elevados
 }
 
 // Colores de la firma del desarrollador (crédito en el footer)
