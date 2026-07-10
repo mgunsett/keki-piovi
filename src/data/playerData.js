@@ -56,7 +56,7 @@ export const playerData = {
   age: 33,
   height: '1.70m',
   weight: '72kg',
-  foot: 'Izquierdo',
+  foot: 'Derecho',
   birthDate: '20 / 08 / 1992',
   birthPlace: 'Morón, Buenos Aires, Argentina',
   currentClub: 'Estudiantes de La Plata',
@@ -74,10 +74,10 @@ export const playerData = {
   ],
 
   seasonStats: [
-    { label: 'Partidos', value: 14 },
-    { label: 'Goles', value: 3 },
+    { label: 'Partidos', value: 15 },
+    { label: 'Recuperos', value: 82 },
     { label: 'Asistencias', value: 1 },
-    { label: 'Tiros al árco', value: 26  },
+    { label: 'Tiros al árco', value: 17  },
     { label: 'Min / Part.', value: "1,726'" },
     { label: 'Valoración', value: 7.9 },
 
@@ -181,25 +181,25 @@ export const playerData = {
 
   press: [
     {
+      media: 'CONMEBOL Libertadores',
+      logo: logo3,
+      title: '⚔️🇦🇹 Ezequiel Piovi no duda en jugarse todo por @edelpoficial',
+      date: 'Mayo 2026',
+      url: 'https://www.instagram.com/p/DX61iBPJehE/?__d=1',
+    },
+    {
+      media: 'Olé',
+      logo: logo2,
+      title: '⚽ Con mayoría de Liga de Quito, Ezequiel Piovi en el 11 ideal de la LigaPro 2024',
+      date: 'Mayo 2024',
+      url: 'https://www.ole.com.ar/ecuador/liga-pro/11-once-equipo-ideal-ligapro-2024-liga-quito-pro-gala-alex-arce_0_7b1vsdcSaJ.html#google_vignette',
+    },
+    {
       media: 'ESPN Deportes',
       logo: logo1,
-      title: 'Lisandro Alzugaray volvió con gol clave para Universitario en CONMEBOL Libertadores',
-      date: 'Abril 2026',
-      url: 'https://espndeportes.espn.com/futbol/copa-libertadores/nota/_/id/16648033/lisandro-alzugaray-volvio-con-gol-clave-para-universitario-en-conmebol-libertadores',
-    },
-    {
-      media: 'CONMEBOL Libertadores',
-      logo: logo3,
-      title: '🔥⚽🇵🇪 Un delantero siempre presente en la CONMEBOL #Libertadores: @lisandroalzugaray',
-      date: 'Mayo 2026',
-      url: 'https://www.instagram.com/p/DYSwt6NDBIC/?hl=es&img_index=4',
-    },
-    {
-      media: 'CONMEBOL Libertadores',
-      logo: logo3,
-      title: '¡El equipo de la semana! Lisandro Alzugaray en el 11 ideal tras la semifinal de ida de la CONMEBOL #Libertadores.',
-      date: 'Octubre 2025',
-      url: 'https://x.com/Libertadores/status/1981820492257669422/photo/1?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1981820492257669422%7Ctwgr%5E81681f2548c9342a151787ad10c31eabb903f3c2%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fwww.teleamazonas.com%2Fdeportes%2Ffutbol%2Flibertadores%2Fseis-futbolistas-liga-quito-equipo-ideal-semana-copa-libertadores-105112%2F',
+      title: 'Ezequiel Piovi: el caudillo de Liga de Quito que impulsó al club con su liderazgo y su juego.',
+      date: 'Febrero 2024',
+      url: 'https://www.espn.com.ar/futbol/nota/_/id/13294198/ezequiel-piovi-el-caudillo-de-liga-de-quito-que-impulso-al-club-con-su-liderazgo',
     },
   ],
 
@@ -236,7 +236,7 @@ export const playerData = {
       iconBg: IoMdStats,
       handle: '@ezequiel-piovi',
       url: 'https://www.transfermarkt.com.ar/ezequiel-piovi/profil/spieler/487346',
-      hoverColor: 'brand.brownLight',
+      hoverColor: '#307de1',
     },
   ],
 

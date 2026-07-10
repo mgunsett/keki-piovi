@@ -100,7 +100,7 @@ export default function Navbar() {
             _groupHover={{ bg: 'brand.dorado' }}
           />
           <Text fontFamily="heading" fontSize="2xl" letterSpacing="wider" color="brand.bone" lineHeight={1}>
-            {playerData.initials}<Box as="span" color="brand.dorado">_</Box>
+            {playerData.initials}<Box as="span" color="brand.amber">_</Box>
           </Text>
         </Flex>
 

@@ -115,7 +115,7 @@ export default function VideosSection() {
       position="relative"
       minH="100vh"
       bg="brand.dark"
-      px={{ base: 5, md: 12, lg: 40 }}
+      px={{ base: 2, md: 12, lg: 40 }}
       pt={{ base: 20, md: '10%' }}
       pb={{ base: 12, md: '10%' }}
       overflow="hidden"
@@ -123,10 +123,10 @@ export default function VideosSection() {
       {/* glows ambientales */}
       <Box
         position="absolute"
-        top={{ base: '10%', md: '-5%' }}
-        right="-12%"
-        w="55vw"
-        h="55vw"
+        top={{ base: '10%', md: '5%' }}
+        right="-5%"
+        w={{ base: '65vw', md: '45vw' }}
+        h={{ base: '65vw', md: '45vw' }}
         background="radial-gradient(ellipse, rgba(189,167,142,0.16) 0%, transparent 70%)"
         pointerEvents="none"
       />
@@ -139,7 +139,7 @@ export default function VideosSection() {
         top={{ base: '10%', md: '12%' }}
         right={{ base: '-6%', md: '8%' }}
         fontFamily="heading"
-        fontSize={{ base: '60vw', md: '40vw' }}
+        fontSize={{ base: '80vw', md: '45vw' }}
         lineHeight={0.8}
         color="transparent"
         pointerEvents="none"
