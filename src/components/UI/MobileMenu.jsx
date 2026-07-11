@@ -26,7 +26,8 @@ export function MobileMenu({ onNavigate, active }) {
         align="stretch"
         justify="center"
         spacing={0}
-        h="80%"
+        h="full"
+        
         px={8}
         pt={0}
         listStyleType="none"
