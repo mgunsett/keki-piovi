@@ -208,7 +208,7 @@ export function ContactSection() {
       <Box position="relative" zIndex={1} maxW="1400px" mx="auto">
         {/* Header */}
         <Box ref={headerRef} mb={{ base: 8, md: 10 }}>
-          <Text fontFamily="mono" fontSize="10px" color="brand.bone" letterSpacing="0.28em"
+          <Text fontFamily="mono" fontSize="10px" color="brand.bone"
                   textTransform="uppercase" letterSpacing="widest">
             #Redes
           </Text>

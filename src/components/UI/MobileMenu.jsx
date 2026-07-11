@@ -1,4 +1,4 @@
-import { Box, Flex, Text, VStack } from '@chakra-ui/react'
+import { Box, Flex, Portal, Text, VStack } from '@chakra-ui/react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { mobileLinks } from './Navbar'
 
@@ -10,11 +10,17 @@ export function MobileMenu({ onNavigate, active }) {
   const reduced = useReducedMotion()
 
   return (
+    // Portal: el nav padre tiene transform de GSAP, que rompe position:fixed
+    <Portal>
     <MotionBox
       position="fixed"
-      inset={0}
-      zIndex={1}
+      top={0}
+      left={0}
+      w="100vw"
+      h="100dvh"
+      zIndex={990}
       bg="brand.panel"
+      overflowY="auto"
       display={{ base: 'block', lg: 'none' }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -26,10 +32,10 @@ export function MobileMenu({ onNavigate, active }) {
         align="stretch"
         justify="center"
         spacing={0}
-        h="full"
-        
+        minH="full"
         px={8}
-        pt={0}
+        pt={20}
+        pb={10}
         listStyleType="none"
       >
         {mobileLinks.map((link, i) => {
@@ -67,7 +73,7 @@ export function MobileMenu({ onNavigate, active }) {
                 </Text>
                 <Text
                   fontFamily="heading"
-                  fontSize="4xl"
+                  fontSize={{ base: '3xl', sm: '4xl' }}
                   letterSpacing="wide"
                   textTransform="uppercase"
                   lineHeight={1.1}
@@ -83,5 +89,6 @@ export function MobileMenu({ onNavigate, active }) {
         })}
       </VStack>
     </MotionBox>
+    </Portal>
   )
 }
