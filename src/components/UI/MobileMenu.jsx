@@ -30,7 +30,7 @@ export function MobileMenu({ onNavigate, active }) {
       <VStack
         as="ul"
         align="stretch"
-        justify="center"
+        justify="start"
         spacing={0}
         minH="full"
         px={8}
