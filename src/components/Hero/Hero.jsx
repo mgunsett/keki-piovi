@@ -170,17 +170,18 @@ export default function Hero() {
         >
           <Box
             ref={photoRef}
-            h={{ base: '78vh', lg: '90vh' }}                               
+            h={{ base: '98vh', lg: '90vh' }}   
+            w={{ base: '82vw', lg: '30vw' }}                            
             style={{ clipPath: 'inset(100% 0 0 0)', opacity: 0 }}
           >
             <Image
               className="player-photo"
               src={playerData.image}
               alt={`${playerData.displayName}, ${playerData.position.toLowerCase()} profesional de ${playerData.currentClub}`}
-              h={{ base: '90%', lg: '100%' }}
+              h={{ base: '100%', lg: '100%' }}
               w={{ base: '82vw', lg: '30vw' }}
               objectFit="contain"
-              objectPosition="bottom center"
+       
               draggable={false}
             />
           </Box>
