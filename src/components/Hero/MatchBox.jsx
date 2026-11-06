@@ -1,10 +1,13 @@
 import { useState } from 'react'
 import { Box, Flex, Text, Image, HStack, VStack } from '@chakra-ui/react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { u } from '../../utils/heroUnits'
+
+// Todos los tamaños usan u(): no cambian con el zoom del navegador (ver utils/heroUnits)
 
 const MotionBox = motion(Box)
 
-function Shield({ src, name, size = '36px' }) {
+function Shield({ src, name, size = u(36) }) {
   if (src) return <Image src={src} alt={name} boxSize={size} objectFit="contain" />
   return (
     <Box
@@ -13,7 +16,7 @@ function Shield({ src, name, size = '36px' }) {
       alignItems="center"
       justifyContent="center"
     >
-      <Text fontFamily="heading" fontSize="10px" color="brand.brownLight">
+      <Text fontFamily="heading" fontSize={u(10)} color="brand.brownLight">
         {name?.slice(0, 3).toUpperCase()}
       </Text>
     </Box>
@@ -25,64 +28,64 @@ function MatchSlot({ data, label, labelColor }) {
 
   return (
     <Box>
-      <Text fontFamily="mono" fontSize="9px" fontWeight="700" letterSpacing="widest"
-            textTransform="uppercase" color={labelColor} mb={2}>
+      <Text fontFamily="mono" fontSize={u(9)} fontWeight="700" letterSpacing="widest"
+            textTransform="uppercase" color={labelColor} mb={u(8)}>
         {label}
       </Text>
 
       {/* Teams row */}
-      <Flex align="center" justify="space-between" gap={2}>
-        <VStack spacing={1} align="center" flex={1} minW={0}>
+      <Flex align="center" justify="space-between" gap={u(8)}>
+        <VStack spacing={u(4)} align="center" flex={1} minW={0}>
           <Shield src={home.shield} name={home.name} />
-          <Text fontFamily="mono" fontSize="9px" color="brand.bone" textTransform="uppercase"
+          <Text fontFamily="mono" fontSize={u(9)} color="brand.bone" textTransform="uppercase"
                 letterSpacing="wider" textAlign="center" noOfLines={1} w="full" wordBreak="break-all">
             {home.name}
           </Text>
         </VStack>
 
         {/* Score */}
-        <Box textAlign="center" px={2} flexShrink={0} maxW="45%">
+        <Box textAlign="center" px={u(8)} flexShrink={0} maxW="45%">
           {homeScore !== null && awayScore !== null ? (
-            <HStack spacing={1} justify="center">
-              <Text fontFamily="heading" fontSize="2xl" color="white" lineHeight={1}>
+            <HStack spacing={u(4)} justify="center">
+              <Text fontFamily="heading" fontSize={u(24)} color="white" lineHeight={1}>
                 {homeScore}
               </Text>
-              <Text fontFamily="heading" fontSize="lg" color="brand.amberLight" lineHeight={1}>
+              <Text fontFamily="heading" fontSize={u(18)} color="brand.amberLight" lineHeight={1}>
                 —
               </Text>
-              <Text fontFamily="heading" fontSize="2xl" color="white" lineHeight={1}>
+              <Text fontFamily="heading" fontSize={u(24)} color="white" lineHeight={1}>
                 {awayScore}
               </Text>
             </HStack>
           ) : (
-            <Text fontFamily="heading" fontSize="xl" color="brand.amber" letterSpacing="wider">
+            <Text fontFamily="heading" fontSize={u(20)} color="brand.amber" letterSpacing="wider">
               VS
             </Text>
           )}
           {competition && (
-            <Text fontFamily="mono" fontSize="8px" color="brand.gray" letterSpacing="wider"
-                  textTransform="uppercase" mt={0.5} textAlign="center" noOfLines={1}>
+            <Text fontFamily="mono" fontSize={u(8)} color="brand.gray" letterSpacing="wider"
+                  textTransform="uppercase" mt={u(2)} textAlign="center" noOfLines={1}>
               {competition}
             </Text>
           )}
         </Box>
 
-        <VStack spacing={1} align="center" flex={1} minW={0}>
+        <VStack spacing={u(4)} align="center" flex={1} minW={0}>
           <Shield src={away.shield} name={away.name} />
-          <Text fontFamily="mono" fontSize="9px" color="brand.bone" textTransform="uppercase"
+          <Text fontFamily="mono" fontSize={u(9)} color="brand.bone" textTransform="uppercase"
                 letterSpacing="wider" textAlign="center" noOfLines={1} w="full" wordBreak="break-all">
             {away.name}
           </Text>
         </VStack>
       </Flex>
 
-      <Flex mt={{base: 2 ,md: 4}} justify="space-between" align="flex-end">
-        <Text fontFamily="mono" fontSize="8px" color="brand.gray" letterSpacing="wider">
+      <Flex mt={{ base: u(8), md: u(16) }} justify="space-between" align="flex-end">
+        <Text fontFamily="mono" fontSize={u(8)} color="brand.gray" letterSpacing="wider">
           {date}
         </Text>
         {stadium && (
-          <Text fontFamily="mono" fontSize="8px" color="brand.gray" letterSpacing="wider"
-                textAlign="right" noOfLines={1} maxW="100px">
+          <Text fontFamily="mono" fontSize={u(8)} color="brand.gray" letterSpacing="wider"
+                textAlign="right" noOfLines={1} maxW={u(100)}>
             {stadium}
           </Text>
         )}
@@ -111,32 +114,32 @@ function CollapsedTab({ last, onClick }) {
       border="1px solid"
       borderColor="brand.amber"
       borderRightWidth={0}
-      borderTopLeftRadius="10px"
-      borderBottomLeftRadius="10px"
-      minH="250px"
-      py={6}
-      px={3}
+      borderTopLeftRadius={u(10)}
+      borderBottomLeftRadius={u(10)}
+      minH={u(250)}
+      py={u(24)}
+      px={u(12)}
       cursor="pointer"
       display="flex"
       flexDir="column"
       alignItems="center"
       justifyContent="center"
-      gap={4}
+      gap={u(16)}
       transitionProperty="background, border-color"
       transitionDuration="0.3s"
       _hover={{ bg: 'whiteAlpha.200', borderColor: 'brand.gray2' }}
       _before={{
         content: '""',
         position: 'absolute',
-        top: 3, right: 0,
-        w: '2px', h: '28px',
+        top: u(12), right: 0,
+        w: '2px', h: u(28),
         bg: 'brand.dorado',
       }}
       position="relative"
     >
       <Text
         fontFamily="heading"
-        fontSize="md"
+        fontSize={u(16)}
         letterSpacing="widest"
         color="brand.amber"
         sx={{ writingMode: 'vertical-rl' }}
@@ -146,20 +149,20 @@ function CollapsedTab({ last, onClick }) {
       </Text>
 
       {hasScore && (
-        <VStack spacing={1.5} align="center">
-          <Shield src={last.home.shield} name={last.home.name} size="18px" />
-          <Flex gap={0.5} justify="center" direction="column" align="center">
-            <Text fontFamily="heading" fontSize="md" color="white" lineHeight={1}>
+        <VStack spacing={u(6)} align="center">
+          <Shield src={last.home.shield} name={last.home.name} size={u(18)} />
+          <Flex gap={u(2)} justify="center" direction="column" align="center">
+            <Text fontFamily="heading" fontSize={u(16)} color="white" lineHeight={1}>
               {last.homeScore}
             </Text>
-            <Text fontFamily="heading" fontSize="xs" color="brand.amberLight" lineHeight={1}>
+            <Text fontFamily="heading" fontSize={u(12)} color="brand.amberLight" lineHeight={1}>
               —
             </Text>
-            <Text fontFamily="heading" fontSize="md" color="white" lineHeight={1}>
+            <Text fontFamily="heading" fontSize={u(16)} color="white" lineHeight={1}>
               {last.awayScore}
             </Text>
           </Flex>
-          <Shield src={last.away.shield} name={last.away.name} size="18px" />
+          <Shield src={last.away.shield} name={last.away.name} size={u(18)} />
         </VStack>
       )}
 
@@ -167,7 +170,7 @@ function CollapsedTab({ last, onClick }) {
         as="span"
         display="block"
         color="brand.amber"
-        fontSize="16px"
+        fontSize={u(16)}
         fontFamily="heading"
         lineHeight={1}
         animate={reduceMotion ? { opacity: 1 } : { x: [0, -5, 0], opacity: [0.5, 1, 0.5] }}
@@ -196,21 +199,21 @@ export function MatchBox({ last, next, variant = 'card' }) {
               exit={{ opacity: 0, scaleX: 0.9, x: 20 }}
               transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
               transformOrigin="right center"
-              w="280px"
+              w={u(280)}
               bg="whiteAlpha.100"
               backdropFilter="blur(12px)"
               border="1px solid"
               borderColor="brand.amber"
               borderRightWidth={0}
-              borderTopLeftRadius="10px"
-              borderBottomLeftRadius="10px"
-              p={4}
+              borderTopLeftRadius={u(10)}
+              borderBottomLeftRadius={u(10)}
+              p={u(16)}
               position="relative"
               _before={{
                 content: '""',
                 position: 'absolute',
-                top: 0, left: 2,
-                w: '28px', h: '2px',
+                top: 0, left: u(8),
+                w: u(28), h: '2px',
                 bg: 'brand.dorado',
               }}
             >
@@ -220,12 +223,12 @@ export function MatchBox({ last, next, variant = 'card' }) {
                 onClick={() => setIsOpen(false)}
                 aria-label="Cerrar partidos"
                 position="absolute"
-                top={'130px'}
-                right={3}
+                top={u(130)}
+                right={u(12)}
                 zIndex={2}
                 color="brand.amber"
                 fontFamily="mono"
-                fontSize="lg"
+                fontSize={u(18)}
                 lineHeight={1}
                 cursor="pointer"
                 transition="color 0.2s"
@@ -234,7 +237,7 @@ export function MatchBox({ last, next, variant = 'card' }) {
                 ⟫
               </Box>
 
-              <VStack spacing={{ base: 4, md: 6 }} align="stretch">
+              <VStack spacing={{ base: u(16), md: u(24) }} align="stretch">
                 <MatchSlot data={last} label="Último Resultado" labelColor="brand.amber" />
                 <Box h="1px" bg="brand.amberLight" w="80%" alignSelf="center" />
                 <MatchSlot data={next} label="Próximo Partido" labelColor="brand.gray2" />
@@ -254,16 +257,16 @@ export function MatchBox({ last, next, variant = 'card' }) {
       backdropFilter="blur(10px)"
       borderTop="1px solid"
       borderColor="brand.amberLight"
-      px={4}
-      py={2}
-      mb={-4}
+      px={u(16)}
+      py={u(8)}
+      mb={u(-16)}
     >
       <Flex gap={0} >
-        <Box flex={1} minW={0} pr={3}>
+        <Box flex={1} minW={0} pr={u(12)}>
           <MatchSlot data={last} label="Último Resultado" labelColor="brand.amber" />
         </Box>
-        <Box w="1px" bg="brand.amber" mx={2} flexShrink={0} />
-        <Box flex={1} minW={0} pl={3}>
+        <Box w="1px" bg="brand.amber" mx={u(8)} flexShrink={0} />
+        <Box flex={1} minW={0} pl={u(12)}>
           <MatchSlot data={next} label="Próximo Partido" labelColor="brand.gray2" />
         </Box>
       </Flex>

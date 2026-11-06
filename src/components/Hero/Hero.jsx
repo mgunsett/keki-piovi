@@ -6,11 +6,13 @@ import MatchBox from './MatchBox'
 import { playerData } from '../../data/playerData'
 import useMatches from '../../hooks/useMatches'
 import heroBg from '@assets/piovi-hero-bg.webp'
+import heroBg2 from '@assets/piovi-hero-bg2.webp'
+import { u, LANDSCAPE, heroUnitVars } from '../../utils/heroUnits'
 
 gsap.registerPlugin(ScrollTrigger)
 
-// Celular en horizontal (o ventanas muy bajas): layout compacto tipo desktop
-const LANDSCAPE = '@media (orientation: landscape) and (max-height: 540px)'
+// Textos, íconos y espaciados del Hero usan u(): no cambian de tamaño con el
+// zoom del navegador (ver utils/heroUnits). El nombre ya escala en vw.
 
 function PlayerPanel() {
   const [amber] = useToken('colors', ['brand.amber'])
@@ -19,43 +21,43 @@ function PlayerPanel() {
     direction={{base:'column', md:'row'}}
     justifyContent={'flex-start'}
     alignItems={'flex-start'}
-    gap={{base:2,md:4}}
-    sx={{ [LANDSCAPE]: { flexDirection: 'row', gap: 4 } }}
+    gap={{ base: u(8), md: u(16) }}
+    sx={{ [LANDSCAPE]: { flexDirection: 'row', gap: u(16) } }}
     >
       <Text
         className="player-number"
         fontFamily="heading"
-        fontSize={{ base: '90px', md: '100px' }}
-        ml={{ base: '-10px', md: 0 }}
-        sx={{ [LANDSCAPE]: { fontSize: '80px', ml: 0 } }}
+        fontSize={{ base: u(80), md: u(100) }}
+        ml={{ base: u(-10), md: 0 }}
+        sx={{ [LANDSCAPE]: { fontSize: u(80), ml: 0 } }}
         lineHeight={0.9}
         color="transparent"
         sx={{ WebkitTextStroke: `2px ${amber}` }}
       >
         {playerData.number}
       </Text>
-      <Box w={{base:'60px',md:"1px"}} h={{base:"1px", md: "70px", lg: "80px"}} bg="brand.amber"
-        sx={{ [LANDSCAPE]: { width: '1px', height: '64px' } }} />
-      <Flex direction={'column'} justifyContent={'flex-start'} gap={1}>
-        <Flex gap={1} justifyContent='flex-start' alignItems='center'>
-          <Text fontFamily="mono" fontSize={{base:'9px',md:"10px"}} color="brand.bone"
+      <Box w={{ base: u(60), md: '1px' }} h={{ base: '1px', md: u(70), lg: u(80) }} bg="brand.amber"
+        sx={{ [LANDSCAPE]: { width: '1px', height: u(64) } }} />
+      <Flex direction={'column'} justifyContent={'flex-start'} gap={u(4)}>
+        <Flex gap={u(4)} justifyContent='flex-start' alignItems='center'>
+          <Text fontFamily="mono" fontSize={{ base: u(9), md: u(10) }} color="brand.bone"
             textTransform="uppercase" letterSpacing="widest">
             Posición
           </Text>
-          <Text fontFamily="mono" fontSize={{base:'9px',md:"12px"}} color="brand.amber"
+          <Text fontFamily="mono" fontSize={{ base: u(9), md: u(12) }} color="brand.amber"
             fontWeight="700" textTransform="uppercase" letterSpacing="widest">
             {playerData.position}
           </Text>
         </Flex>
-        <Flex justifyContent='flex-start' alignItems='center' gap={{base:'10px',md:'12px'}}>
-          <Image src={playerData.nationalityFlag} alt={`Bandera de ${playerData.nationality}`} w={{ base: '15px', md: '20px' }} />
-          <Text mb={'-5px'} fontFamily="mono" fontSize={{base:'xs',md:"md"}} color="brand.amber" letterSpacing="wider">
+        <Flex justifyContent='flex-start' alignItems='center' gap={{ base: u(10), md: u(12) }}>
+          <Image src={playerData.nationalityFlag} alt={`Bandera de ${playerData.nationality}`} w={{ base: u(15), md: u(20) }} />
+          <Text mb={u(-5)} fontFamily="mono" fontSize={{ base: u(12), md: u(16) }} color="brand.amber" letterSpacing="wider">
             {playerData.nationality}
           </Text>
         </Flex>
-        <Flex justifyContent='flex-start' alignItems={'flex-end'} gap={{base:'8px',md:'10px'}} mt={'3px'} ml={-1}>
-          <Image src={playerData.logoCurrentClub} alt={`Escudo de ${playerData.currentClub}`} ml={{ base: '2px', md: 0 }} w={{ base: '16px', md: '24px' }} h={{base:'20px',md:'30px'}} objectFit="contain" />
-          <Text fontFamily="mono" fontSize={{base:'xs',md:"md"}} color="brand.amber" letterSpacing="wider">
+        <Flex justifyContent='flex-start' alignItems={'flex-end'} gap={{ base: u(8), md: u(10) }} mt={u(3)} ml={u(-4)}>
+          <Image src={playerData.logoCurrentClub} alt={`Escudo de ${playerData.currentClub}`} ml={{ base: u(2), md: 0 }} w={{ base: u(16), md: u(24) }} h={{ base: u(20), md: u(30) }} objectFit="contain" />
+          <Text fontFamily="mono" fontSize={{ base: u(12), md: u(16) }} color="brand.amber" letterSpacing="wider">
             {playerData.currentClub}
           </Text>
         </Flex>
@@ -120,6 +122,7 @@ export default function Hero() {
           WebkitMaskImage: 'linear-gradient(black 90%, transparent)',
           // dvh evita el salto al colapsar la barra del navegador en mobile; vh queda de fallback
           '@supports (height: 100dvh)': { height: '100dvh' },
+          ...heroUnitVars,
         }}
       >
         {/* Foto de fondo — fundida con el fondo */}
@@ -156,6 +159,36 @@ export default function Hero() {
           />
         </Box>
         
+        {/* Segunda foto de fondo — sector derecho, detrás y a la derecha del jugador.
+            Mismo tratamiento que la anterior. Solo desktop: en mobile/tablet y en
+            horizontal el jugador ocupa ese sector y la foto quedaría tapada. */}
+        <Box
+          position="absolute"
+          zIndex={0}
+          pointerEvents="none"
+          display={{ base: 'none', lg: 'block' }}
+          right={{ lg: '-3%' }}
+          bottom={0}
+          h={{ lg: '82vh' }}
+          sx={{
+            maskImage: 'radial-gradient(70% 65% at 50% 45%, black 30%, transparent 80%)',
+            WebkitMaskImage: 'radial-gradient(70% 65% at 50% 45%, black 30%, transparent 80%)',
+          }}
+        >
+          <Image
+            src={heroBg2}
+            alt=""
+            aria-hidden="true"
+            draggable={false}
+            h="100%"
+            w="auto"
+            maxW="none"
+            opacity={0.2}
+            filter="grayscale(100%) contrast(1.05)"
+            sx={{ mixBlendMode: 'luminosity' }}
+          />
+        </Box>
+
         {/* Player photo
             Anclada abajo y dimensionada por alto (la foto es vertical, ~0.43 de proporción):
             - mobile/tablet: arranca a la altura de "EZEQUIEL" y termina sobre el strip de partidos
@@ -165,7 +198,7 @@ export default function Hero() {
           position="absolute"
           zIndex={{ base: 3, md: 5, lg: 9 }}
           top={{ base: '46vw', md: '36vw', lg: 'auto' }}
-          bottom={{ base: '138px', md: '168px', lg: '5vh' }}
+          bottom={{ base: u(138), md: u(168), lg: '5vh' }}
           right={{ base: '1%', md: '7%', lg: 'auto' }}
           left={{ base: 'auto', lg: '56%' }}
           h={{ lg: '84vh' }}
@@ -240,7 +273,7 @@ export default function Hero() {
               color="brand.gray2"
               lineHeight={0.9}
               style={{ opacity: 0 }}
-              mt={{ base: '-10px', md: '-20px', lg: '-30px' }}
+              mt={{ base: u(-10), md: u(-20), lg: u(-30) }}
             >
               {playerData.name}
             </Text>
@@ -253,7 +286,7 @@ export default function Hero() {
         <Box
           className="player-info"
           position="absolute"
-          bottom={{ base: '40%', lg: '22%' }}
+          bottom={{ base: '45%', md: '40%', lg: '22%' }}
           left={{ base: '5%', lg: '15%' }}
           zIndex={15}
           sx={{ [LANDSCAPE]: { bottom: '10%', left: '6%' } }}
@@ -277,7 +310,7 @@ export default function Hero() {
         {/* MatchBox mobile */}
         <Box
           position="absolute"
-          bottom={{base:"30px",md:"40px"}}
+          bottom={{ base: u(30), md: u(40) }}
           left={0}
           right={0}
           zIndex={15}

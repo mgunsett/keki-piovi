@@ -14,16 +14,3 @@
     animation: none;
   }
 }
-
-@media screen and (max-width: 408px){
-  .player-photo { 
-    width: 320px !important;
-    max-width: none !important;
-  }
-  .player-number {
-    font-size: 80px !important;
-  }
-  .player-info {
-    bottom: 45% !important;
-  }
-}
