@@ -9,6 +9,9 @@ import heroBg from '@assets/piovi-hero-bg.webp'
 
 gsap.registerPlugin(ScrollTrigger)
 
+// Celular en horizontal (o ventanas muy bajas): layout compacto tipo desktop
+const LANDSCAPE = '@media (orientation: landscape) and (max-height: 540px)'
+
 function PlayerPanel() {
   const [amber] = useToken('colors', ['brand.amber'])
   return (
@@ -17,19 +20,22 @@ function PlayerPanel() {
     justifyContent={'flex-start'}
     alignItems={'flex-start'}
     gap={{base:2,md:4}}
+    sx={{ [LANDSCAPE]: { flexDirection: 'row', gap: 4 } }}
     >
       <Text
         className="player-number"
         fontFamily="heading"
         fontSize={{ base: '90px', md: '100px' }}
         ml={{ base: '-10px', md: 0 }}
+        sx={{ [LANDSCAPE]: { fontSize: '80px', ml: 0 } }}
         lineHeight={0.9}
         color="transparent"
         sx={{ WebkitTextStroke: `2px ${amber}` }}
       >
         {playerData.number}
       </Text>
-      <Box w={{base:'60px',md:"1px"}} h={{base:"1px", md: "70px", lg: "80px"}} bg="brand.amber" />
+      <Box w={{base:'60px',md:"1px"}} h={{base:"1px", md: "70px", lg: "80px"}} bg="brand.amber"
+        sx={{ [LANDSCAPE]: { width: '1px', height: '64px' } }} />
       <Flex direction={'column'} justifyContent={'flex-start'} gap={1}>
         <Flex gap={1} justifyContent='flex-start' alignItems='center'>
           <Text fontFamily="mono" fontSize={{base:'9px',md:"10px"}} color="brand.bone"
@@ -145,40 +151,50 @@ export default function Hero() {
             objectFit={{ base: 'cover', md: 'contain' }}
             objectPosition={{ base: 'center', md: 'center top' }}
             opacity={{ base: 0.21, lg: 0.20 }}
+            sx={{ mixBlendMode: 'luminosity', [LANDSCAPE]: { width: 'auto', height: '100vh', objectFit: 'contain' } }}
             filter="grayscale(100%) contrast(1.05)"
-            sx={{ mixBlendMode: 'luminosity' }}
           />
         </Box>
         
-        {/* Player photo */}
+        {/* Player photo
+            Anclada abajo y dimensionada por alto (la foto es vertical, ~0.43 de proporción):
+            - mobile/tablet: arranca a la altura de "EZEQUIEL" y termina sobre el strip de partidos
+            - desktop: a la derecha del nombre, con el balón apoyado cerca del borde inferior */}
         <Box
+          ref={photoRef}
           position="absolute"
-          inset={0}
-          zIndex={{base: 3, md: 5,  lg:9}}
-          pl={{ base: '18%', lg: '0%' }}
-          pt={{ base: '24%', lg: '5%' }}
-          pr={{ base: '0%', lg: '15%' }}
+          zIndex={{ base: 3, md: 5, lg: 9 }}
+          top={{ base: '46vw', md: '36vw', lg: 'auto' }}
+          bottom={{ base: '138px', md: '168px', lg: '5vh' }}
+          right={{ base: '1%', md: '7%', lg: 'auto' }}
+          left={{ base: 'auto', lg: '56%' }}
+          h={{ lg: '84vh' }}
+          w={{ base: 'auto', lg: 'min(30vw, 36vh)' }}
+          maxW={{ base: '62vw', md: '46vw', lg: 'none' }}
           display="flex"
-          justifyContent={{ base: 'flex-start', lg: 'flex-end' }}
-          alignItems={{ base: 'flex-start', lg: 'flex-start' }}
+          justifyContent={{ base: 'flex-end', lg: 'center' }}
+          alignItems="flex-end"
           pointerEvents="none"
+          sx={{
+            [LANDSCAPE]: {
+              top: 'auto', bottom: '2vh', left: 'auto', right: '9%',
+              height: '90vh', width: 'auto', maxWidth: 'none',
+            },
+          }}
+          style={{ clipPath: 'inset(100% 0 0 0)', opacity: 0 }}
         >
-          <Box
-            ref={photoRef}
-            h={{ base: '78vh', lg: '90vh' }}                               
-            style={{ clipPath: 'inset(100% 0 0 0)', opacity: 0 }}
-          >
-            <Image
-              className="player-photo"
-              src={playerData.image}
-              alt={`${playerData.displayName}, ${playerData.position.toLowerCase()} profesional de ${playerData.currentClub}`}
-              h={{ base: '90%', lg: '100%' }}
-              w={{ base: '82vw', lg: '30vw' }}
-              objectFit="contain"
-              objectPosition="bottom center"
-              draggable={false}
-            />
-          </Box>
+          <Image
+            className="player-photo"
+            src={playerData.image}
+            alt={`${playerData.displayName}, ${playerData.position.toLowerCase()} profesional de ${playerData.currentClub}`}
+            h="100%"
+            w="auto"
+            maxW="100%"
+            objectFit="contain"
+            objectPosition={{ base: 'bottom right', lg: 'bottom center' }}
+            filter="drop-shadow(0 24px 40px rgba(0,0,0,0.55))"
+            draggable={false}
+          />
         </Box>
 
         {/* Visible name text */}
@@ -190,10 +206,11 @@ export default function Hero() {
           display="flex"
           flexDir="column"
           alignItems='flex-start'
-          justifyContent={{ base: 'flex-start', md: 'center' }}
-          pl={{ base: 0, lg: '15%' }}
+          justifyContent={{ base: 'flex-start', lg: 'center' }}
+          pl={{ base: 0, md: '5%', lg: '15%' }}
           pt={{ base: '22%', lg: '0%' }}
           mt={{ base: '0', lg: '-4%' }}
+          sx={{ [LANDSCAPE]: { justifyContent: 'center', pl: '6%', pt: 0, mt: '-14vh' } }}
         >
           <Flex 
           direction="column" 
@@ -206,6 +223,7 @@ export default function Hero() {
               display="block"
               fontFamily="heading"
               fontSize={{ base: '28vw', md: '16vw', lg: '13vw' }}
+              sx={{ [LANDSCAPE]: { fontSize: 'min(26vh, 13vw)' } }}
               color="brand.amber"
               lineHeight={0.9}
               style={{ opacity: 0 }}
@@ -218,6 +236,7 @@ export default function Hero() {
               display="block"
               fontFamily="heading"
               fontSize={{ base: '25vw', md: '16vw', lg: '13vw' }}
+              sx={{ [LANDSCAPE]: { fontSize: 'min(26vh, 13vw)', mt: '-2vh' } }}
               color="brand.gray2"
               lineHeight={0.9}
               style={{ opacity: 0 }}
@@ -237,6 +256,7 @@ export default function Hero() {
           bottom={{ base: '40%', lg: '22%' }}
           left={{ base: '5%', lg: '15%' }}
           zIndex={15}
+          sx={{ [LANDSCAPE]: { bottom: '10%', left: '6%' } }}
         >
           <PlayerPanel />
         </Box>
@@ -249,6 +269,7 @@ export default function Hero() {
           top={{ base: 'auto', lg: '20%' }}
           zIndex={10}
           display={{ base: 'none', lg: 'block' }}
+          sx={{ [LANDSCAPE]: { display: 'block', top: '16%', bottom: '8%' } }}
         >
           <MatchBox last={matches.last} next={matches.next} variant="card" />
         </Box>
@@ -261,6 +282,7 @@ export default function Hero() {
           right={0}
           zIndex={15}
           display={{ base: 'block', lg: 'none' }}
+          sx={{ [LANDSCAPE]: { display: 'none' } }}
         >
           <MatchBox last={matches.last} next={matches.next} variant="strip" />
         </Box>
