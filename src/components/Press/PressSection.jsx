@@ -1,4 +1,4 @@
-                import { useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import { Box, Grid, Text, Flex, VStack, HStack, Link, Image, useToken } from '@chakra-ui/react'
 import { FaStar } from 'react-icons/fa'
 import { gsap } from 'gsap'
@@ -33,7 +33,7 @@ function Stars({ count = 5 }) {
 
 function PressCard({ article, index }) {
   const cardRef = useRef(null)
-  const [panel, brownDark, amber, amberLight] = useToken('colors', ['brand.panel', 'brand.brownDark', 'brand.amber', 'brand.amberLight'])
+  const [brownDark, amber, amberLight] = useToken('colors', ['brand.brownDark', 'brand.amber', 'brand.amberLight'])
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -78,8 +78,7 @@ function PressCard({ article, index }) {
         _groupHover={{
           borderColor: 'brand.amber',
           transform: 'translateY(-4px)',
-          bg: '#bda78e1a',
-          _before: { width: '40px' },
+          bg: 'brand.bgRef',
           textDecoration: 'none',
         }}
       >
@@ -93,7 +92,7 @@ function PressCard({ article, index }) {
               borderColor="brand.amber"
               borderRadius="sm"
               transition="border-color 0.35s, background 0.35s"
-              _groupHover={{ bg: '#bda78e65' }}
+              _groupHover={{ bg: 'brand.doradoMid' }}
               >
                 <Text fontFamily="mono" fontSize="9px" color="brand.amber"
                 textTransform="uppercase" letterSpacing="0.18em"
@@ -131,8 +130,8 @@ function PressCard({ article, index }) {
           borderColor="brand.amber"
           transition="border-color 0.35s, box-shadow 0.35s"
           _groupHover={{
-            borderColor: 'brand.brown',
-            boxShadow: '0 0 0 3px #bda78e44',
+            borderColor: 'brand.dorado',
+            boxShadow: '0 0 0 3px #B89B5E44',
           }}
         >
           {article.logo ? (

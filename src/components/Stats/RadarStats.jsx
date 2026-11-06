@@ -273,7 +273,7 @@ function SeasonColumn({ items }) {
           role="group"
           _hover={{
             borderColor: 'brand.amber',
-            bg: '#bda78e1a',
+            bg: 'brand.bgRef',
             transform: 'translateY(-2px)',
           }}
         >

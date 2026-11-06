@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { Box } from '@chakra-ui/react'
 import Navbar from './components/UI/Navbar'
@@ -8,7 +9,9 @@ import GallerySection from './components/Gallery/GallerySection'
 import PressSection from './components/Press/PressSection'
 import ContactSection from './components/Contact/ContactSection'
 import Footer from './components/UI/Footer'
-import AdminPage from './pages/AdminPage'
+
+// El panel admin (y Firebase Auth/Storage) se carga solo al entrar a /admin
+const AdminPage = lazy(() => import('./pages/AdminPage'))
 
 function Landing() {
   return (
@@ -31,7 +34,14 @@ export default function App() {
   return (
     <Routes>
       <Route path="/"          element={<Landing />} />
-      <Route path="/admin"     element={<AdminPage />} />
+      <Route
+        path="/admin"
+        element={
+          <Suspense fallback={<Box minH="100vh" bg="brand.dark" />}>
+            <AdminPage />
+          </Suspense>
+        }
+      />
     </Routes>
   )
 }

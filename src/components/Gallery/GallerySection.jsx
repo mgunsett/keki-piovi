@@ -12,6 +12,9 @@ const MotionImage = motion(Image)
 
 const SPRING = { type: 'spring', stiffness: 240, damping: 28, mass: 0.9 }
 
+// Negro cálido de la paleta para velos y degradados sobre las fotos
+const SCRIM = (a) => `rgba(10,5,5,${a})`
+
 function Lightbox({ photo, onClose, onPrev, onNext }) {
   useEffect(() => {
     const handler = (e) => {
@@ -67,11 +70,15 @@ function Lightbox({ photo, onClose, onPrev, onNext }) {
       </Box>
       {/* Close */}
       <Box
-        position="absolute" top={16} right={40}
-        cursor="pointer" opacity={0.5} transition="opacity 0.2s"
-        onClick={onClose}
+        as="button"
+        type="button"
+        aria-label="Cerrar foto"
+        position="absolute" top={{ base: 16, md: 16 }} right={{ base: 6, md: 16, lg: 40 }}
+        cursor="pointer" color="whiteAlpha.600" transition="color 0.2s"
+        _hover={{ color: 'brand.rose' }}
+        onClick={(e) => { e.stopPropagation(); onClose() }}
       >
-        <Text fontFamily="heading" fontSize="2xl" color="white" _hover={{ opacity: 1, color: 'brand.rose' }}>✕</Text>
+        <Text as="span" fontFamily="heading" fontSize="2xl" lineHeight={1}>✕</Text>
       </Box>
     </MotionBox>
   )
@@ -128,7 +135,7 @@ function GalleryCard({ photo, offset, abs, cardW, spacing, total, index, onFocus
         {/* Velo oscuro en tarjetas laterales */}
         <Box
           position="absolute" inset={0}
-          bg="rgba(5,11,20,0.55)"
+          bg={SCRIM(0.55)}
           opacity={isCenter ? 0 : 1}
           transition="opacity 0.45s ease"
           pointerEvents="none"
@@ -137,7 +144,7 @@ function GalleryCard({ photo, offset, abs, cardW, spacing, total, index, onFocus
         {/* Degradado inferior */}
         <Box
           position="absolute" inset={0}
-          background="linear-gradient(to top, rgba(3,6,10,0.92) 0%, transparent 42%, rgba(3,6,10,0.2) 100%)"
+          background={`linear-gradient(to top, ${SCRIM(0.92)} 0%, transparent 42%, ${SCRIM(0.2)} 100%)`}
           pointerEvents="none"
         />
 
@@ -147,7 +154,7 @@ function GalleryCard({ photo, offset, abs, cardW, spacing, total, index, onFocus
           align="center"
           px={2.5} py={1}
           borderRadius="full"
-          bg="rgba(5,11,20,0.55)"
+          bg={SCRIM(0.55)}
           backdropFilter="blur(6px)"
           border="1px solid"
           borderColor="whiteAlpha.200"
@@ -167,16 +174,13 @@ function GalleryCard({ photo, offset, abs, cardW, spacing, total, index, onFocus
           transform={isCenter ? 'translateY(0)' : 'translateY(12px)'}
           transition="opacity 0.45s ease 0.05s, transform 0.45s ease 0.05s"
         >
-         {/* Logo */}
+        {/* Firma (decorativa) */}
         <Text
+          aria-hidden="true"
           fontFamily="heading"
           fontSize="2xl"
           letterSpacing="wider"
-          cursor="pointer"
-          onClick={(e) => handleLink(e, '#hero')}
           color="brand.amber"
-          _hover={{ color: 'brand.amber' }}
-          transition="color 0.2s"
         >
           {playerData.initials}
           <Box as="span" color="brand.gray2">_</Box>
@@ -190,7 +194,7 @@ function GalleryCard({ photo, offset, abs, cardW, spacing, total, index, onFocus
             boxSize={{base: '24px',md:"34px"}}
             align="center" justify="center"
             borderRadius="full"
-            bg="rgba(5,11,20,0.5)"
+            bg={SCRIM(0.5)}
             backdropFilter="blur(6px)"
             border="1px solid"
             borderColor="whiteAlpha.200"
@@ -282,7 +286,7 @@ export default function GallerySection() {
       <Box
         position="absolute" top={{base:'16%',md:"10%"}} left="50%" transform="translateX(-50%)"
         w="70vw" h="40vw" maxW="900px"
-        background="radial-gradient(ellipse, #bda78e1a 0%, transparent 70%)"
+        background="radial-gradient(ellipse, rgba(184,155,94,0.10) 0%, transparent 70%)"
         pointerEvents="none"
       />
 
@@ -370,7 +374,7 @@ export default function GallerySection() {
             display="flex" alignItems="center" justifyContent="center"
             border="1px solid" borderColor="brand.amber" borderRadius="full"
             color="brand.bone" transition="all 0.25s" 
-            _hover={{ bg: '#bda78e1a', color: 'brand.gray2' }}
+            _hover={{ bg: 'brand.bgRef', color: 'brand.gray2' }}
             _active={{ transform: 'scale(0.92)' }}
           >
             <Text fontFamily="heading" fontSize="4xl" lineHeight={1} pt="2px">‹</Text>
@@ -386,6 +390,8 @@ export default function GallerySection() {
                   key={photo.id}
                   as="button"
                   onClick={() => setCurrent(i)}
+                  aria-label={`Ver foto ${i + 1}`}
+                  aria-current={active ? 'true' : undefined}
                   flexShrink={0}
                   w={active ? { base: '54px', md: '70px' } : { base: '40px', md: '48px' }}
                   h={{ base: '40px', md: '48px' }}
@@ -393,13 +399,13 @@ export default function GallerySection() {
                   overflow="hidden"
                   position="relative"
                   border="1px solid"
-                  borderColor={active ? 'brand.brown' : 'whiteAlpha.200'}
-                  boxShadow={active ? '0 0 0 2px rgba(30,95,168,0.4)' : 'none'}
+                  borderColor={active ? 'brand.amber' : 'whiteAlpha.200'}
+                  boxShadow={active ? '0 0 0 2px #EF2D3852' : 'none'}
                   opacity={active ? 1 : 0.5}
                   transition="all 0.3s ease"
                   _hover={{ opacity: 1 }}
                 >
-                  <Image src={photo.src} alt={photo.alt}
+                  <Image src={photo.src} alt="" aria-hidden="true" loading="lazy"
                          w="100%" h="100%" objectFit="cover" draggable={false} />
                 </Box>
               )
@@ -413,7 +419,7 @@ export default function GallerySection() {
             display="flex" alignItems="center" justifyContent="center"
             border="1px solid" borderColor="brand.amber" borderRadius="full"
             color="brand.bone" transition="all 0.25s"
-            _hover={{ bg: '#bda78e1a', color: 'brand.gray2' }}
+            _hover={{ bg: 'brand.bgRef', color: 'brand.gray2' }}
             _active={{ transform: 'scale(0.92)' }}
           >
             <Text fontFamily="heading" fontSize="4xl" lineHeight={1} pt="2px">›</Text>

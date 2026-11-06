@@ -34,19 +34,8 @@ export default function VideosSection() {
 
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    // El header lo anima useScrubReveal (igual que el resto de las secciones)
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        headerRef.current,
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.9,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: headerRef.current, start: 'top 85%', once: true },
-        }
-      )
-
       const cards = gsap.utils.toArray('.video-card', wrapRef.current)
       if (reduced) {
         gsap.set(cards, { autoAlpha: 1, y: 0 })
@@ -127,7 +116,7 @@ export default function VideosSection() {
         right="-5%"
         w={{ base: '65vw', md: '45vw' }}
         h={{ base: '65vw', md: '45vw' }}
-        background="radial-gradient(ellipse, rgba(189,167,142,0.16) 0%, transparent 70%)"
+        background="radial-gradient(ellipse, rgba(184,155,94,0.16) 0%, transparent 70%)"
         pointerEvents="none"
       />
 
@@ -145,7 +134,7 @@ export default function VideosSection() {
         pointerEvents="none"
         userSelect="none"
         zIndex={0}
-        sx={{ WebkitTextStroke: '1.5px rgba(189,167,142,0.14)' }}
+        sx={{ WebkitTextStroke: '1.5px rgba(184,155,94,0.14)' }}
       >
         {playerData.number}
       </Text>
@@ -200,8 +189,9 @@ export default function VideosSection() {
               <Box
                 as="button"
                 aria-label="Video anterior"
+                type="button"
                 onClick={() => goTo(active - 1)}
-                isDisabled={active === 0}
+                disabled={active === 0}
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
@@ -220,8 +210,9 @@ export default function VideosSection() {
               <Box
                 as="button"
                 aria-label="Video siguiente"
+                type="button"
                 onClick={() => goTo(active + 1)}
-                isDisabled={active === videos.length - 1}
+                disabled={active === videos.length - 1}
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
@@ -244,7 +235,7 @@ export default function VideosSection() {
             position="fixed"
             inset={0}
             zIndex={2000}
-            bg="rgba(3,6,10,0.95)"
+            bg="rgba(10,5,5,0.95)"
             backdropFilter="blur(12px)"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

@@ -84,7 +84,7 @@ export function VideoCard({ video, index = 0, onOpen }) {
             position="absolute"
             inset={0}
             pointerEvents="none"
-            background="radial-gradient(ellipse at center, transparent 42%, rgba(3,6,10,0.8) 125%)"
+            background="radial-gradient(ellipse at center, transparent 42%, rgba(10,5,5,0.8) 125%)"
             opacity={hovered ? 1 : 0.4}
             transition="opacity 0.5s ease"
           />
@@ -139,7 +139,7 @@ export function VideoCard({ video, index = 0, onOpen }) {
             borderColor="whiteAlpha.300"
             zIndex={4}
             transition="border-color 0.4s ease, background 0.4s ease"
-            _groupHover={{ borderColor: 'brand.amber', bg: 'rgba(189,167,142,0.25)' }}
+            _groupHover={{ borderColor: 'brand.amber', bg: 'rgba(184,155,94,0.25)' }}
           >
             <Box as={FaInstagram} fontSize="14px" color="white" />
           </Flex>
@@ -163,7 +163,7 @@ export function VideoCard({ video, index = 0, onOpen }) {
                 transition="opacity 0.4s ease"
                 sx={{
                   background:
-                    'conic-gradient(from 0deg, transparent 0deg, #bda78ee6 80deg, #7a4e1f 150deg, transparent 220deg, transparent 360deg)',
+                    'conic-gradient(from 0deg, transparent 0deg, #B89B5Ee6 80deg, #7C0E15 150deg, transparent 220deg, transparent 360deg)',
                   WebkitMask: 'radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 2px))',
                   mask: 'radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 2px))',
                 }}
@@ -181,8 +181,8 @@ export function VideoCard({ video, index = 0, onOpen }) {
                 bg="rgba(10,5,5,0.4)"
                 backdropFilter="blur(10px)"
                 transition="all 0.4s ease"
-                boxShadow={hovered ? '0 0 28px rgba(189,167,142,0.55)' : 'none'}
-                _groupHover={{ bg: 'rgba(189,167,142,0.5)', borderColor: 'white' }}
+                boxShadow={hovered ? '0 0 28px rgba(184,155,94,0.55)' : 'none'}
+                _groupHover={{ bg: 'rgba(184,155,94,0.5)', borderColor: 'white' }}
               >
                 <Box as={FiPlay} fontSize="20px" ml="3px" color="white" />
               </Flex>

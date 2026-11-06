@@ -1,17 +1,13 @@
 import { useRef, useEffect } from 'react'
-import { Box, Text, Flex, VStack, HStack, Image, useToken } from '@chakra-ui/react'
-import { motion } from 'framer-motion'
+import { Box, Text, Flex, Image, useToken } from '@chakra-ui/react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import MatchBox from './MatchBox'
 import { playerData } from '../../data/playerData'
 import useMatches from '../../hooks/useMatches'
-import heroBg from '@assets/polaco3.webp'
-import '../../styles/globals.css'
+import heroBg from '@assets/piovi-hero-bg.webp'
 
 gsap.registerPlugin(ScrollTrigger)
-
-const MotionBox = motion(Box)
 
 function PlayerPanel() {
   const [amber] = useToken('colors', ['brand.amber'])
@@ -28,7 +24,6 @@ function PlayerPanel() {
         fontSize={{ base: '90px', md: '100px' }}
         ml={{ base: '-10px', md: 0 }}
         lineHeight={0.9}
-        borderColor={'brand.amber'}
         color="transparent"
         sx={{ WebkitTextStroke: `2px ${amber}` }}
       >
@@ -47,13 +42,13 @@ function PlayerPanel() {
           </Text>
         </Flex>
         <Flex justifyContent='flex-start' alignItems='center' gap={{base:'10px',md:'12px'}}>
-          <Image src={playerData.nationalityFlag} w={{ base: '15px', md: '20px' }} />
+          <Image src={playerData.nationalityFlag} alt={`Bandera de ${playerData.nationality}`} w={{ base: '15px', md: '20px' }} />
           <Text mb={'-5px'} fontFamily="mono" fontSize={{base:'xs',md:"md"}} color="brand.amber" letterSpacing="wider">
             {playerData.nationality}
           </Text>
         </Flex>
-        <Flex justifyContent='flex-start' alignItems={'flex-end'} gap={{base:'8px',md:'10px'}} spacing={1} mt={'3px'} ml={-1}>
-          <Image src={playerData.logoCurrentClub} ml={{base:'2px',md:'none'}} w={{ base: '16px', md: '24px' }} h={{base:'20px',md:'30px'}} />
+        <Flex justifyContent='flex-start' alignItems={'flex-end'} gap={{base:'8px',md:'10px'}} mt={'3px'} ml={-1}>
+          <Image src={playerData.logoCurrentClub} alt={`Escudo de ${playerData.currentClub}`} ml={{ base: '2px', md: 0 }} w={{ base: '16px', md: '24px' }} h={{base:'20px',md:'30px'}} objectFit="contain" />
           <Text fontFamily="mono" fontSize={{base:'xs',md:"md"}} color="brand.amber" letterSpacing="wider">
             {playerData.currentClub}
           </Text>

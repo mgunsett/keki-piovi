@@ -32,22 +32,22 @@ function MatchSlot({ data, label, labelColor }) {
 
       {/* Teams row */}
       <Flex align="center" justify="space-between" gap={2}>
-        <VStack spacing={1} align="center" flex={1}>
+        <VStack spacing={1} align="center" flex={1} minW={0}>
           <Shield src={home.shield} name={home.name} />
           <Text fontFamily="mono" fontSize="9px" color="brand.bone" textTransform="uppercase"
-                letterSpacing="wider" textAlign="center" noOfLines={1}>
+                letterSpacing="wider" textAlign="center" noOfLines={1} w="full" wordBreak="break-all">
             {home.name}
           </Text>
         </VStack>
 
         {/* Score */}
-        <Box textAlign="center" px={2}>
+        <Box textAlign="center" px={2} flexShrink={0} maxW="45%">
           {homeScore !== null && awayScore !== null ? (
             <HStack spacing={1} justify="center">
               <Text fontFamily="heading" fontSize="2xl" color="white" lineHeight={1}>
                 {homeScore}
               </Text>
-              <Text fontFamily="heading" fontSize="lg" color="brand.brown" lineHeight={1}>
+              <Text fontFamily="heading" fontSize="lg" color="brand.amberLight" lineHeight={1}>
                 —
               </Text>
               <Text fontFamily="heading" fontSize="2xl" color="white" lineHeight={1}>
@@ -61,16 +61,16 @@ function MatchSlot({ data, label, labelColor }) {
           )}
           {competition && (
             <Text fontFamily="mono" fontSize="8px" color="brand.gray" letterSpacing="wider"
-                  textTransform="uppercase" mt={0.5} textAlign="center">
+                  textTransform="uppercase" mt={0.5} textAlign="center" noOfLines={1}>
               {competition}
             </Text>
           )}
         </Box>
 
-        <VStack spacing={1} align="center" flex={1}>
+        <VStack spacing={1} align="center" flex={1} minW={0}>
           <Shield src={away.shield} name={away.name} />
           <Text fontFamily="mono" fontSize="9px" color="brand.bone" textTransform="uppercase"
-                letterSpacing="wider" textAlign="center" noOfLines={1}>
+                letterSpacing="wider" textAlign="center" noOfLines={1} w="full" wordBreak="break-all">
             {away.name}
           </Text>
         </VStack>
@@ -130,7 +130,7 @@ function CollapsedTab({ last, onClick }) {
         position: 'absolute',
         top: 3, right: 0,
         w: '2px', h: '28px',
-        bg: 'brand.brown',
+        bg: 'brand.dorado',
       }}
       position="relative"
     >
@@ -148,7 +148,7 @@ function CollapsedTab({ last, onClick }) {
       {hasScore && (
         <VStack spacing={1.5} align="center">
           <Shield src={last.home.shield} name={last.home.name} size="18px" />
-          <Flex spacing={0.5} justify="center" direction="column" align="center">
+          <Flex gap={0.5} justify="center" direction="column" align="center">
             <Text fontFamily="heading" fontSize="md" color="white" lineHeight={1}>
               {last.homeScore}
             </Text>
@@ -211,7 +211,7 @@ export function MatchBox({ last, next, variant = 'card' }) {
                 position: 'absolute',
                 top: 0, left: 2,
                 w: '28px', h: '2px',
-                bg: 'brand.brown',
+                bg: 'brand.dorado',
               }}
             >
               <Box
@@ -223,13 +223,13 @@ export function MatchBox({ last, next, variant = 'card' }) {
                 top={'130px'}
                 right={3}
                 zIndex={2}
-                color="brand.rec"
+                color="brand.amber"
                 fontFamily="mono"
                 fontSize="lg"
                 lineHeight={1}
                 cursor="pointer"
-                transition="all 0.2s"
-                _hover={{ color: 'brand.rec' }}
+                transition="color 0.2s"
+                _hover={{ color: 'brand.bone' }}
               >
                 ⟫
               </Box>
@@ -250,20 +250,20 @@ export function MatchBox({ last, next, variant = 'card' }) {
 
   return (
     <Box
-      bg="  "
+      bg="transparent"
       backdropFilter="blur(10px)"
       borderTop="1px solid"
-      borderColor='brand.brown'
+      borderColor="brand.amberLight"
       px={4}
       py={2}
       mb={-4}
     >
       <Flex gap={0} >
-        <Box flex={1} pr={3}>
+        <Box flex={1} minW={0} pr={3}>
           <MatchSlot data={last} label="Último Resultado" labelColor="brand.amber" />
         </Box>
-        <Box w="1px" bg="brand.amber" mx={2} />
-        <Box flex={1} pl={3}>
+        <Box w="1px" bg="brand.amber" mx={2} flexShrink={0} />
+        <Box flex={1} minW={0} pl={3}>
           <MatchSlot data={next} label="Próximo Partido" labelColor="brand.gray2" />
         </Box>
       </Flex>

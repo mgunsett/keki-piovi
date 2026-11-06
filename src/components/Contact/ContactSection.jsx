@@ -111,7 +111,7 @@ function ContactRow({ item, gold }) {
       _hover={{
         transform: 'translateY(-3px)',
         borderColor: gold ? 'brand.orangeLight' : 'brand.amber',
-        bg: gold ? 'rgba(163,107,44,0.04)' : 'brand.bgRef',
+        bg: gold ? 'rgba(244,100,107,0.05)' : 'brand.bgRef',
       }}
     >
       <Flex align="center" gap={4}>
@@ -122,8 +122,8 @@ function ContactRow({ item, gold }) {
             fontSize="40px"
             color='whiteAlpha.400'
             opacity={0.4}
-            transition='all 0.8 ease'
-            _groupHover={{ opacity: 1, color: 'brand.brown' }}
+            transition="all 0.3s ease"
+            _groupHover={{ opacity: 1, color: 'brand.amber' }}
           />
         )}
         {item.image && (
@@ -203,8 +203,6 @@ export function ContactSection() {
       py={{ base: 20, md: 28 }}
       overflow="hidden"
     >
-      <Box className="deco-grid" />
-
       <Box position="relative" zIndex={1} maxW="1400px" mx="auto">
         {/* Header */}
         <Box ref={headerRef} mb={{ base: 8, md: 10 }}>

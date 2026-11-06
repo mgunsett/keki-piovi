@@ -3,10 +3,9 @@ import { FaXTwitter } from 'react-icons/fa6'
 import { IoMdStats } from 'react-icons/io'
 
 //Hero
-import polaco1 from '@assets/polaco1.webp'
+import heroImage from '@assets/piovi-hero.webp'
 
 import argentina from '@assets/argentina.webp'
-import universitario from '@assets/escudo_univ.webp'
 //Escudos trayectoria
 import escudoEstudiantes from '@assets/escudos/escudo_estudiantes.webp'
 import escudoLigadequito from '@assets/escudos/escudo_ligadequito.webp'
@@ -43,26 +42,41 @@ import moon from '@assets/contact4.webp'
 const name = 'EZEQUIEL'
 const fullName = 'PIOVI'
 
+// Fecha de nacimiento en formato ISO: de acá salen la edad y el texto visible
+const BIRTH_DATE = '1992-08-20'
+
+function ageFrom(iso) {
+  const [y, m, d] = iso.split('-').map(Number)
+  const now = new Date()
+  let age = now.getFullYear() - y
+  if (now.getMonth() + 1 < m || (now.getMonth() + 1 === m && now.getDate() < d)) age--
+  return age
+}
+
+function formatBirthDate(iso) {
+  const [y, m, d] = iso.split('-')
+  return `${d} / ${m} / ${y}`
+}
+
 export const playerData = {
   name,
   fullName,
-  initials: `${name[0]}${fullName[0]}`, // iniciales para logos (PF)
+  initials: `${name[0]}${fullName[0]}`, // iniciales para logos (EP)
   displayName: `${name} ${fullName}`,   // nombre completo para textos legales / alt
   number: 21,
   position: 'Mediocampista',
   positionShort: 'MID',
   nationality: 'Argentina',
   nationalityFlag: argentina,
-  age: 33,
+  age: ageFrom(BIRTH_DATE),
   height: '1.70m',
   weight: '72kg',
   foot: 'Derecho',
-  birthDate: '20 / 08 / 1992',
+  birthDate: formatBirthDate(BIRTH_DATE),
   birthPlace: 'Morón, Buenos Aires, Argentina',
   currentClub: 'Estudiantes de La Plata',
   logoCurrentClub: escudoEstudiantes,
-  image: polaco1,
-
+  image: heroImage,
 
   stats: [
     { label: 'Velocidad', value: 85 },
@@ -77,8 +91,8 @@ export const playerData = {
     { label: 'Partidos', value: 15 },
     { label: 'Recuperos', value: 82 },
     { label: 'Asistencias', value: 1 },
-    { label: 'Tiros al árco', value: 17  },
-    { label: 'Min / Part.', value: "1,726'" },
+    { label: 'Tiros al arco', value: 17 },
+    { label: 'Minutos jugados', value: "1.726'" },
     { label: 'Valoración', value: 7.9 },
 
   ],
@@ -103,7 +117,7 @@ export const playerData = {
     {
       name: 'Arsenal de Sarandí',
       country: 'Argentina',
-      years: '2016 - 2019',
+      years: '2019 — 2020',
       logo: escudoArsenal,
       titles: [],
       info: '',
@@ -111,7 +125,7 @@ export const playerData = {
     {
       name: 'Almagro',
       country: 'Argentina',
-      years: '2021 — 2022',
+      years: '2016 — 2020',
       logo: escudoAlmagro,
       titles: [],
       info: '',
@@ -119,7 +133,7 @@ export const playerData = {
     {
       name: 'Fénix',
       country: 'Argentina',
-      years: '2015 - 2016',
+      years: '2015 — 2016',
       logo: escudoFenix,
       titles: [],
       info: '',
@@ -135,7 +149,7 @@ export const playerData = {
     {
       name: 'A.C.R Messina',
       country: 'Italia',
-      years: '2013 - 2014',
+      years: '2013 — 2014',
       logo: escudoMessina,
       titles: [],
       info: '',
@@ -161,7 +175,7 @@ export const playerData = {
       title: 'Campeonato Estudiantes 2025',
       fullTitle: 'Keki Piovi | Compilado',
       season: 'Campeonato 2025',
-      league: 'Campeon Liga Argentina',
+      league: 'Campeón Liga Argentina',
       thumbnail: image1,
       cover: image3,
       category: 'Estudiantes',
@@ -203,21 +217,22 @@ export const playerData = {
     },
   ],
 
+  // Agregar `caption` a cada foto si en algún momento se muestran epígrafes
   gallery: [
-    { id: 1, src: image1, alt: 'Francisco Fydriszewski', caption: 'Liga Profesional 2024', category: 'Partido', aspect: 'wide' },
-    { id: 2, src: image2, alt: 'Francisco Fydriszewski', caption: 'Festejo ante Racing', category: 'Festejo', aspect: 'tall' },
-    { id: 3, src: image3, alt: 'Francisco Fydriszewski', caption: 'Pretemporada 2025', category: 'Entrenamiento', aspect: 'square' },
-    { id: 4, src: image4, alt: 'Francisco Fydriszewski', caption: 'Copa Argentina 2024', category: 'Partido', aspect: 'wide' },
-    { id: 5, src: image5, alt: 'Francisco Fydriszewski', caption: 'Plantel Talleres 2024', category: 'Equipo', aspect: 'wide' },
-    { id: 6, src: image6, alt: 'Francisco Fydriszewski', caption: 'Foto oficial 2024', category: 'Retrato', aspect: 'tall' },
-    { id: 7, src: image7, alt: 'Francisco Fydriszewski', caption: 'Liga Profesional 2025', category: 'Partido', aspect: 'wide' },
-    { id: 8, src: image8, alt: 'Francisco Fydriszewski', caption: 'Copa Sudamericana 2023', category: 'Partido', aspect: 'wide' },
-    { id: 9, src: image9, alt: 'Francisco Fydriszewski', caption: 'Liga Profesional 2024', category: 'Partido', aspect: 'wide' },
-    { id: 10, src: image10, alt: 'Francisco Fydriszewski', caption: 'Festejo ante Racing', category: 'Festejo', aspect: 'tall' },
-    { id: 11, src: image11, alt: 'Francisco Fydriszewski', caption: 'Pretemporada 2025', category: 'Entrenamiento', aspect: 'square' },
-    { id: 12, src: image12, alt: 'Francisco Fydriszewski', caption: 'Copa Argentina 2024', category: 'Partido', aspect: 'wide' },
-    { id: 13, src: image13, alt: 'Francisco Fydriszewski', caption: 'Plantel Talleres 2024', category: 'Equipo', aspect: 'wide' },
-    { id: 14, src: image14, alt: 'Francisco Fydriszewski', caption: 'Foto oficial 2024', category: 'Retrato', aspect: 'tall' },
+    { id: 1, src: image1, alt: 'Ezequiel Piovi — foto 1 de la galería' },
+    { id: 2, src: image2, alt: 'Ezequiel Piovi — foto 2 de la galería' },
+    { id: 3, src: image3, alt: 'Ezequiel Piovi — foto 3 de la galería' },
+    { id: 4, src: image4, alt: 'Ezequiel Piovi — foto 4 de la galería' },
+    { id: 5, src: image5, alt: 'Ezequiel Piovi — foto 5 de la galería' },
+    { id: 6, src: image6, alt: 'Ezequiel Piovi — foto 6 de la galería' },
+    { id: 7, src: image7, alt: 'Ezequiel Piovi — foto 7 de la galería' },
+    { id: 8, src: image8, alt: 'Ezequiel Piovi — foto 8 de la galería' },
+    { id: 9, src: image9, alt: 'Ezequiel Piovi — foto 9 de la galería' },
+    { id: 10, src: image10, alt: 'Ezequiel Piovi — foto 10 de la galería' },
+    { id: 11, src: image11, alt: 'Ezequiel Piovi — foto 11 de la galería' },
+    { id: 12, src: image12, alt: 'Ezequiel Piovi — foto 12 de la galería' },
+    { id: 13, src: image13, alt: 'Ezequiel Piovi — foto 13 de la galería' },
+    { id: 14, src: image14, alt: 'Ezequiel Piovi — foto 14 de la galería' },
   ],
 
   socialMedia: [
