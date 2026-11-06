@@ -28,11 +28,10 @@ function PlayerPanel() {
         className="player-number"
         fontFamily="heading"
         fontSize={{ base: u(80), md: u(100) }}
-        ml={{ base: u(-10), md: 0 }}
-        sx={{ [LANDSCAPE]: { fontSize: u(80), ml: 0 } }}
+        ml={{ base: u(0), md: 0 }}
+        sx={{ [LANDSCAPE]: { fontSize: u(80), ml: 0 }, WebkitTextStroke: `2px ${amber}` }}
         lineHeight={0.9}
         color="transparent"
-        sx={{ WebkitTextStroke: `2px ${amber}` }}
       >
         {playerData.number}
       </Text>
@@ -167,7 +166,7 @@ export default function Hero() {
           zIndex={0}
           pointerEvents="none"
           display={{ base: 'none', lg: 'block' }}
-          right={{ lg: '-3%' }}
+          right={{ lg: '10%' }}
           bottom={0}
           h={{ lg: '82vh' }}
           sx={{
@@ -242,7 +241,7 @@ export default function Hero() {
           justifyContent={{ base: 'flex-start', lg: 'center' }}
           pl={{ base: 0, md: '5%', lg: '15%' }}
           pt={{ base: '22%', lg: '0%' }}
-          mt={{ base: '0', lg: '-4%' }}
+          mt={{ base: '10%', lg: '-4%' }}
           sx={{ [LANDSCAPE]: { justifyContent: 'center', pl: '6%', pt: 0, mt: '-14vh' } }}
         >
           <Flex 
@@ -255,7 +254,7 @@ export default function Hero() {
               as="span"
               display="block"
               fontFamily="heading"
-              fontSize={{ base: '28vw', md: '16vw', lg: '13vw' }}
+              fontSize={{ base: '35vw', md: '16vw', lg: '13vw' }}
               sx={{ [LANDSCAPE]: { fontSize: 'min(26vh, 13vw)' } }}
               color="brand.amber"
               lineHeight={0.9}
@@ -268,7 +267,7 @@ export default function Hero() {
               as="span"
               display="block"
               fontFamily="heading"
-              fontSize={{ base: '25vw', md: '16vw', lg: '13vw' }}
+              fontSize={{ base: '30vw', md: '16vw', lg: '13vw' }}
               sx={{ [LANDSCAPE]: { fontSize: 'min(26vh, 13vw)', mt: '-2vh' } }}
               color="brand.gray2"
               lineHeight={0.9}
@@ -286,7 +285,7 @@ export default function Hero() {
         <Box
           className="player-info"
           position="absolute"
-          bottom={{ base: '45%', md: '40%', lg: '22%' }}
+          bottom={{ base: '40%', md: '40%', lg: '18%' }}
           left={{ base: '5%', lg: '15%' }}
           zIndex={15}
           sx={{ [LANDSCAPE]: { bottom: '10%', left: '6%' } }}
