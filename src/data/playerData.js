@@ -219,22 +219,45 @@ export const playerData = {
     },
   ],
 
-  // Agregar `caption` a cada foto si en algún momento se muestran epígrafes
-  gallery: [
-    { id: 1, src: image1, alt: 'Ezequiel Piovi — foto 1 de la galería' },
-    { id: 2, src: image2, alt: 'Ezequiel Piovi — foto 2 de la galería' },
-    { id: 3, src: image3, alt: 'Ezequiel Piovi — foto 3 de la galería' },
-    { id: 4, src: image4, alt: 'Ezequiel Piovi — foto 4 de la galería' },
-    { id: 5, src: image5, alt: 'Ezequiel Piovi — foto 5 de la galería' },
-    { id: 6, src: image6, alt: 'Ezequiel Piovi — foto 6 de la galería' },
-    { id: 7, src: image7, alt: 'Ezequiel Piovi — foto 7 de la galería' },
-    { id: 8, src: image8, alt: 'Ezequiel Piovi — foto 8 de la galería' },
-    { id: 9, src: image9, alt: 'Ezequiel Piovi — foto 9 de la galería' },
-    { id: 10, src: image10, alt: 'Ezequiel Piovi — foto 10 de la galería' },
-    { id: 11, src: image11, alt: 'Ezequiel Piovi — foto 11 de la galería' },
-    { id: 12, src: image12, alt: 'Ezequiel Piovi — foto 12 de la galería' },
-    { id: 13, src: image13, alt: 'Ezequiel Piovi — foto 13 de la galería' },
-    { id: 14, src: image14, alt: 'Ezequiel Piovi — foto 14 de la galería' },
+  // Galería dividida en categorías (pestañas). El orden de cada lista es el orden en pantalla:
+  // la primera foto sale grande en el mosaico. Se muestran 4 y el resto queda tras "Ver más fotos".
+  // Para sumar fotos: importar la imagen arriba y agregarla a la categoría que corresponda.
+  galleries: [
+    {
+      key: 'estudiantes',
+      name: 'Estudiantes',
+      description: 'Partidos con el Pincha desde 2025.',
+      photos: [
+        { src: image2, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
+        { src: image13, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
+        { src: image3, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
+        { src: image12, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
+        { src: image5, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
+        { src: image4, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
+        { src: image11, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
+        { src: image6, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
+        { src: image9, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
+        { src: image10, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
+        { src: image14, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
+      ],
+    },
+    {
+      key: 'entrenamiento',
+      name: 'Entrenamiento',
+      description: 'Semana de trabajo y entradas en calor.',
+      photos: [
+        { src: image7, alt: 'Keki Piovi en la entrada en calor antes de un partido' },
+      ],
+    },
+    {
+      key: 'clubes',
+      name: 'Clubes',
+      description: 'Sus etapas anteriores, antes de llegar a La Plata.',
+      photos: [
+        { src: image1, alt: 'Keki Piovi jugando para Liga de Quito' },
+        { src: image8, alt: 'Keki Piovi jugando para Liga de Quito' },
+      ],
+    },
   ],
 
   socialMedia: [
