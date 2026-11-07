@@ -125,7 +125,7 @@ export default function LibertadoresSection() {
               color={GOLD}
               mt={1}
             >
-              Rumbo a la quinta
+              Rumbo a la ilusión
             </Text>
 
             <Flex align="center" gap={{ base: 4, lg: 5 }} mt={{ base: 5, lg: 7 }}>
