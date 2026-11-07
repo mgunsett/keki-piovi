@@ -160,6 +160,17 @@ export const playerData = {
 
   videos: [
     {
+      id: 'v0',
+      instagramId: 'DejbgvYCU51',
+      title: 'Libertadores 2026',
+      fullTitle: 'Keki Piovi | Jugadas destacadas',
+      season: 'Copa Libertadores 2026',
+      league: 'Temporada 2026',
+      thumbnail: image2,
+      cover: image5,
+      category: 'Highlights', 
+    },
+    {
       id: 'v1',
       // instagramId: código del reel. En https://www.instagram.com/reel/DXXXXXXXXXX/ es "DXXXXXXXXXX"
       instagramId: 'DS5j1OFkXzC',

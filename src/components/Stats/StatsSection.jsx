@@ -72,7 +72,6 @@ function PitchCard() {
     <Flex direction="column" h="100%">
       <Flex justify="space-between" align="baseline" gap={3}>
         <CardTitle>Zona de influencia</CardTitle>
-        <Label>Ataca hacia arriba</Label>
       </Flex>
       {/* En md+ la cancha se dimensiona por alto (atado al viewport) y el ancho sale de la proporción */}
       <Box ref={ref} mx="auto" mt={5}
@@ -176,7 +175,6 @@ function Attributes() {
     <Grid templateColumns={{ base: '1fr', lg: '220px 1fr' }} gap={{ base: 5, lg: 9 }} alignItems="center">
       <Box>
         <CardTitle>Atributos</CardTitle>
-        <Text fontSize="sm" color="brand.gray" mt={2} lineHeight={1.5}>Escala de 0 a 100. Cada bloque son 10 puntos.</Text>
       </Box>
       <Grid as="ul" listStyleType="none" templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }}
             columnGap={10} rowGap={{ base: 4, lg: 5 }}>

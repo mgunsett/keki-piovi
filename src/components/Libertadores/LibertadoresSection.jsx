@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 const GOLD = '#D9BE7E'
 const GOLD_DEEP = '#B89B5E'
+const GALLERY_POSITIONS = ['center 30%', 'center 30%', 'center 80%', 'center 90%', 'center 80%']
 
 export default function LibertadoresSection() {
   const sectionRef = useRef(null)
@@ -275,7 +276,7 @@ export default function LibertadoresSection() {
                 sx={{ scrollSnapAlign: 'start' }}
               >
                 <Image src={g.src} alt={g.alt} loading="lazy" w="100%" h="100%" objectFit="cover"
-                       objectPosition={i === 4 ? 'center 78%' : 'center 30%'} />
+                       objectPosition={GALLERY_POSITIONS[i] ?? 'center 30%'} />
               </Box>
             ))}
           </Grid>
