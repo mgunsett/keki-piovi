@@ -226,10 +226,12 @@ function ClubRow({ club, index, isCurrent }) {
           <Label mt={0.5}>{country}</Label>
         </Box>
       </Flex>
-      <Text gridArea="sum" fontFamily="mono" fontSize="sm" color={hasDetail ? 'brand.bone' : 'rgba(163,155,146,.55)'}
-            pl={{ base: '48px', md: 0 }}>
-        {hasDetail ? summary : 'Sin títulos ni distinciones'}
-      </Text>
+      {/* Resumen solo si hay títulos o distinciones */}
+      {hasDetail && (
+        <Text gridArea="sum" fontFamily="mono" fontSize="sm" color="brand.bone" pl={{ base: '48px', md: 0 }}>
+          {summary}
+        </Text>
+      )}
       <Box gridArea="chev" data-chev w="34px" h="34px" display="flex" alignItems="center" justifyContent="center"
            borderRadius="full" border="1px solid" borderColor={hasDetail ? LINE_2 : 'transparent'}
            color={hasDetail ? 'brand.bone' : 'transparent'} aria-hidden="true">
