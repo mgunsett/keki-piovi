@@ -65,6 +65,7 @@ export const playerData = {
   displayName: `${name} ${fullName}`,   // nombre completo para textos legales / alt
   number: 21,
   position: 'Mediocampista',
+  positionDetail: 'Mediocampista central',
   positionShort: 'MID',
   nationality: 'Argentina',
   nationalityFlag: argentina,
@@ -87,14 +88,14 @@ export const playerData = {
     { label: 'Visión de Juego', value: 86 },
   ],
 
+  // highlight: se muestran en rojo en la ficha (los números que mejor lo definen)
   seasonStats: [
+    { label: 'Recuperos', value: 82, highlight: true },
     { label: 'Partidos', value: 15 },
-    { label: 'Recuperos', value: 82 },
-    { label: 'Asistencias', value: 1 },
-    { label: 'Tiros al arco', value: 17 },
     { label: 'Minutos jugados', value: "1.726'" },
-    { label: 'Valoración', value: 7.9 },
-
+    { label: 'Valoración', value: 7.9, highlight: true },
+    { label: 'Tiros al arco', value: 17 },
+    { label: 'Asistencias', value: 1 },
   ],
 
   clubs: [
@@ -117,6 +118,7 @@ export const playerData = {
     {
       name: 'Arsenal de Sarandí',
       country: 'Argentina',
+      loan: true,
       years: '2019 — 2020',
       logo: escudoArsenal,
       titles: [],
