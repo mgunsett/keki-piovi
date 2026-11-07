@@ -1,292 +1,183 @@
+// ─────────────────────────────────────────────────────────────
+// Contacto — redes en tarjetas con ícono de fondo + representación
+// con logo, para qué escribirle y botón. Todo sale de playerData.
+// ─────────────────────────────────────────────────────────────
 import { useRef } from 'react'
-import { Box, Flex, Text, SimpleGrid, Grid, Image } from '@chakra-ui/react'
+import { Box, Flex, Grid, Text, Image } from '@chakra-ui/react'
+import { FaInstagram } from 'react-icons/fa'
+import { FiArrowUpRight } from 'react-icons/fi'
+import useScrubReveal from '../../hooks/useScrubReveal'
 import { playerData } from '../../data/playerData'
-import { useScrubReveal } from '../../hooks/useScrubReveal'
+
+const GOLD = '#D9BE7E'
+
+// Íconos de fondo de las tarjetas de redes (por label)
+const GhostInstagram = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+    <rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" />
+    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+  </svg>
+)
+const GhostStats = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor">
+    <rect x="3" y="14" width="3.5" height="7" rx=".5" /><rect x="8.5" y="5" width="3.5" height="16" rx=".5" />
+    <rect x="14" y="11" width="3.5" height="10" rx=".5" /><rect x="19.5" y="8" width="3.5" height="13" rx=".5" />
+  </svg>
+)
+const GHOSTS = { Instagram: GhostInstagram, TransferMarkt: GhostStats }
+
+// Base compartida por las tarjetas (link externo con borde rojo fino)
+const cardProps = (label) => ({
+  as: 'a',
+  target: '_blank',
+  rel: 'noopener noreferrer',
+  'aria-label': `${label}. Se abre en otra pestaña`,
+  position: 'relative',
+  overflow: 'hidden',
+  display: 'flex',
+  flexDirection: 'column',
+  border: '1px solid',
+  borderColor: 'rgba(239,45,56,.55)',
+  borderRadius: '12px',
+  bg: '#1b1717',
+  transition: 'border-color .2s ease, background-color .2s ease, transform .16s cubic-bezier(0.23, 1, 0.32, 1)',
+  _active: { transform: 'scale(0.99)' },
+  _focusVisible: { outline: '2px solid', outlineColor: GOLD, outlineOffset: '3px' },
+})
+
+const hover = (rules) => ({ '@media (hover: hover) and (pointer: fine)': { '&:hover': { borderColor: 'brand.amber', bg: '#201a1a' }, ...rules } })
 
 function SocialCard({ item }) {
-  const Icon = item.iconBg
-  const gradientFill = item.hoverGradient
-    ? { '[role=group]:hover & path': { fill: `url(#${item.hoverGradient})` } }
-    : undefined
+  const Ghost = GHOSTS[item.label]
+  const Icon = item.icon
   return (
     <Box
-      as="a"
+      {...cardProps(`${item.label} de Keki Piovi, ${item.handle}`)}
       href={item.url}
-      target={item.url?.startsWith('http') ? '_blank' : undefined}
-      rel="noopener noreferrer"
-      position="relative"
-      overflow="hidden"
-      bg="brand.dark"
-      border="1px solid"
-      borderColor="brand.amber"
-      borderRadius={'10px'}
-      p={{ base: 6, md: 8 }}
-      transition="all 0.3s ease"
-      role="group"
-      _hover={{
-        transform: 'translateY(-3px)',
-          borderColor: 'brand.amber',
-          bg: 'brand.bgRef',
+      minH={{ base: '160px', md: '190px' }}
+      p={{ base: 5, md: 7 }}
+      justifyContent="space-between"
+      sx={{
+        '& .ghost': { transition: 'color .3s ease, transform .5s cubic-bezier(0.23, 1, 0.32, 1)' },
+        '& .arrow': { transition: 'background-color .2s ease, border-color .2s ease' },
+        ...hover({
+          '&:hover .ghost': { color: 'rgba(239,45,56,.22)', transform: 'rotate(-6deg) scale(1.04)' },
+          '&:hover .arrow': { bg: 'brand.amber', borderColor: 'brand.amber' },
+        }),
       }}
     >
-      {/* watermark gigante */}
-      <Box
-        position="absolute"
-        right="-10px"
-        bottom="-40px"
-        opacity={0.2}
-        transition="all 0.4s ease"
-        _groupHover={{ opacity: 0.18, color: (item.hoverColor) }}
-        color="white"
-        pointerEvents="none"
-        sx={gradientFill}
-      >
-        <Box as={Icon} fontSize="180px" />
-      </Box>
-      <Box position="relative">
-        {item.icon && (
-        <Box
-          as={Icon}
-          fontSize="28px"
-          mb={6}
-          color="whiteAlpha.700"
-          transition="color 0.3s ease"
-          _groupHover={{ color: item.hoverColor }}
-          sx={gradientFill}
-        />
-        )}
-        {item.image && (
-          <Image
-          src={item.image}
-          alt={`Logo de ${item.label}`}
-          w={'30px'}
-          h={'30px'}
-          mb={6}
-          loading="lazy"
-          filter="brightness(0.3)"
-          color="whiteAlpha.700"
-          transition="all 0.3s ease"
-          _groupHover={{ color: item.hoverColor, filter:"brightness(0.9)"}}
-        />
-        )}
-        <Text
-          fontFamily="mono"
-          fontSize="10px"
-          letterSpacing="0.24em"
-          textTransform="uppercase"
-          color="brand.gray"
-          mb={1}
-          _groupHover={{ color: 'brand.bone' }}
-        >
-          {item.label}
-        </Text>
-        <Text fontFamily="heading" color={'brand.bone'} fontSize={{base:'xl',md:"2xl"}} _groupHover={{ color: 'brand.gray2' }}>
+      {Ghost && (
+        <Box className="ghost" aria-hidden="true" position="absolute" right="-18px" bottom="-26px"
+             boxSize={{ base: '150px', md: '190px' }} color="rgba(184,155,94,.12)" pointerEvents="none">
+          <Ghost />
+        </Box>
+      )}
+      <Flex className="arrow" aria-hidden="true" position="absolute" top={{ base: 4, md: 5 }} right={{ base: 4, md: 5 }}
+            boxSize="42px" borderRadius="full" border="1px solid" borderColor="whiteAlpha.300" align="center" justify="center">
+        <Box as={FiArrowUpRight} boxSize="18px" />
+      </Flex>
 
+      <Flex aria-hidden="true" boxSize="46px" borderRadius="12px" border="1px solid" borderColor="whiteAlpha.300" align="center" justify="center">
+        {Icon ? <Box as={Icon} boxSize="22px" /> : <Image src={item.image} alt="" boxSize="24px" objectFit="contain" />}
+      </Flex>
+      <Box position="relative" mt={5}>
+        <Text fontFamily="mono" fontSize="sm" fontWeight={600} color="brand.gray">{item.label === 'TransferMarkt' ? 'Transfermarkt' : item.label}</Text>
+        <Text fontFamily="heading" fontSize={{ base: '30px', md: 'clamp(30px, 3vw, 40px)' }} lineHeight={1} color="brand.bone">
           {item.handle}
         </Text>
+        {item.note && <Text fontFamily="mono" fontSize="sm" fontWeight={500} color="brand.gray" mt={1}>{item.note}</Text>}
       </Box>
     </Box>
   )
 }
 
-function ContactRow({ item, gold }) {
-  const Icon = item.icon
+function RepCard({ item }) {
   return (
     <Box
-      as="a"
+      {...cardProps(`${item.cta || item.label} por Instagram, ${item.handle}`)}
       href={item.url}
-      target={item.url?.startsWith('http') ? '_blank' : undefined}
-      rel="noopener noreferrer"
-      display="block"
-      bg="rgba(255,255,255,0.02)"
-      border="1px solid"
-      borderColor={gold ? 'brand.orangeLight' : 'brand.amber'}
-      borderRadius='10px'
-      borderLeftColor= {gold ? 'brand.orangeLight' : 'brand.amber'}
-      borderLeftWidth= '4px'
-      borderLeftStyle= 'solid'
-      p={{ base: 5, md: 8 }}
-      transition="all 0.3s ease"
-      role="group"
-      _hover={{
-        transform: 'translateY(-3px)',
-        borderColor: gold ? 'brand.orangeLight' : 'brand.amber',
-        bg: gold ? 'rgba(244,100,107,0.05)' : 'brand.bgRef',
+      p={{ base: 5, md: 7 }}
+      gap={{ base: 4, md: 5 }}
+      sx={{
+        '& .rep-cta': { transition: 'background-color .2s ease' },
+        ...hover({ '&:hover .rep-cta': { bg: 'brand.amber' } }),
       }}
     >
-      <Flex align="center" gap={4}>
-        {item.icon && (
-          <Box
-            ml={3}
-            as={Icon}
-            fontSize="40px"
-            color='whiteAlpha.400'
-            opacity={0.4}
-            transition="all 0.3s ease"
-            _groupHover={{ opacity: 1, color: 'brand.amber' }}
-          />
-        )}
-        {item.image && (
-          <Box boxSize="60px" overflow="hidden" transition="all 0.5s ease" >
-            <Image
-            src={item.image}
-            alt={`Logo de ${item.label}`}
-            w="100%"
-            loading="lazy"
-            filter="brightness(0.3)"
-            transition="all 0.3s ease"
-            _groupHover={{ 
-              filter: 'brightness(0.98)',
-             }}
-             />
-          </Box>
-        )}
-        <Box ml={gold ? '8px' : '16px'}>
-          <Text
-            fontFamily="mono"
-            fontSize="10px"
-            letterSpacing="0.24em"
-            textTransform="uppercase"
-            color="brand.gray"
-            _groupHover={{ color: 'brand.bone' }}
-          >
+      <Flex align="center" gap={{ base: 3.5, md: 5 }}>
+        <Flex flexShrink={0} boxSize={{ base: '70px', md: '92px' }} borderRadius="16px" bg="rgba(243,238,227,.04)"
+              border="1px solid" borderColor="whiteAlpha.100" align="center" justify="center">
+          <Image src={item.image} alt="" boxSize={{ base: '58px', md: '76px' }} objectFit="contain" />
+        </Flex>
+        <Box minW={0}>
+          <Text fontFamily="mono" fontSize="sm" fontWeight={600} color={GOLD}>{item.title}</Text>
+          <Text fontFamily="heading" fontSize={{ base: '30px', md: 'clamp(32px, 3vw, 42px)' }} lineHeight={0.95} color="brand.bone" mt={0.5}>
             {item.label}
           </Text>
-          <Text 
-          fontFamily="heading" 
-          fontSize="2xl" 
-          color="brand.bone" 
-          fontWeight={500} 
-          _groupHover={{ color: gold ? 'brand.orangeLight' : 'brand.gray2' }}
-          >
-            {item.handle}
-          </Text>
+          <Text fontFamily="mono" fontSize="sm" fontWeight={500} color="brand.gray" mt={1}>{item.handle}</Text>
         </Box>
+      </Flex>
+
+      {item.forWhom && (
+        <Text fontSize="15px" lineHeight={1.5} color="brand.gray" pt={4} borderTop="1px solid" borderColor="whiteAlpha.100">
+          <Text as="span" color="brand.bone" fontWeight={500}>Escribile por:</Text> {item.forWhom}.
+        </Text>
+      )}
+
+      <Flex className="rep-cta" mt="auto" align="center" justify={{ base: 'center', md: 'flex-start' }} alignSelf={{ base: 'stretch', md: 'flex-start' }}
+            gap={2.5} px={4.5} py={3} borderRadius="full" bg="rgba(239,45,56,.14)"
+            fontFamily="mono" fontSize="15px" fontWeight={700} color="brand.bone">
+        <Box as={FaInstagram} boxSize="18px" aria-hidden="true" />
+        {item.cta || `Escribir a ${item.label}`}
       </Flex>
     </Box>
   )
 }
 
-export function ContactSection() {
-  const professional = playerData.contact.filter(
-    (c) => c.title === 'Representante Deportivo'
-  )
-  const representative = playerData.contact.filter(
-    (c) => c.title === 'Contacto Marketing'
-  )
-
-  const sectionRef = useRef(null)
-  const headerRef  = useRef(null)
-  const socialRef  = useRef(null)
-  const proRef     = useRef(null)
-  const repRef     = useRef(null)
-
-  useScrubReveal(sectionRef, {
-    elements: [
-      { ref: headerRef, fromVars: { y: 50, opacity: 0 }, vars: { y: 0, opacity: 1 } },
-      { ref: socialRef, fromVars: { y: 40, opacity: 0 }, vars: { y: 0, opacity: 1 } },
-      { ref: proRef,    fromVars: { y: 40, opacity: 0 }, vars: { y: 0, opacity: 1 } },
-      { ref: repRef,    fromVars: { y: 40, opacity: 0 }, vars: { y: 0, opacity: 1 } },
-    ],
-    start: 'top 80%',
-    end:   'top 35%',
-  })
-
+function Group({ title, children }) {
   return (
-    <Box
-      as="section"
-      id="contact"
-      ref={sectionRef}
-      position="relative"
-      bg="brand.dark"
-      px={{ base: 6, md: 12, lg: 20 }}
-      py={{ base: 20, md: 28 }}
-      overflow="hidden"
-    >
-      <Box position="relative" zIndex={1} maxW="1400px" mx="auto">
-        {/* Header */}
-        <Box ref={headerRef} mb={{ base: 8, md: 10 }}>
-          <Text fontFamily="mono" fontSize="10px" color="brand.bone"
-                  textTransform="uppercase" letterSpacing="widest">
-            #Redes
-          </Text>
-          <Text as="h2" fontFamily="heading" fontSize={{ base: '5xl', lg: '6xl' }}
-                  color="brand.amber" lineHeight={1}>
-            Contacto
-          </Text>
-        </Box>
-
-        {/* Social media */}
-        <Box ref={socialRef} mb={4}>
-          <Text
-            fontFamily="mono"
-            fontSize="11px"
-            letterSpacing="0.28em"
-            textTransform="uppercase"
-            color="brand.amber"
-            mb={5}
-          >
-            Redes sociales
-          </Text>
-          {/* Definición del degradado oficial de Instagram (referenciado por fill: url(#insta-gradient)) */}
-          <Box as="svg" w={0} h={0} position="absolute" aria-hidden>
-            <defs>
-              <linearGradient id="insta-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
-                <stop offset="0%"   stopColor="#f09433" />
-                <stop offset="25%"  stopColor="#e6683c" />
-                <stop offset="50%"  stopColor="#dc2743" />
-                <stop offset="75%"  stopColor="#cc2366" />
-                <stop offset="100%" stopColor="#bc1888" />
-              </linearGradient>
-            </defs>
-          </Box>
-          <SimpleGrid columns={{ base: 1, sm: 2, lg: 2 }} spacing={4}>
-            {playerData.socialMedia.map((s, i) => (
-              <SocialCard key={i} item={s} />
-            ))}
-          </SimpleGrid>
-        </Box>
-
-        {/* Contacto profesional */}
-        <Box ref={proRef} mb={4}>
-          <Text
-            fontFamily="mono"
-                fontSize="11px"
-                letterSpacing="0.28em"
-                textTransform="uppercase"
-                color="brand.amber"
-                mb={5}
-          >
-            Representante Deportivo
-          </Text>
-          <Grid templateColumns={{ base: '1fr', md: '1fr' }} gap={4}>
-            {professional.map((c, i) => (
-              <ContactRow key={i} item={c} />
-            ))}
-          </Grid>
-        </Box>
-
-        {/* Representante */}
-        <Box ref={repRef}>
-          <Text
-            fontFamily="mono"
-                fontSize="11px"
-                letterSpacing="0.28em"
-                textTransform="uppercase"
-                color="brand.orangeLight"
-                mb={5}
-          >
-            Representante de marketing
-          </Text>
-          <Grid templateColumns={{ base: '1fr', md: '1fr' }} gap={4}>
-            {representative.map((c, i) => (
-              <ContactRow key={i} item={c} gold />
-            ))}
-          </Grid>
-        </Box>
-      </Box>
+    <Box mt={{ base: 9, md: 11 }}>
+      <Text as="h3" fontFamily="mono" fontSize="sm" fontWeight={600} color="brand.amber" mb={3.5}>{title}</Text>
+      <Grid templateColumns={{ base: '1fr', md: '1fr 1fr' }} gap={3.5}>{children}</Grid>
     </Box>
   )
 }
 
-export default ContactSection
+export default function ContactSection() {
+  const sectionRef = useRef(null)
+  const headerRef = useRef(null)
+
+  useScrubReveal(sectionRef, {
+    elements: [{ ref: headerRef, fromVars: { y: 50, opacity: 0 }, vars: { y: 0, opacity: 1 } }],
+    start: 'top 80%',
+    end: 'top 40%',
+  })
+
+  return (
+    <Box as="section" id="contact" ref={sectionRef} aria-labelledby="contact-title" bg="brand.dark"
+         pt={{ base: 16, lg: 24 }} pb={{ base: 20, lg: 28 }} px={{ base: 5, lg: 10 }}>
+      <Box maxW="1400px" mx="auto">
+        <Flex ref={headerRef} justify="space-between" align="flex-end" gap={5} flexWrap="wrap">
+          <Box>
+            <Text fontFamily="mono" fontSize="10px" color="brand.bone" textTransform="uppercase" letterSpacing="widest">
+              Redes y representación
+            </Text>
+            <Text as="h2" id="contact-title" fontFamily="heading" fontSize={{ base: '6xl', lg: '8xl' }} lineHeight={0.88}
+                  color="brand.amber" mt={1}>
+              Contacto
+            </Text>
+          </Box>
+          <Text color="brand.gray" maxW="40ch" lineHeight={1.5}>
+            Seguilo en sus redes o escribí directamente a quien lleva cada tema.
+          </Text>
+        </Flex>
+
+        <Group title="Redes sociales">
+          {playerData.socialMedia.map((s) => <SocialCard key={s.url} item={s} />)}
+        </Group>
+        <Group title="Representación">
+          {playerData.contact.map((c) => <RepCard key={c.url} item={c} />)}
+        </Group>
+      </Box>
+    </Box>
+  )
+}
