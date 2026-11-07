@@ -15,8 +15,8 @@ const brand = {
   orange:     '#C4151F', // rojo oscuro (hover de botones)
   orangeDark: '#8A0F16', // rojo muy oscuro (hover de botones)
   orangeLight:'#F4646B', // rojo claro (hover de botones)
-  dark:       '#1512129f', // negro carbón cálido (fondo global)
-  dark3:      '#151212a1',
+  dark:       '#151212', // negro carbón cálido (fondo global, opaco)
+  dark3:      '#151212a1', // fondo translúcido del navbar (glass)
   dark2:      '#A9A29B',
   gray:       '#A39B92', // gris cálido (texto secundario)
   gray2:      '#ebebeb', // bordó apagado (bordes sutiles)
@@ -24,6 +24,9 @@ const brand = {
   boneWarm:   '#D8C088', // dorado suave (detalles)
   rec:        '#EF2D38', // rojo del indicador REC
   bgRef:      '#d9be7e21', // bg de hover en cajas (dorado sutil)
+  doradoSoft: '#B89B5E29', // dorado translúcido (glows / trazos fantasma)
+  doradoMid:  '#B89B5E66', // dorado translúcido medio (hover de badges)
+  doradoRing: '#B89B5E44', // anillo de foco/hover dorado
   accent:     '#EF2D38', // rojo pincha (scrollbar y acentos)
   accentMid:  '#C4151F', // rojo medio (gradientes)
   accentDeep: '#7C0E15', // rojo profundo (gradientes)

@@ -21,13 +21,7 @@ const spin = keyframes`
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
 `
-// Parpadeo del punto REC
-const blink = keyframes`
-  0%, 100% { opacity: 1; }
-  50%      { opacity: 0.2; }
-`
-
-export function VideoCard({ video, index = 0, onOpen }) {
+export function VideoCard({ video, onOpen }) {
   const [hovered, setHovered] = useState(false)
 
   return (
@@ -84,7 +78,7 @@ export function VideoCard({ video, index = 0, onOpen }) {
             position="absolute"
             inset={0}
             pointerEvents="none"
-            background="radial-gradient(ellipse at center, transparent 42%, rgba(3,6,10,0.8) 125%)"
+            background="radial-gradient(ellipse at center, transparent 42%, rgba(10,5,5,0.8) 125%)"
             opacity={hovered ? 1 : 0.4}
             transition="opacity 0.5s ease"
           />
@@ -100,28 +94,6 @@ export function VideoCard({ video, index = 0, onOpen }) {
                 'repeating-linear-gradient(180deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 2px, transparent 4px)',
             }}
           />
-
-          {/* badge REC + categoría */}
-          <Flex
-            position="absolute"
-            top={3}
-            left={3}
-            align="center"
-            gap="6px"
-            bg="rgba(10,5,5,0.55)"
-            backdropFilter="blur(6px)"
-            border="1px solid"
-            borderColor="brand.amber"
-            px="8px"
-            py="4px"
-            borderRadius="5px"
-            zIndex={4}
-          >
-            <Box w="6px" h="6px" borderRadius="full" bg="brand.rec" animation={`${blink} 1.6s ease-in-out infinite`} />
-            <Text fontFamily="mono" fontSize="9px" letterSpacing="0.24em" textTransform="uppercase" color="white">
-              {video.category}
-            </Text>
-          </Flex>
 
           {/* marcador de fuente: Instagram */}
           <Flex
@@ -139,7 +111,7 @@ export function VideoCard({ video, index = 0, onOpen }) {
             borderColor="whiteAlpha.300"
             zIndex={4}
             transition="border-color 0.4s ease, background 0.4s ease"
-            _groupHover={{ borderColor: 'brand.amber', bg: 'rgba(189,167,142,0.25)' }}
+            _groupHover={{ borderColor: 'brand.amber', bg: 'rgba(184,155,94,0.25)' }}
           >
             <Box as={FaInstagram} fontSize="14px" color="white" />
           </Flex>
@@ -163,7 +135,7 @@ export function VideoCard({ video, index = 0, onOpen }) {
                 transition="opacity 0.4s ease"
                 sx={{
                   background:
-                    'conic-gradient(from 0deg, transparent 0deg, #bda78ee6 80deg, #7a4e1f 150deg, transparent 220deg, transparent 360deg)',
+                    'conic-gradient(from 0deg, transparent 0deg, #B89B5Ee6 80deg, #7C0E15 150deg, transparent 220deg, transparent 360deg)',
                   WebkitMask: 'radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 2px))',
                   mask: 'radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 2px))',
                 }}
@@ -181,55 +153,30 @@ export function VideoCard({ video, index = 0, onOpen }) {
                 bg="rgba(10,5,5,0.4)"
                 backdropFilter="blur(10px)"
                 transition="all 0.4s ease"
-                boxShadow={hovered ? '0 0 28px rgba(189,167,142,0.55)' : 'none'}
-                _groupHover={{ bg: 'rgba(189,167,142,0.5)', borderColor: 'white' }}
+                boxShadow={hovered ? '0 0 28px rgba(184,155,94,0.55)' : 'none'}
+                _groupHover={{ bg: 'rgba(184,155,94,0.5)', borderColor: 'white' }}
               >
                 <Box as={FiPlay} fontSize="20px" ml="3px" color="white" />
               </Flex>
             </Box>
           </Flex>
 
-          {/* etiqueta estática (visible siempre, se oculta al hover) */}
-          <Flex
-            position="absolute"
-            bottom={3}
-            left={3}
-            right={3}
-            align="flex-end"
-            justify="space-between"
-            gap={2}
-            zIndex={4}
-            opacity={hovered ? 0 : 1}
-            transition="opacity 0.35s ease"
-            pointerEvents="none"
-          >
-            <Text fontFamily="heading" fontSize="xl" lineHeight={1} color="white" noOfLines={1}>
-              {video.title}
-            </Text>
-            <Text fontFamily="mono" fontSize="11px" letterSpacing="0.2em" color="brand.amber" flexShrink={0}>
-              {`0${index + 1}`}
-            </Text>
-          </Flex>
-
-          {/* título al hover (sube desde abajo) */}
-          <Box
+          {/* título (visible siempre) */}
+          <Text
             position="absolute"
             bottom={4}
             left={4}
             right={4}
             zIndex={4}
-            opacity={hovered ? 1 : 0}
-            transform={hovered ? 'translateY(0)' : 'translateY(14px)'}
-            transition="opacity 0.45s ease 0.05s, transform 0.45s cubic-bezier(0.22,1,0.36,1) 0.05s"
+            fontFamily="heading"
+            fontSize="2xl"
+            lineHeight={1}
+            color="white"
+            noOfLines={1}
             pointerEvents="none"
           >
-            <Text fontFamily="mono" fontSize="8px" letterSpacing="0.26em" textTransform="uppercase" color="brand.amber" mb={1}>
-              Jugadas destacadas
-            </Text>
-            <Text fontFamily="heading" fontSize="2xl" lineHeight={1} color="white" letterSpacing="0.01em" noOfLines={1}>
-              {video.season}
-            </Text>
-          </Box>
+            {video.title}
+          </Text>
 
           {/* sheen diagonal */}
           <Box position="absolute" inset={0} overflow="hidden" pointerEvents="none" zIndex={2}>

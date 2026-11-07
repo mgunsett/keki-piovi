@@ -10,23 +10,21 @@ export function docToMatch(data) {
   }
 }
 
+import escudoEstudiantes from '@assets/escudos/escudo_estudiantes.webp'
+
+// Placeholder neutro: solo se ve si Firebase no está configurado o falla la carga.
+// Los partidos reales se cargan desde /admin.
+const placeholder = {
+  home:      { name: 'Estudiantes', shield: escudoEstudiantes },
+  away:      { name: '—', shield: null },
+  homeScore: null,
+  awayScore: null,
+  date:      'A confirmar',
+  stadium:   '',
+  competition: 'Liga Profesional',
+}
+
 export const defaultMatches = {
-  last: {
-    home:      { name: 'Talleres', shield: null },
-    away:      { name: 'Boca Juniors', shield: null },
-    homeScore: 2,
-    awayScore: 1,
-    date:      '08 Jun 2025',
-    stadium:   'Mario Kempes',
-    competition: 'Liga Profesional',
-  },
-  next: {
-    home:      { name: 'River Plate', shield: null },
-    away:      { name: 'Talleres', shield: null },
-    homeScore: null,
-    awayScore: null,
-    date:      '22 Jun 2025',
-    stadium:   'Monumental',
-    competition: 'Liga Profesional',
-  },
+  last: placeholder,
+  next: placeholder,
 }

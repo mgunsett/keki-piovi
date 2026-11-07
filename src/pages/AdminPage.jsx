@@ -8,11 +8,14 @@ import {
 import { FiEdit2, FiTrash2, FiUpload, FiLogOut, FiSave } from 'react-icons/fi'
 import { playerData } from '../data/playerData'
 import {
-  signInWithEmailAndPassword, signOut, onAuthStateChanged,
+  getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged,
 } from 'firebase/auth'
 import { getDoc, setDoc, deleteDoc } from 'firebase/firestore'
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-import { auth, storage, isFirebaseConfigured, playerMatchDoc, PLAYER_SLUG } from '../lib/firebase'
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { app, isFirebaseConfigured, playerMatchDoc, PLAYER_SLUG } from '../lib/firebase'
+
+const auth = app ? getAuth(app) : null
+const storage = app ? getStorage(app) : null
 
 const emptySlot = {
   home_team: '', away_team: '',
@@ -34,8 +37,8 @@ const inputStyle = {
   fontFamily: 'mono', fontSize: 'sm', color: 'white',
   h: '42px',
   _hover: { borderColor: 'brand.gray' },
-  _focus: { borderColor: 'brand.brown', boxShadow: '0 0 0 1px rgba(30,95,168,0.4)' },
-  _placeholder: { color: 'rgba(122,140,163,0.5)' },
+  _focus: { borderColor: 'brand.amber', boxShadow: '0 0 0 1px rgba(239,45,56,0.4)' },
+  _placeholder: { color: 'rgba(163,155,146,0.5)' },
 }
 
 function ShieldUpload({ label, currentUrl, onFileChange }) {
@@ -71,7 +74,7 @@ function ShieldUpload({ label, currentUrl, onFileChange }) {
         borderRadius="md"
         cursor="pointer"
         transition="all 0.2s"
-        _hover={{ borderColor: 'brand.brown', bg: 'rgba(30,95,168,0.04)' }}
+        _hover={{ borderColor: 'brand.amber', bg: 'rgba(239,45,56,0.04)' }}
         onClick={() => inputRef.current?.click()}
         minH="56px"
       >
@@ -106,7 +109,7 @@ function MatchForm({ slot, label, data, onSave, uploading }) {
 
   return (
     <Box>
-      <Text fontFamily="mono" fontSize="10px" color="brand.brown"
+      <Text fontFamily="mono" fontSize="10px" color="brand.amber"
             textTransform="uppercase" letterSpacing="widest" mb={4}>
         {label}
       </Text>
@@ -114,7 +117,7 @@ function MatchForm({ slot, label, data, onSave, uploading }) {
       <Grid templateColumns={{ base: '1fr', md: '1fr auto 1fr' }} gap={{ base: 4, md: 3 }} alignItems="start">
         {/* Local */}
         <VStack spacing={3} align="stretch">
-          <Box px={3} py={2} bg="rgba(30,95,168,0.05)" borderRadius="md" border="1px solid" borderColor="brand.brownDark">
+          <Box px={3} py={2} bg="rgba(239,45,56,0.05)" borderRadius="md" border="1px solid" borderColor="brand.brownDark">
             <Text fontFamily="mono" fontSize="9px" color="brand.brownLight"
                   textTransform="uppercase" letterSpacing="widest" mb={2}>
               Local
@@ -143,7 +146,7 @@ function MatchForm({ slot, label, data, onSave, uploading }) {
 
         {/* Visitante */}
         <VStack spacing={3} align="stretch">
-          <Box px={3} py={2} bg="rgba(30,95,168,0.05)" borderRadius="md" border="1px solid" borderColor="brand.brownDark">
+          <Box px={3} py={2} bg="rgba(239,45,56,0.05)" borderRadius="md" border="1px solid" borderColor="brand.brownDark">
             <Text fontFamily="mono" fontSize="9px" color="brand.brownLight"
                   textTransform="uppercase" letterSpacing="widest" mb={2}>
               Visitante
@@ -184,12 +187,12 @@ function MatchForm({ slot, label, data, onSave, uploading }) {
 
       <Button
         mt={5} w="full"
-        bg="brand.brown" color="white"
+        bg="brand.amber" color="white"
         fontFamily="mono" fontSize="sm" letterSpacing="widest" textTransform="uppercase"
         borderRadius="md" h="44px"
         leftIcon={<FiSave />}
-        _hover={{ bg: 'brand.brownLight' }}
-        _active={{ bg: 'brand.brownDark' }}
+        _hover={{ bg: 'brand.orange' }}
+        _active={{ bg: 'brand.orangeDark' }}
         isLoading={uploading}
         onClick={() => onSave(slot, form, shieldFiles)}
       >
@@ -232,14 +235,14 @@ function MatchPreviewCard({ slot, data, label, onEdit, onDelete }) {
       borderRadius="lg"
       overflow="hidden"
       transition="all 0.2s"
-      _hover={{ borderColor: 'brand.brown' }}
+      _hover={{ borderColor: 'brand.amber' }}
     >
       {/* Card header */}
       <Flex
         justify="space-between"
         align="center"
         px={4} py={2}
-        bg="rgba(30,95,168,0.08)"
+        bg="rgba(239,45,56,0.08)"
         borderBottom="1px solid"
         borderColor="brand.brownDark"
       >
@@ -258,7 +261,7 @@ function MatchPreviewCard({ slot, data, label, onEdit, onDelete }) {
             icon={<FiEdit2 size={14} />}
             size="sm" variant="ghost"
             color="brand.gray"
-            _hover={{ color: 'brand.brownLight', bg: 'rgba(30,95,168,0.1)' }}
+            _hover={{ color: 'brand.brownLight', bg: 'rgba(239,45,56,0.1)' }}
             aria-label="Editar"
             onClick={onEdit}
           />
@@ -334,7 +337,7 @@ function MatchPreviewCard({ slot, data, label, onEdit, onDelete }) {
       {/* Match meta */}
       <Flex
         px={4} py={2}
-        bg="rgba(30,95,168,0.04)"
+        bg="rgba(239,45,56,0.04)"
         borderTop="1px solid"
         borderColor="brand.brownDark"
         justify="space-between"
@@ -349,7 +352,7 @@ function MatchPreviewCard({ slot, data, label, onEdit, onDelete }) {
             </Text>
           )}
           {data.competition && (
-            <Badge fontFamily="mono" fontSize="8px" bg="rgba(30,95,168,0.1)"
+            <Badge fontFamily="mono" fontSize="8px" bg="rgba(239,45,56,0.1)"
                    color="brand.brownLight" px={2} py={0.5} letterSpacing="wider">
               {data.competition}
             </Badge>
@@ -488,7 +491,7 @@ export default function AdminPage() {
   if (loading) {
     return (
       <Box minH="100vh" bg="brand.dark" display="flex" alignItems="center" justifyContent="center">
-        <Spinner color="brand.brown" size="lg" />
+        <Spinner color="brand.amber" size="lg" />
       </Box>
     )
   }
@@ -506,7 +509,7 @@ export default function AdminPage() {
           backdropFilter="blur(10px)"
         >
           <VStack spacing={1} mb={6}>
-            <Text fontFamily="heading" fontSize="3xl" color="white">{playerData.name} <Text as="span" color="brand.brown">{playerData.fullName}</Text> _</Text>
+            <Text fontFamily="heading" fontSize="3xl" color="white">{playerData.name} <Text as="span" color="brand.amber">{playerData.fullName}</Text> _</Text>
             <Text fontFamily="mono" fontSize="10px" color="brand.gray"
                   letterSpacing="widest" textTransform="uppercase">
               Panel de administración
@@ -525,11 +528,11 @@ export default function AdminPage() {
                      onKeyDown={(e) => e.key === 'Enter' && handleLogin()} />
             </FormControl>
             <Button
-              w="full" bg="brand.brown" color="white" h="44px"
+              w="full" bg="brand.amber" color="white" h="44px"
               fontFamily="mono" fontSize="sm" letterSpacing="widest" textTransform="uppercase"
               borderRadius="md"
-              _hover={{ bg: 'brand.brownLight' }}
-              _active={{ bg: 'brand.brownDark' }}
+              _hover={{ bg: 'brand.orange' }}
+              _active={{ bg: 'brand.orangeDark' }}
               isLoading={authLoading}
               onClick={handleLogin}
             >
@@ -552,8 +555,8 @@ export default function AdminPage() {
             </Text>
             <HStack spacing={2} mt={2}>
               <Badge
-                fontFamily="mono" fontSize="9px" bg="rgba(30,95,168,0.15)"
-                color="brand.brownLight" border="1px solid rgba(30,95,168,0.3)"
+                fontFamily="mono" fontSize="9px" bg="rgba(239,45,56,0.15)"
+                color="brand.brownLight" border="1px solid rgba(239,45,56,0.3)"
                 px={2} py={0.5} letterSpacing="widest"
               >
                 Partidos
@@ -570,7 +573,7 @@ export default function AdminPage() {
             fontFamily="mono" fontSize="xs"
             letterSpacing="widest" textTransform="uppercase"
             leftIcon={<FiLogOut />}
-            _hover={{ color: 'white', bg: 'rgba(30,95,168,0.1)' }}
+            _hover={{ color: 'white', bg: 'rgba(239,45,56,0.1)' }}
             onClick={handleLogout}
           >
             <Text display={{ base: 'none', sm: 'block' }}>Salir</Text>
@@ -598,7 +601,7 @@ export default function AdminPage() {
                 fontFamily="mono" fontSize="11px" letterSpacing="widest"
                 textTransform="uppercase" color="brand.gray"
                 borderRadius="md" px={4} py={2}
-                _selected={{ color: 'white', bg: 'brand.brown' }}
+                _selected={{ color: 'white', bg: 'brand.amber' }}
                 _hover={{ color: 'white' }}
               >
                 Último Resultado
@@ -607,7 +610,7 @@ export default function AdminPage() {
                 fontFamily="mono" fontSize="11px" letterSpacing="widest"
                 textTransform="uppercase" color="brand.gray"
                 borderRadius="md" px={4} py={2}
-                _selected={{ color: 'white', bg: 'brand.brown' }}
+                _selected={{ color: 'white', bg: 'brand.amber' }}
                 _hover={{ color: 'white' }}
               >
                 Próximo Partido

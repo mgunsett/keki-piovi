@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Box, Flex, Text, HStack } from '@chakra-ui/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { gsap } from 'gsap'
-import { playerData } from '../../data/playerData'
+import BrandLogo from './BrandLogo'
 import { useActiveSection } from '../../hooks/useActiveSection'
 import { MobileMenu } from './MobileMenu'
 
@@ -10,6 +10,7 @@ const MotionBox = motion(Box)
 
 export const navLinks = [
   { label: 'Home',         href: '#hero' },
+  { label: 'Libertadores', href: '#libertadores' },
   { label: 'Estadísticas', href: '#estadisticas' },
   { label: 'Videos',       href: '#videos' },
   { label: 'Galería',      href: '#galeria' },
@@ -89,20 +90,8 @@ export default function Navbar() {
         borderColor={scrolled && !menuOpen ? 'brand.amberLight' : 'transparent'}
         transition="background 0.35s, border-color 0.35s, backdrop-filter 0.35s"
       >
-        {/* Logo: bastón rojo + iniciales + guión dorado */}
-        <Flex align="center" gap={2.5} cursor="pointer" onClick={(e) => handleLink(e, '#hero')} role="group">
-          <Box
-            w="5px"
-            h="22px"
-            bg="brand.amber"
-            transform="skewX(-12deg)"
-            transition="background 0.25s"
-            _groupHover={{ bg: 'brand.dorado' }}
-          />
-          <Text fontFamily="heading" fontSize="2xl" letterSpacing="wider" color="brand.bone" lineHeight={1}>
-            {playerData.initials}<Box as="span" color="brand.amber">_</Box>
-          </Text>
-        </Flex>
+        {/* Logo: bastón rojo + iniciales + guión (compartido con el Footer) */}
+        <BrandLogo cursor="pointer" onClick={(e) => handleLink(e, '#hero')} />
 
         {/* Links desktop con indicador deslizante de sección activa */}
         <HStack spacing={1} display={{ base: 'none', lg: 'flex' }}>
