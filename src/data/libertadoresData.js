@@ -42,18 +42,21 @@ export const libertadores = {
       rival: 'Universidad Católica',
       detail: '1-1 en La Plata y 3-0 en Santiago',
       score: '4-1',
+      keki: "180', 140 toques y 7 recuperaciones",
     },
     {
       stage: 'Cuartos',
       rival: 'Corinthians',
       detail: '1-1 en La Plata y 1-0 en São Paulo',
       score: '2-1',
+      keki: "176', 98 toques y 10 recuperaciones",
     },
     {
       stage: 'Semifinal',
       rival: 'Flamengo',
       detail: 'Dos 0-0 y 3-2 en penales en el Maracaná',
       score: 'Pen. 3-2',
+      keki: "180'; en la vuelta, 16 de 20 pases y 4 recuperaciones",
       highlight: true,
     },
   ],
@@ -65,13 +68,16 @@ export const libertadores = {
       'Cuarenta minutos con diez y una definición por penales en el estadio del campeón vigente. Estudiantes ganó 3-2 y volvió a una final 17 años después.',
   },
 
-  // ⚠️ Stats de Keki en la copa: valores provisorios tomados de Flashscore/Tribuna,
-  // las fuentes no coinciden. Confirmar con el jugador antes de publicar.
+  // Stats de Keki en la eliminación directa (octavos, cuartos y semis).
+  // Fuente: placas de estadísticas por serie (U. Católica, Corinthians) y
+  // datos del partido de vuelta en el Maracaná. Sin datos de fase de grupos
+  // ni de la ida ante Flamengo, por eso no se muestran totales de toques/recuperaciones.
   playerStats: [
-    { value: '10', label: 'Partidos jugados', provisional: true },
-    { value: '6.8', label: 'Puntaje promedio', provisional: true },
-    { value: "180'", label: 'Sin goles en contra en semis' },
+    { value: '6/6', label: 'Partidos de eliminación jugados' },
+    { value: "536'", label: 'Minutos en eliminación directa' },
+    { value: '86%', label: 'Pases precisos en octavos y cuartos' },
   ],
+  playerNote: 'Fue el jugador con más toques y más pases precisos de la serie ante Universidad Católica.',
 
   images: {
     main: kekiFinal,

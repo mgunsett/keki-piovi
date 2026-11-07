@@ -224,6 +224,11 @@ export default function LibertadoresSection() {
                           display={{ base: 'none', md: 'block' }} mt={1}>{p.score}</Text>
                   )}
                   <Text fontFamily="body" fontSize="xs" color="brand.gray" mt={1}>{p.detail}</Text>
+                  {p.keki && (
+                    <Text fontFamily="mono" fontSize="sm" color={GOLD} mt={2} lineHeight={1.3}>
+                      <Text as="span" color="brand.bone" fontWeight={600}>Keki: </Text>{p.keki}
+                    </Text>
+                  )}
                 </Box>
               ))}
             </Grid>
@@ -242,7 +247,7 @@ export default function LibertadoresSection() {
               ))}
             </Grid>
             <Text fontFamily="body" fontSize="sm" color="brand.gray" mt={5} maxW="42ch">
-              Titular en el mediocampo la noche del Maracaná.
+              {L.playerNote}
             </Text>
           </Box>
         </Grid>
