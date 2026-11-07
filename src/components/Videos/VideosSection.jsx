@@ -8,6 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { playerData } from '../../data/playerData'
 import useScrubReveal from '../../hooks/useScrubReveal'
 import { VideoCard } from './VideoCard'
+import { InstagramRail } from './InstagramRail'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -152,8 +153,9 @@ export default function VideosSection() {
 
         {/* ── Cards ── */}
         <Box ref={wrapRef} position="relative">
-          {/* Desktop: en fila */}
+          {/* Desktop: riel de Instagram + cards en fila (el riel toma la altura de las cards) */}
           <Flex display={{ base: 'none', md: 'flex' }} justify="center" align="stretch" gap={{ md: 5, lg: 12 }}>
+            <InstagramRail width={{ md: '64px', lg: '84px' }} />
             {videos.map((v, i) => (
               <Box key={v.id} flex="1 1 0" maxW={{ md: '300px', lg: '340px' }}>
                 <VideoCard video={v} index={i} onOpen={setOpenVideo} />
@@ -163,8 +165,12 @@ export default function VideosSection() {
 
           {/* Mobile: slider con swipe */}
           <Box display={{ base: 'block', md: 'none' }}>
+            <Flex align="stretch" gap={3} pl={2}>
+            <InstagramRail width="40px" />
             <Flex
               ref={sliderRef}
+              flex="1"
+              minW={0}
               onScroll={handleScroll}
               overflowX="auto"
               scrollSnapType="x mandatory"
@@ -184,6 +190,7 @@ export default function VideosSection() {
               ))}
             </Flex>
 
+            </Flex>
             {/* flechas indicadoras */}
             <Flex justify="center" align="center" gap={5} mt={6}>
               <Box
