@@ -235,7 +235,6 @@ export default function GallerySection() {
                 tabIndex={i === cur ? 0 : -1}
                 onClick={() => select(i)}
                 align="baseline"
-                gap={{ base: 1.5, md: 2 }}
                 pb={4}
                 color={i === cur ? 'brand.bone' : 'brand.gray'}
                 transition="color .2s ease"
@@ -243,17 +242,11 @@ export default function GallerySection() {
                 sx={{ '@media (hover: hover) and (pointer: fine)': { '&:hover': { color: 'brand.bone' } } }}
               >
                 <Text as="span" fontFamily="heading" fontSize={{ base: '25px', md: '40px' }} lineHeight={1}>{g.name}</Text>
-                <Text as="sup" fontFamily="mono" fontSize="13px" fontWeight={600} color={i === cur ? 'brand.amber' : 'inherit'}>
-                  {g.photos.length}
-                </Text>
               </Flex>
             ))}
             <Box ref={inkRef} aria-hidden="true" position="absolute" left={0} bottom="-1px" h="3px" w="1px" bg="brand.amber"
                  transformOrigin="left" transition={reduce ? 'none' : 'transform .3s cubic-bezier(0.23, 1, 0.32, 1)'} />
           </Flex>
-          <Text display={{ base: 'none', md: 'block' }} pb={4} maxW="40ch" color="brand.gray" fontSize="sm">
-            {gallery.description}
-          </Text>
         </Flex>
 
         {/* Mosaico */}

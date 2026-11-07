@@ -97,9 +97,7 @@ export default function PressSection() {
               Prensa
             </Text>
           </Box>
-          <Text color="brand.gray" maxW="38ch" lineHeight={1.5}>
-            Lo que se escribió sobre él, de Quito a La Plata.
-          </Text>
+        
         </Flex>
 
         <Box as="ul" listStyleType="none" mt={{ base: 8, lg: 11 }} borderTop="1px solid" borderColor="whiteAlpha.300">

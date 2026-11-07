@@ -2,12 +2,13 @@
 // Footer: logo (el mismo del navbar), copyright y, a la derecha,
 // "Volver arriba" sobre el crédito de desarrollo.
 // ─────────────────────────────────────────────────────────────
-import { Box, Flex, Grid, Text, Link, useToken } from '@chakra-ui/react'
+import { Box, Flex, Grid, Text, Link, useToken, Image } from '@chakra-ui/react'
 import { FiArrowUp } from 'react-icons/fi'
 import { LiaLaptopCodeSolid } from 'react-icons/lia'
 import BrandLogo from './BrandLogo'
 import { scrollTo } from './Navbar'
 import { playerData } from '../../data/playerData'
+import sportfolioWeb from '../../../assets/logo_sport.png'
 
 const GOLD = '#D9BE7E'
 // "EZEQUIEL PIOVI" → "Ezequiel Piovi"
@@ -26,10 +27,10 @@ export default function Footer() {
   return (
     <Box as="footer" bg="brand.brown" borderTop="1px solid" borderColor="whiteAlpha.100">
       <Grid
-        maxW="1400px"
+        maxW="1600px"
         mx="auto"
-        px={{ base: 5, lg: 10 }}
-        py={{ base: 10, md: 11 }}
+        px={{ base: 5, lg: 4 }}
+        py={{ base: 10, md: 16 }}
         templateColumns={{ base: '1fr', md: '1fr auto 1fr' }}
         alignItems="center"
         justifyItems={{ base: 'center', md: 'stretch' }}
@@ -46,7 +47,7 @@ export default function Footer() {
         </Text>
 
         {/* Volver arriba + crédito */}
-        <Flex direction="column" align={{ base: 'center', md: 'flex-end' }} gap={3.5} justifySelf={{ md: 'end' }}>
+        <Flex direction="row" align={{ base: 'center', md: 'flex-end' }} gap={3.5} justifySelf={{ md: 'end' }}>
           <Flex
             as="a"
             href="#hero"
@@ -78,29 +79,20 @@ export default function Footer() {
             <Box as={FiArrowUp} boxSize="16px" aria-hidden="true" />
           </Flex>
 
-          <Text fontFamily="mono" fontSize="13px" fontWeight={500} color="brand.gray">
-            Desarrollo web:{' '}
+          <Flex direction="column" fontSize="12px" color="rgba(255,255,255,0.3)" letterSpacing="0.05em"
+            textTransform="uppercase" fontFamily="'Barlow Condensed', sans-serif" >
+            Desarrollo Web
+            <Box width="95px" height="1px" color="rgba(255,255,255,0.3)" />
             <Link
-              href="https://matiasgunsett.netlify.app/"
+              href="https://matiasgunsett.netlify.app/sportfolio"
               isExternal
-              aria-label="Matias Gunsett, desarrollador web. Se abre en otra pestaña"
-              display="inline-flex"
-              alignItems="center"
-              gap={1.5}
-              fontSize="14px"
-              fontWeight={600}
-              color={devCream}
-              borderBottom="1px solid"
-              borderColor={devGreen}
-              pb="1px"
-              transition="border-color .2s ease"
-              _hover={{ textDecoration: 'none', borderColor: devCream }}
-              _focusVisible={focus}
+              color="#2D5A47"
+              _hover={{ borderColor: '#e8d5a370', color: '#e8d5a380' }}
+              transition="color 0.3s"
             >
-              Matias Gunsett
-              <Box as={LiaLaptopCodeSolid} boxSize="18px" color="#4f9a7a" aria-hidden="true" />
+              <Image src={sportfolioWeb} alt="Sportfolio Web" display="block" width="85px" height="22px" mr="2px" ml="2px" pt="4px" />
             </Link>
-          </Text>
+          </Flex>
         </Flex>
       </Grid>
     </Box>

@@ -1,10 +1,9 @@
 // ─────────────────────────────────────────────────────────────
 // Contacto — redes en tarjetas con ícono de fondo + representación
-// con logo, para qué escribirle y botón. Todo sale de playerData.
+// con logo y usuario. Todo sale de playerData.
 // ─────────────────────────────────────────────────────────────
 import { useRef } from 'react'
 import { Box, Flex, Grid, Text, Image } from '@chakra-ui/react'
-import { FaInstagram } from 'react-icons/fa'
 import { FiArrowUpRight } from 'react-icons/fi'
 import useScrubReveal from '../../hooks/useScrubReveal'
 import { playerData } from '../../data/playerData'
@@ -99,12 +98,26 @@ function RepCard({ item }) {
       p={{ base: 5, md: 7 }}
       gap={{ base: 4, md: 5 }}
       sx={{
-        '& .rep-cta': { transition: 'background-color .2s ease' },
-        ...hover({ '&:hover .rep-cta': { bg: 'brand.amber' } }),
+        // Brillo suave que nace detrás del logo, con el color de cada agencia
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          inset: 0,
+          pointerEvents: 'none',
+          background: `radial-gradient(circle at 12% 50%, ${item.hoverColor || 'rgba(184,155,94,.16)'}, transparent 50%)`,
+          opacity: 0,
+          transition: 'opacity .35s ease',
+        },
+        '& .rep-logo': { transition: 'border-color .3s ease, box-shadow .3s ease' },
+        ...hover({
+          // Intensidad del brillo: 0 = nada, 1 = color pleno de hoverColor
+          '&:hover::before': { opacity: 0.45 },
+          '&:hover .rep-logo': { borderColor: 'whiteAlpha.200', boxShadow: '0 0 18px rgba(217,190,126,.05)' },
+        }),
       }}
     >
-      <Flex align="center" gap={{ base: 3.5, md: 5 }}>
-        <Flex flexShrink={0} boxSize={{ base: '70px', md: '92px' }} borderRadius="16px" bg="rgba(243,238,227,.04)"
+      <Flex position="relative" align="center" gap={{ base: 3.5, md: 5 }}>
+        <Flex className="rep-logo" flexShrink={0} boxSize={{ base: '70px', md: '92px' }} borderRadius="16px" bg="rgba(243,238,227,.04)"
               border="1px solid" borderColor="whiteAlpha.100" align="center" justify="center">
           <Image src={item.image} alt="" boxSize={{ base: '58px', md: '76px' }} objectFit="contain" />
         </Flex>
@@ -116,19 +129,6 @@ function RepCard({ item }) {
           <Text fontFamily="mono" fontSize="sm" fontWeight={500} color="brand.gray" mt={1}>{item.handle}</Text>
         </Box>
       </Flex>
-
-      {item.forWhom && (
-        <Text fontSize="15px" lineHeight={1.5} color="brand.gray" pt={4} borderTop="1px solid" borderColor="whiteAlpha.100">
-          <Text as="span" color="brand.bone" fontWeight={500}>Escribile por:</Text> {item.forWhom}.
-        </Text>
-      )}
-
-      <Flex className="rep-cta" mt="auto" align="center" justify={{ base: 'center', md: 'flex-start' }} alignSelf={{ base: 'stretch', md: 'flex-start' }}
-            gap={2.5} px={4.5} py={3} borderRadius="full" bg="rgba(239,45,56,.14)"
-            fontFamily="mono" fontSize="15px" fontWeight={700} color="brand.bone">
-        <Box as={FaInstagram} boxSize="18px" aria-hidden="true" />
-        {item.cta || `Escribir a ${item.label}`}
-      </Flex>
     </Box>
   )
 }
@@ -136,7 +136,7 @@ function RepCard({ item }) {
 function Group({ title, children }) {
   return (
     <Box mt={{ base: 9, md: 11 }}>
-      <Text as="h3" fontFamily="mono" fontSize="sm" fontWeight={600} color="brand.amber" mb={3.5}>{title}</Text>
+      <Text as="h3" fontFamily="mono" fontSize="sm" fontWeight={600} color="brand.brownLight" mb={3.5}>{title}</Text>
       <Grid templateColumns={{ base: '1fr', md: '1fr 1fr' }} gap={3.5}>{children}</Grid>
     </Box>
   )
@@ -158,17 +158,13 @@ export default function ContactSection() {
       <Box maxW="1400px" mx="auto">
         <Flex ref={headerRef} justify="space-between" align="flex-end" gap={5} flexWrap="wrap">
           <Box>
-            <Text fontFamily="mono" fontSize="10px" color="brand.bone" textTransform="uppercase" letterSpacing="widest">
-              Redes y representación
-            </Text>
+            
             <Text as="h2" id="contact-title" fontFamily="heading" fontSize={{ base: '6xl', lg: '8xl' }} lineHeight={0.88}
                   color="brand.amber" mt={1}>
               Contacto
             </Text>
           </Box>
-          <Text color="brand.gray" maxW="40ch" lineHeight={1.5}>
-            Seguilo en sus redes o escribí directamente a quien lleva cada tema.
-          </Text>
+         
         </Flex>
 
         <Group title="Redes sociales">

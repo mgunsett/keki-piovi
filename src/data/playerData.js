@@ -29,6 +29,7 @@ import image11 from '@assets/gallery/image11.webp'
 import image12 from '@assets/gallery/image12.webp'
 import image13 from '@assets/gallery/image13.webp'
 import image14 from '@assets/gallery/image14.webp'
+import image15 from '@assets/libertadores/remate-maracana.webp'
 //Prensa
 import logo1 from '@assets/logos/logo1.webp'
 import logo2 from '@assets/logos/logo2.webp'
@@ -167,7 +168,7 @@ export const playerData = {
       season: 'Copa Libertadores 2026',
       league: 'Temporada 2026',
       thumbnail: image2,
-      cover: image5,
+      cover: image15,
       category: 'Highlights', 
     },
     {
@@ -210,7 +211,7 @@ export const playerData = {
     {
       media: 'CONMEBOL Libertadores',
       logo: logo3,
-      type: 'Publicación en Instagram',
+      type: 'Publicación',
       title: 'Ezequiel Piovi no duda en jugarse todo por Estudiantes',
       date: 'Mayo 2026',
       url: 'https://www.instagram.com/p/DX61iBPJehE/',
@@ -280,7 +281,7 @@ export const playerData = {
       icon: FaInstagram,
       iconBg: FaInstagram,
       handle: '@kekipiovi18',
-      note: 'Su cuenta personal',
+
       url: 'https://www.instagram.com/kekipiovi18/',
       hoverColor: '#E1306C',
       hoverGradient: 'insta-gradient',
@@ -290,7 +291,7 @@ export const playerData = {
       image: transfermkt,
       iconBg: IoMdStats,
       handle: '@ezequiel-piovi',
-      note: 'Ficha y valor de mercado',
+
       url: 'https://www.transfermarkt.com.ar/ezequiel-piovi/profil/spieler/487346',
       hoverColor: '#307de1',
     },
@@ -308,7 +309,7 @@ export const playerData = {
       hoverColor: 'rgba(139,69,19,0.18)',
     },
     {
-      title: 'Marketing y marcas',
+      title: 'Marketing y Gestión',
       label: 'LED Sports Marketing',
       image: ledsports,
       handle: '@_ledsports',

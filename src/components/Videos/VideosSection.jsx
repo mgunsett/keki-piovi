@@ -140,7 +140,7 @@ export default function VideosSection() {
         {playerData.number}
       </Text>
 
-      <Box maxW="1240px" mx="auto" position="relative" zIndex={1}>
+      <Box maxW="1320px" mx="auto" position="relative" zIndex={1}>
         {/* ── Header ── */}
         <Flex direction="column" align="flex-start" justify="flex-start" ref={headerRef} mb={{ base: 8, md: 12 }} ml={{ base: 0, md: '-30px', lg: '-90px' }}>
           <Text fontFamily="mono" fontSize="10px" color="brand.bone" textTransform="uppercase" letterSpacing="widest">
@@ -154,11 +154,13 @@ export default function VideosSection() {
         {/* ── Cards ── */}
         <Box ref={wrapRef} position="relative">
           {/* Desktop: riel de Instagram + cards en fila (el riel toma la altura de las cards) */}
-          <Flex display={{ base: 'none', md: 'flex' }} justify="center" align="stretch" gap={{ md: 5, lg: 12 }}>
+          <Flex display={{ base: 'none', md: 'flex' }} justify="center" align="stretch" gap={{ md: 3, lg: 6 }}>
             <InstagramRail width={{ md: '64px', lg: '84px' }} />
-            {videos.map((v, i) => (
-              <Box key={v.id} flex="1 1 0" maxW={{ md: '300px', lg: '340px' }}>
-                <VideoCard video={v} index={i} onOpen={setOpenVideo} />
+            {videos.map((v) => (
+              // Tope por alto de viewport: la card (9:16) nunca supera ~78vh
+              <Box key={v.id} flex="1 1 0"
+                   maxW={{ md: 'min(340px, calc(70vh * 9 / 16))', lg: 'min(400px, calc(78vh * 9 / 16))' }}>
+                <VideoCard video={v} onOpen={setOpenVideo} />
               </Box>
             ))}
           </Flex>
@@ -183,9 +185,9 @@ export default function VideosSection() {
                 WebkitOverflowScrolling: 'touch',
               }}
             >
-              {videos.map((v, i) => (
+              {videos.map((v) => (
                 <Box key={v.id} flex="0 0 82%" scrollSnapAlign="center">
-                  <VideoCard video={v} index={i} onOpen={setOpenVideo} />
+                  <VideoCard video={v} onOpen={setOpenVideo} />
                 </Box>
               ))}
             </Flex>
