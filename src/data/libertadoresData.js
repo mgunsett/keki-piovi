@@ -1,7 +1,3 @@
-// ─────────────────────────────────────────────────────────────
-// Copa Libertadores 2026 — datos de la sección "Final"
-// Fuentes: CONMEBOL, El Gráfico, Primicias, SBT, 442 Perfil (oct–nov 2026)
-// ─────────────────────────────────────────────────────────────
 import kekiFinal from '@assets/libertadores/keki-final.webp'
 import formacion from '@assets/libertadores/formacion-maracana.webp'
 import quite from '@assets/libertadores/quite-maracana.webp'
@@ -77,7 +73,7 @@ export const libertadores = {
     { value: "536'", label: 'Minutos en eliminación directa' },
     { value: '86%', label: 'Pases precisos en octavos y cuartos' },
   ],
-  playerNote: 'Fue el jugador con más toques y más pases precisos de la serie ante Universidad Católica.',
+  playerNote: 'Jugador con más toques y más pases precisos de la serie ante Universidad Católica.',
 
   images: {
     main: kekiFinal,

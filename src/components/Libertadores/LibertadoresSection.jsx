@@ -1,9 +1,3 @@
-// ─────────────────────────────────────────────────────────────
-// Sección Libertadores 2026 — "La Quinta"
-// Un 5 gigante en dorado detrás de Keki: Estudiantes tiene cuatro
-// Libertadores y la final de Montevideo es por la quinta. Las cinco
-// estrellas (cuatro llenas + una punteada) son el momento animado.
-// ─────────────────────────────────────────────────────────────
 import { useEffect, useRef } from 'react'
 import { Box, Flex, Grid, Text, Image } from '@chakra-ui/react'
 import { gsap } from 'gsap'
@@ -202,9 +196,9 @@ export default function LibertadoresSection() {
         </Grid>
 
         {/* ── Camino + Keki en la copa ── */}
-        <Grid templateColumns={{ base: '1fr', lg: '1.6fr 1fr' }} gap={{ base: 10, lg: 16 }} mt={{ base: 16, lg: 20 }}
+        <Grid templateColumns={{ base: '1fr', lg: '1.6fr 1fr' }} rowGap={10} columnGap={0} mt={{ base: 16, lg: 20 }}
               pt={{ base: 10, lg: 12 }} borderTop="1px solid" borderColor="whiteAlpha.100">
-          <Box>
+          <Box pr={{ lg: 16 }}>
             <Text as="h3" fontFamily="heading" fontSize="3xl" color="brand.bone" lineHeight={1}>Camino a la final</Text>
             <Grid as="ol" listStyleType="none" templateColumns={{ base: '1fr', md: 'repeat(4, 1fr)' }} gap={{ base: 0, md: 4 }} mt={6}>
               {L.path.map((p) => (
@@ -223,10 +217,10 @@ export default function LibertadoresSection() {
                     <Text fontFamily="heading" fontSize="4xl" lineHeight={1} color={p.highlight ? GOLD : 'brand.amber'}
                           display={{ base: 'none', md: 'block' }} mt={1}>{p.score}</Text>
                   )}
-                  <Text fontFamily="body" fontSize="xs" color="brand.gray" mt={1}>{p.detail}</Text>
+                  
                   {p.keki && (
                     <Text fontFamily="mono" fontSize="sm" color={GOLD} mt={2} lineHeight={1.3}>
-                      <Text as="span" color="brand.bone" fontWeight={600}>Keki: </Text>{p.keki}
+                      {p.keki}
                     </Text>
                   )}
                 </Box>
@@ -234,7 +228,11 @@ export default function LibertadoresSection() {
             </Grid>
           </Box>
 
-          <Box>
+          <Box
+            pt={{ base: 10, lg: 0 }} pl={{ lg: 16 }}
+            borderTop={{ base: '1px solid', lg: 'none' }} borderLeft={{ base: 'none', lg: '1px solid' }}
+            borderColor="whiteAlpha.200"
+          >
             <Text as="h3" fontFamily="heading" fontSize="3xl" color="brand.bone" lineHeight={1}>Keki en la copa</Text>
             <Grid as="ul" listStyleType="none" templateColumns="repeat(3, 1fr)" gap={4} mt={6}>
               {L.playerStats.map((s) => (
@@ -256,7 +254,7 @@ export default function LibertadoresSection() {
         <Box mt={{ base: 16, lg: 20 }}>
           <Flex direction={{ base: 'column', md: 'row' }} justify="space-between" align={{ md: 'flex-end' }} gap={3} mb={6}>
             <Text as="h3" fontFamily="heading" fontSize="3xl" color="brand.bone" lineHeight={1}>{L.maracana.title}</Text>
-            <Text fontFamily="body" fontSize="sm" color="brand.gray" maxW="52ch">{L.maracana.summary}</Text>
+            {/* <Text fontFamily="body" fontSize="sm" color="brand.gray" maxW="52ch">{L.maracana.summary}</Text> */}
           </Flex>
           <Grid
             templateColumns={{ base: 'repeat(5, 72vw)', md: '2fr 1fr 1fr', lg: '2fr 1fr 1fr 1fr' }}
