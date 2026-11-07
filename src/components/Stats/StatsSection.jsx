@@ -1,8 +1,3 @@
-// ─────────────────────────────────────────────────────────────
-// Estadísticas — "Ficha de scouting"
-// Ficha del jugador, zona de influencia en la cancha, última temporada,
-// atributos en bloques y trayectoria con clubes colapsables.
-// ─────────────────────────────────────────────────────────────
 import { useRef, useState } from 'react'
 import { Box, Flex, Grid, Text, Image, Collapse } from '@chakra-ui/react'
 import { useInView, useReducedMotion } from 'framer-motion'
@@ -79,7 +74,12 @@ function PitchCard() {
         <CardTitle>Zona de influencia</CardTitle>
         <Label>Ataca hacia arriba</Label>
       </Flex>
-      <Box ref={ref} mx="auto" mt={5} w="100%" maxW={{ base: '260px', md: '330px' }} sx={{ aspectRatio: '68 / 105' }}>
+      {/* En md+ la cancha se dimensiona por alto (atado al viewport) y el ancho sale de la proporción */}
+      <Box ref={ref} mx="auto" mt={5}
+           w={{ base: '100%', md: 'auto' }}
+           h={{ base: 'auto', md: 'clamp(300px, calc(100svh - 300px), 440px)' }}
+           maxW={{ base: '260px', md: '100%' }}
+           sx={{ aspectRatio: '68 / 105' }}>
         <Box as="svg" viewBox="0 0 68 105" w="100%" h="100%" display="block" role="img"
              aria-label="Cancha con la zona de influencia de Keki: el círculo central y el carril interior derecho, de área a área.">
           <defs>
@@ -106,9 +106,9 @@ function PitchCard() {
           </g>
           {/* Único momento animado de la sección: la zona aparece al entrar en pantalla */}
           <g style={{ opacity: show ? 1 : 0, transition: reduce ? 'none' : 'opacity 1.1s cubic-bezier(0.23, 1, 0.32, 1) .15s' }}>
-            <ellipse cx="36" cy="58" rx="15" ry="19" fill="url(#pitch-heat)" />
+            <ellipse cx="35" cy="55" rx="21" ry="22" fill="url(#pitch-heat)" />
             <ellipse cx="44" cy="40" rx="11" ry="12" fill="url(#pitch-heat-2)" />
-            <ellipse cx="28" cy="74" rx="10" ry="10" fill="url(#pitch-heat-2)" />
+            <ellipse cx="33" cy="74" rx="15" ry="10" fill="url(#pitch-heat-2)" />
           </g>
           <circle cx="36" cy="57" r="3.2" fill="#EF2D38" stroke="#151212" strokeWidth=".8" />
           <text x="36" y="58.3" textAnchor="middle" fontFamily="'Bebas Neue', sans-serif" fontSize="3.6" fill="#F3EEE3">
@@ -124,9 +124,6 @@ function PitchCard() {
           </Flex>
         ))}
       </Flex>
-      <Label textAlign="center" mt={2} color="rgba(163,155,146,.75)">
-        Mapa orientativo según su posición, no un mapa de calor de partido.
-      </Label>
     </Flex>
   )
 }
@@ -347,16 +344,14 @@ export default function StatsSection() {
         <Flex ref={titleRef} justify="space-between" align="flex-end" gap={6} flexWrap="wrap">
           <Box>
             <Text fontFamily="mono" fontSize="10px" color="brand.bone" textTransform="uppercase" letterSpacing="widest">
-              Temporada 2025 / 2026
+              Temporadas
             </Text>
             <Text as="h2" id="stats-title" fontFamily="heading" fontSize={{ base: '6xl', lg: '8xl' }} lineHeight={0.88}
                   color="brand.amber" mt={1}>
               Estadísticas
             </Text>
           </Box>
-          <Text fontSize="md" color="brand.gray" maxW="44ch" lineHeight={1.55}>
-            Volante central de recuperación y primer pase. Así se lee su juego, su temporada y el camino que lo trajo a Estudiantes.
-          </Text>
+         
         </Flex>
 
         {/* Hoja: las líneas internas salen del gap de 1px sobre el fondo de la grilla */}

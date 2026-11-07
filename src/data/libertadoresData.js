@@ -4,6 +4,8 @@ import quite from '@assets/libertadores/quite-maracana.webp'
 import grito from '@assets/libertadores/grito.webp'
 import festejo from '@assets/libertadores/festejo-maracana.webp'
 import remate from '@assets/libertadores/remate-maracana.webp'
+import escudoEstudiantes from '@assets/escudos/escudo_estudiantes.webp'
+import escudoPalmeiras from '@assets/escudos/escudo_palmeiras.webp'
 
 export const libertadores = {
   edition: 2026,
@@ -16,6 +18,7 @@ export const libertadores = {
     stadium: 'Estadio Centenario',
     city: 'Montevideo',
     rival: 'Palmeiras',
+    shields: { home: escudoEstudiantes, rival: escudoPalmeiras },
     format: 'Partido único',
   },
 
@@ -36,21 +39,18 @@ export const libertadores = {
     {
       stage: 'Octavos',
       rival: 'Universidad Católica',
-      detail: '1-1 en La Plata y 3-0 en Santiago',
       score: '4-1',
       keki: "180', 140 toques y 7 recuperaciones",
     },
     {
       stage: 'Cuartos',
       rival: 'Corinthians',
-      detail: '1-1 en La Plata y 1-0 en São Paulo',
       score: '2-1',
       keki: "176', 98 toques y 10 recuperaciones",
     },
     {
       stage: 'Semifinal',
       rival: 'Flamengo',
-      detail: 'Dos 0-0 y 3-2 en penales en el Maracaná',
       score: 'Pen. 3-2',
       keki: "180'; en la vuelta, 16 de 20 pases y 4 recuperaciones",
       highlight: true,
@@ -60,14 +60,10 @@ export const libertadores = {
   // La noche del Maracaná (22/10/2026)
   maracana: {
     title: 'La noche del Maracaná',
-    summary:
-      'Cuarenta minutos con diez y una definición por penales en el estadio del campeón vigente. Estudiantes ganó 3-2 y volvió a una final 17 años después.',
+
   },
 
-  // Stats de Keki en la eliminación directa (octavos, cuartos y semis).
-  // Fuente: placas de estadísticas por serie (U. Católica, Corinthians) y
-  // datos del partido de vuelta en el Maracaná. Sin datos de fase de grupos
-  // ni de la ida ante Flamengo, por eso no se muestran totales de toques/recuperaciones.
+
   playerStats: [
     { value: '6/6', label: 'Partidos de eliminación jugados' },
     { value: "536'", label: 'Minutos en eliminación directa' },

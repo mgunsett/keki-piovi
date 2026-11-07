@@ -127,14 +127,12 @@ export default function LibertadoresSection() {
               Rumbo a la quinta
             </Text>
 
-            <Flex align="baseline" gap={3} mt={{ base: 4, lg: 6 }} flexWrap="wrap">
-              <Text fontFamily="heading" fontSize={{ base: '3xl', lg: '4xl' }} color="brand.bone" lineHeight={1}>
-                Estudiantes
-              </Text>
+            <Flex align="center" gap={{ base: 4, lg: 5 }} mt={{ base: 5, lg: 7 }}>
+              <Image src={L.final.shields.home} alt="Estudiantes"
+                     h={{ base: '56px', lg: '72px' }} w="auto" objectFit="contain" draggable={false} />
               <Text fontFamily="mono" fontSize="lg" color="brand.gray">vs</Text>
-              <Text fontFamily="heading" fontSize={{ base: '3xl', lg: '4xl' }} color="brand.bone" lineHeight={1}>
-                {L.final.rival}
-              </Text>
+              <Image src={L.final.shields.rival} alt={L.final.rival}
+                     h={{ base: '56px', lg: '72px' }} w="auto" objectFit="contain" draggable={false} />
             </Flex>
 
             <Grid as="dl" templateColumns="repeat(3, auto)" justifyContent="start" columnGap={{ base: 6, lg: 10 }} rowGap={1} mt={4}>
@@ -188,9 +186,7 @@ export default function LibertadoresSection() {
                   <Text fontFamily="mono" fontSize="sm" color="brand.gray">28/11</Text>
                 </Flex>
               </Flex>
-              <Text fontFamily="body" fontSize="sm" color="brand.gray" mt={3} maxW="38ch">
-                {L.history}
-              </Text>
+              
             </Box>
           </Box>
         </Grid>
@@ -217,7 +213,9 @@ export default function LibertadoresSection() {
                     <Text fontFamily="heading" fontSize="4xl" lineHeight={1} color={p.highlight ? GOLD : 'brand.amber'}
                           display={{ base: 'none', md: 'block' }} mt={1}>{p.score}</Text>
                   )}
-                  
+                  {p.detail && (
+                    <Text fontFamily="mono" fontSize="xs" color="brand.gray" mt={1}>{p.detail}</Text>
+                  )}
                   {p.keki && (
                     <Text fontFamily="mono" fontSize="sm" color={GOLD} mt={2} lineHeight={1.3}>
                       {p.keki}
@@ -233,7 +231,7 @@ export default function LibertadoresSection() {
             borderTop={{ base: '1px solid', lg: 'none' }} borderLeft={{ base: 'none', lg: '1px solid' }}
             borderColor="whiteAlpha.200"
           >
-            <Text as="h3" fontFamily="heading" fontSize="3xl" color="brand.bone" lineHeight={1}>Keki en la copa</Text>
+            <Text as="h3" fontFamily="heading" fontSize="3xl" color="brand.bone" lineHeight={1}>Partidos en Copa</Text>
             <Grid as="ul" listStyleType="none" templateColumns="repeat(3, 1fr)" gap={4} mt={6}>
               {L.playerStats.map((s) => (
                 <Box as="li" key={s.label}>

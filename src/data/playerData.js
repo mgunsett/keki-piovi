@@ -81,9 +81,9 @@ export const playerData = {
 
   stats: [
     { label: 'Velocidad', value: 85 },
-    { label: 'Pases', value: 69 },
+    { label: 'Pases', value: 88 },
     { label: 'Regate', value: 87 },
-    { label: 'Juego Aéreo', value: 75 },
+    { label: 'Recuperos', value: 89 },
     { label: 'Presión Alta', value: 90 },
     { label: 'Visión de Juego', value: 86 },
   ],
