@@ -9,6 +9,7 @@ import GallerySection from './components/Gallery/GallerySection'
 import PressSection from './components/Press/PressSection'
 import ContactSection from './components/Contact/ContactSection'
 import Footer from './components/UI/Footer'
+import LibertadoresSection from './components/Libertadores/LibertadoresSection'
 
 // El panel admin (y Firebase Auth/Storage) se carga solo al entrar a /admin
 const AdminPage = lazy(() => import('./pages/AdminPage'))
@@ -19,6 +20,7 @@ function Landing() {
       <Navbar />
       <Hero />
       <Box mt="-100vh" position="relative" zIndex={21}>
+        <LibertadoresSection />
         <StatsSection />
         <VideosSection />
         <GallerySection />

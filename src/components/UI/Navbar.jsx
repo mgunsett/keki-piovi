@@ -10,6 +10,7 @@ const MotionBox = motion(Box)
 
 export const navLinks = [
   { label: 'Home',         href: '#hero' },
+  { label: 'Libertadores', href: '#libertadores' },
   { label: 'Estadísticas', href: '#estadisticas' },
   { label: 'Videos',       href: '#videos' },
   { label: 'Galería',      href: '#galeria' },
