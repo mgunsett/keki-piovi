@@ -90,9 +90,16 @@ export default function VideosSection() {
     setActive(Math.round(el.scrollLeft / itemW))
   }
 
+  // Centra la card i moviendo SOLO el slider. (scrollIntoView también desplazaba
+  // en horizontal la sección/página, y se corrían el título y el riel.)
   const goTo = (i) => {
     const el = sliderRef.current
-    el?.children[i]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })
+    const card = el?.children[i]
+    if (!card) return
+    const offset = card.getBoundingClientRect().left - el.getBoundingClientRect().left
+    const left = el.scrollLeft + offset - (el.clientWidth - card.offsetWidth) / 2
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    el.scrollTo({ left, behavior: reduce ? 'auto' : 'smooth' })
   }
 
   if (!videos.length) return null
@@ -109,6 +116,8 @@ export default function VideosSection() {
       pt={{ base: 20, md: '10%' }}
       pb={{ base: 12, md: '10%' }}
       overflow="hidden"
+      // clip: además de recortar, impide que la sección se desplace en horizontal por código
+      sx={{ '@supports (overflow: clip)': { overflow: 'clip' } }}
     >
       {/* glows ambientales */}
       <Box
@@ -168,7 +177,7 @@ export default function VideosSection() {
           {/* Mobile: slider con swipe */}
           <Box display={{ base: 'block', md: 'none' }}>
             <Flex align="stretch" gap={3} pl={2}>
-            <InstagramRail width="40px" />
+            <InstagramRail width="48px" />
             <Flex
               ref={sliderRef}
               flex="1"
