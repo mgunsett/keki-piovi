@@ -19,7 +19,8 @@ function Landing() {
     <Box as="main" bg="brand.dark" overflowX="hidden">
       <Navbar />
       <Hero />
-      <Box mt="-100vh" position="relative" zIndex={21}>
+      {/* Sube exactamente un alto de Hero (misma unidad estable que el Hero: svh) */}
+      <Box mt="-100vh" position="relative" zIndex={21} sx={{ '@supports (height: 1svh)': { marginTop: '-100svh' } }}>
         <LibertadoresSection />
         <StatsSection />
         <VideosSection />

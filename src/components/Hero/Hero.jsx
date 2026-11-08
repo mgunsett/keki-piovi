@@ -7,9 +7,10 @@ import { playerData } from '../../data/playerData'
 import useMatches from '../../hooks/useMatches'
 import heroBg from '@assets/piovi-hero-bg.webp'
 import heroBg2 from '@assets/piovi-hero-bg2.webp'
-import { u, LANDSCAPE, heroUnitVars } from '../../utils/heroUnits'
+import { u, LANDSCAPE, heroUnitVars, SV_VARS } from '../../utils/heroUnits'
 
 gsap.registerPlugin(ScrollTrigger)
+
 
 // Textos, íconos y espaciados del Hero usan u(): no cambian de tamaño con el
 // zoom del navegador (ver utils/heroUnits). El nombre ya escala en vw.
@@ -108,19 +109,18 @@ export default function Hero() {
   }, [])
 
   return (
-    <Box ref={outerRef} h="200vh" position="relative" zIndex={1} id= 'hero'>
+    <Box ref={outerRef} position="relative" zIndex={1} id="hero"
+         h="calc(200 * var(--sv))" sx={SV_VARS}>
       <Box
         ref={containerRef}
         position="sticky"
         top={0}
-        h="100vh"
+        h="calc(100 * var(--sv))"
         overflow="hidden"
         bg="brand.dark"
         sx={{
           maskImage: 'linear-gradient(black 90%, transparent)',
           WebkitMaskImage: 'linear-gradient(black 90%, transparent)',
-          // dvh evita el salto al colapsar la barra del navegador en mobile; vh queda de fallback
-          '@supports (height: 100dvh)': { height: '100dvh' },
           ...heroUnitVars,
         }}
       >
@@ -149,11 +149,11 @@ export default function Hero() {
             draggable={false}
             // Controlá el tamaño acá 👇
             w={{ base: '100vw', md: '28vw' }}
-            h={{ base: '100vh', md: 'auto' }}
+            h={{ base: 'calc(100 * var(--sv))', md: 'auto' }}
             objectFit={{ base: 'cover', md: 'contain' }}
             objectPosition={{ base: 'center', md: 'center top' }}
             opacity={{ base: 0.21, lg: 0.20 }}
-            sx={{ mixBlendMode: 'luminosity', [LANDSCAPE]: { width: 'auto', height: '100vh', objectFit: 'contain' } }}
+            sx={{ mixBlendMode: 'luminosity', [LANDSCAPE]: { width: 'auto', height: 'calc(100 * var(--sv))', objectFit: 'contain' } }}
             filter="grayscale(100%) contrast(1.05)"
           />
         </Box>
@@ -168,7 +168,7 @@ export default function Hero() {
           display={{ base: 'none', lg: 'block' }}
           right={{ lg: '10%' }}
           bottom={0}
-          h={{ lg: '82vh' }}
+          h={{ lg: 'calc(82 * var(--sv))' }}
           sx={{
             maskImage: 'radial-gradient(70% 65% at 50% 45%, black 30%, transparent 80%)',
             WebkitMaskImage: 'radial-gradient(70% 65% at 50% 45%, black 30%, transparent 80%)',
@@ -197,11 +197,11 @@ export default function Hero() {
           position="absolute"
           zIndex={{ base: 3, md: 5, lg: 9 }}
           top={{ base: '46vw', md: '36vw', lg: 'auto' }}
-          bottom={{ base: u(138), md: u(168), lg: '5vh' }}
+          bottom={{ base: u(138), md: u(168), lg: 'calc(5 * var(--sv))' }}
           right={{ base: '1%', md: '7%', lg: 'auto' }}
           left={{ base: 'auto', lg: '56%' }}
-          h={{ lg: '84vh' }}
-          w={{ base: 'auto', lg: 'min(30vw, 36vh)' }}
+          h={{ lg: 'calc(84 * var(--sv))' }}
+          w={{ base: 'auto', lg: 'min(30vw, calc(36 * var(--sv)))' }}
           maxW={{ base: '62vw', md: '46vw', lg: 'none' }}
           display="flex"
           justifyContent={{ base: 'flex-end', lg: 'center' }}
@@ -209,8 +209,8 @@ export default function Hero() {
           pointerEvents="none"
           sx={{
             [LANDSCAPE]: {
-              top: 'auto', bottom: '2vh', left: 'auto', right: '9%',
-              height: '90vh', width: 'auto', maxWidth: 'none',
+              top: 'auto', bottom: 'calc(2 * var(--sv))', left: 'auto', right: '9%',
+              height: 'calc(90 * var(--sv))', width: 'auto', maxWidth: 'none',
             },
           }}
           style={{ clipPath: 'inset(100% 0 0 0)', opacity: 0 }}
@@ -242,7 +242,7 @@ export default function Hero() {
           pl={{ base: 0, md: '5%', lg: '15%' }}
           pt={{ base: '22%', lg: '0%' }}
           mt={{ base: '10%', lg: '-4%' }}
-          sx={{ [LANDSCAPE]: { justifyContent: 'center', pl: '6%', pt: 0, mt: '-14vh' } }}
+          sx={{ [LANDSCAPE]: { justifyContent: 'center', pl: '6%', pt: 0, mt: 'calc(-14 * var(--sv))' } }}
         >
           <Flex 
           direction="column" 
@@ -255,7 +255,7 @@ export default function Hero() {
               display="block"
               fontFamily="heading"
               fontSize={{ base: '35vw', md: '16vw', lg: '13vw' }}
-              sx={{ [LANDSCAPE]: { fontSize: 'min(26vh, 13vw)' } }}
+              sx={{ [LANDSCAPE]: { fontSize: 'min(calc(26 * var(--sv)), 13vw)' } }}
               color="brand.amber"
               lineHeight={0.9}
               style={{ opacity: 0 }}
@@ -268,7 +268,7 @@ export default function Hero() {
               display="block"
               fontFamily="heading"
               fontSize={{ base: '30vw', md: '16vw', lg: '13vw' }}
-              sx={{ [LANDSCAPE]: { fontSize: 'min(26vh, 13vw)', mt: '-2vh' } }}
+              sx={{ [LANDSCAPE]: { fontSize: 'min(calc(26 * var(--sv)), 13vw)', mt: 'calc(-2 * var(--sv))' } }}
               color="brand.gray2"
               lineHeight={0.9}
               style={{ opacity: 0 }}

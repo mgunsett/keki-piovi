@@ -10,6 +10,8 @@ import App from './App'
 import './styles/globals.css'
 
 gsap.registerPlugin(ScrollTrigger)
+// Mobile: no recalcular los ScrollTriggers cuando aparece/desaparece la barra del navegador
+ScrollTrigger.config({ ignoreMobileResize: true })
 
 const lenis = new Lenis({
   duration:       1.2,
