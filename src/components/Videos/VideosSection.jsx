@@ -167,7 +167,7 @@ export default function VideosSection() {
             <InstagramRail width={{ md: '64px', lg: '84px' }} />
             {videos.map((v) => (
               // Tope por alto de viewport: la card (9:16) nunca supera ~78vh
-              <Box key={v.id} flex="1 1 0"
+              <Box key={v.id} flex="1 1 0" scrollSnapAlign="center"
                    maxW={{md: 'min(340px, calc(70vh * 9 / 16))', lg: 'min(400px, calc(78vh * 9 / 16))' }}>
                 <VideoCard video={v} onOpen={setOpenVideo} />
               </Box>
