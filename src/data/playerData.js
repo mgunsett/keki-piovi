@@ -30,6 +30,24 @@ import image12 from '@assets/gallery/image12.webp'
 import image13 from '@assets/gallery/image13.webp'
 import image14 from '@assets/gallery/image14.webp'
 import image15 from '@assets/libertadores/remate-maracana.webp'
+import image16 from '@assets/gallery/image16.webp'
+import image17 from '@assets/gallery/image17.webp'
+import image18 from '@assets/gallery/image18.webp'
+import image19 from '@assets/gallery/image19.webp'
+import image20 from '@assets/gallery/image20.webp'
+import image21 from '@assets/gallery/image21.webp'
+import image22 from '@assets/gallery/image22.webp'
+import image23 from '@assets/gallery/image23.webp'
+import image24 from '@assets/gallery/image24.webp'
+import image25 from '@assets/gallery/image25.webp'
+import image26 from '@assets/gallery/image26.webp'
+import image27 from '@assets/gallery/image27.webp'
+import image28 from '@assets/gallery/image28.webp'
+import image29 from '@assets/gallery/image29.webp'
+import image30 from '@assets/gallery/image30.webp'
+import image31 from '@assets/gallery/image31.webp'
+import image32 from '@assets/gallery/image32.webp'
+import image33 from '@assets/gallery/image33.webp'
 //Prensa
 import logo1 from '@assets/logos/logo1.webp'
 import logo2 from '@assets/logos/logo2.webp'
@@ -243,11 +261,20 @@ export const playerData = {
       name: 'Estudiantes',
       description: 'Partidos con el Pincha desde 2025.',
       photos: [
+        { src: image16, alt: 'Keki Piovi controla la pelota en el clásico ante Gimnasia' },
+        { src: image17, alt: 'Keki Piovi conduce la pelota en un partido de Copa Libertadores', pos: '40% center' },
+        { src: image20, alt: 'Keki Piovi, de espaldas con la 21, saluda al entrenador tras un partido', pos: 'center 22%' },
+        { src: image22, alt: 'Formación titular de Estudiantes en la Copa Libertadores' },
         { src: image2, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
         { src: image13, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
+        { src: image18, alt: 'Keki Piovi encara ante Corinthians por la Copa Libertadores', pos: '60% center' },
         { src: image3, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
+        { src: image21, alt: 'Keki Piovi festeja con sus compañeros de Estudiantes', pos: 'center 35%' },
         { src: image12, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
+        { src: image19, alt: 'Keki Piovi con la pelota en un partido de la Liga Profesional', pos: '45% center' },
         { src: image5, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
+        { src: image23, alt: 'Keki Piovi en una pausa del partido con la camiseta de Estudiantes', pos: '42% center' },
+        { src: image24, alt: 'Keki Piovi de espaldas con la 21 frente a la tribuna de Estudiantes' },
         { src: image4, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
         { src: image11, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
         { src: image6, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
@@ -261,7 +288,9 @@ export const playerData = {
       name: 'Entrenamiento',
       description: 'Semana de trabajo y entradas en calor.',
       photos: [
-        { src: image7, alt: 'Keki Piovi en la entrada en calor antes de un partido' },
+        { src: image25, alt: 'Keki Piovi en la entrada en calor con el plantel de Estudiantes', pos: 'center 4%' },
+        { src: image26, alt: 'Keki Piovi sonríe durante la entrada en calor', pos: 'center 25%' },
+        { src: image7, alt: 'Keki Piovi en la entrada en calor antes de un partido', pos: 'center 30%' },
       ],
     },
     {
@@ -269,8 +298,15 @@ export const playerData = {
       name: 'Clubes',
       description: 'Sus etapas anteriores, antes de llegar a La Plata.',
       photos: [
+        { src: image33, alt: 'Keki Piovi con el trofeo de la Copa Sudamericana 2023 ganada con Liga de Quito', pos: 'center 12%' },
         { src: image1, alt: 'Keki Piovi jugando para Liga de Quito' },
         { src: image8, alt: 'Keki Piovi jugando para Liga de Quito' },
+        { src: image32, alt: 'Keki Piovi con la camiseta de Almagro', pos: 'center 30%' },
+        { src: image29, alt: 'Keki Piovi jugando para Arsenal de Sarandí', pos: 'center 25%' },
+        { src: image30, alt: 'Keki Piovi jugando para Arsenal de Sarandí', pos: 'center 25%' },
+        { src: image31, alt: 'Keki Piovi con la camiseta de Almagro', pos: 'center 22%' },
+        { src: image27, alt: 'Keki Piovi en sus comienzos en el ascenso argentino', pos: '85% center' },
+        { src: image28, alt: 'Keki Piovi en sus comienzos en el ascenso argentino', pos: 'center 60%' },
       ],
     },
   ],

@@ -20,16 +20,39 @@ const GOLD = '#D9BE7E'
 const MotionBox = motion(Box)
 
 // Forma de cada celda: la primera grande (si hay suficientes), cada 5 una ancha
-const shapeOf = (i, n) => {
+const baseShape = (i, n) => {
   if (n >= 5 && i === 0) return { colSpan: 2, rowSpan: 2 }
   if (i % 5 === 3 || n <= 2) return { colSpan: 2, rowSpan: 1 }
   return { colSpan: 1, rowSpan: 1 }
 }
 
+// Ajusta las últimas celdas para que cada grilla cierre sin huecos
+// (4 columnas en desktop, 2 en mobile: alcanza con que el total sea múltiplo de 4).
+// Con 5+ fotos hay dos grillas (las primeras VISIBLE y el resto), así que se ajusta solo el resto.
+const shapesFor = (n) => {
+  const shapes = Array.from({ length: n }, (_, i) => baseShape(i, n))
+  if (n <= 2) return shapes
+  const from = n >= 5 ? VISIBLE : 0
+  const units = shapes.slice(from).reduce((a, s) => a + s.colSpan * s.rowSpan, 0)
+  const r = units % 4
+  if (r === 0) return shapes
+  const last = (cond) => { for (let i = n - 1; i >= from; i--) if (cond(shapes[i])) return i; return -1 }
+  if (r === 1) {
+    const w = last((s) => s.colSpan === 2 && s.rowSpan === 1)
+    if (w !== -1) { shapes[w] = { colSpan: 1, rowSpan: 1 }; return shapes }
+  }
+  for (let k = 0; k < 4 - r; k++) {
+    const i = last((s) => s.colSpan === 1)
+    if (i === -1) break
+    shapes[i] = { colSpan: 2, rowSpan: 1 }
+  }
+  return shapes
+}
+
 const plural = (n) => `${n} ${n === 1 ? 'foto' : 'fotos'}`
 
 // ── Mosaico ──────────────────────────────────────────────────
-function Mosaic({ photos, offset = 0, total, onOpen }) {
+function Mosaic({ photos, offset = 0, total, shapes, onOpen }) {
   return (
     <Grid
       templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }}
@@ -39,7 +62,7 @@ function Mosaic({ photos, offset = 0, total, onOpen }) {
     >
       {photos.map((p, k) => {
         const i = k + offset
-        const { colSpan, rowSpan } = shapeOf(i, total)
+        const { colSpan, rowSpan } = shapes[i]
         return (
           <Box
             key={p.src}
@@ -63,7 +86,7 @@ function Mosaic({ photos, offset = 0, total, onOpen }) {
               },
             }}
           >
-            <Image src={p.src} alt={p.alt} loading="lazy" w="100%" h="100%" objectFit="cover" />
+            <Image src={p.src} alt={p.alt} loading="lazy" w="100%" h="100%" objectFit="cover" objectPosition={p.pos || "center"} />
             <Flex className="zoom" aria-hidden="true" position="absolute" right="10px" bottom="10px"
                   boxSize="34px" borderRadius="full" bg="rgba(10,5,5,.6)" align="center" justify="center">
               <Box as={FiZoomIn} boxSize="16px" color="white" />
@@ -186,6 +209,7 @@ export default function GallerySection() {
   const gallery = GALLERIES[cur]
   const first = gallery.photos.slice(0, VISIBLE)
   const rest = gallery.photos.slice(VISIBLE)
+  const shapes = shapesFor(gallery.photos.length)
 
   const select = (i, focus) => {
     setCur(i)
@@ -260,7 +284,7 @@ export default function GallerySection() {
               transition={{ duration: 0.16 }}
             >
               <Box position="relative">
-                <Mosaic photos={first} total={gallery.photos.length} onOpen={setLightbox} />
+                <Mosaic photos={first} total={gallery.photos.length} shapes={shapes} onOpen={setLightbox} />
                 {/* Fundido sobre el corte mientras está colapsado */}
                 {rest.length > 0 && (
                   <Box aria-hidden="true" position="absolute" left={0} right={0} bottom="-1px" h={{ base: '90px', md: '120px' }}
@@ -273,7 +297,7 @@ export default function GallerySection() {
                 <>
                   <Collapse in={expanded} animateOpacity>
                     <Box id="galeria-mas" pt={{ base: 2, md: '10px' }}>
-                      <Mosaic photos={rest} offset={VISIBLE} total={gallery.photos.length} onOpen={setLightbox} />
+                      <Mosaic photos={rest} offset={VISIBLE} total={gallery.photos.length} shapes={shapes} onOpen={setLightbox} />
                     </Box>
                   </Collapse>
 
