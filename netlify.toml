@@ -2,6 +2,29 @@
   command = "npm run build"
   publish = "dist"
 
+# El panel de administración no debe aparecer en buscadores
+[[headers]]
+  for = "/admin*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+# Archivos de Vite con hash en el nombre: se pueden cachear para siempre
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/site.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"

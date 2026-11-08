@@ -1,62 +1,99 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#151212" />
+    <meta name="color-scheme" content="dark" />
 
     <!-- SEO básico -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Ezequiel Piovi | Jugador Profesional</title>
-    <meta name="description" content="Sitio oficial de Ezequiel Piovi, mediocampista argentino de Estudiantes de La Plata. Estadísticas, highlights, galería y contacto profesional." />
-    <meta name="keywords" content="Ezequiel Piovi, Keki Piovi, Lucas Ezequiel Piovi, mediocampista, Estudiantes de La Plata, Liga de Quito, LDU Quito, Copa Sudamericana, fútbol argentino, Liga Profesional, highlights" />
+    <title>Ezequiel Piovi | Mediocampista de Estudiantes de La Plata</title>
+    <meta name="description" content="Sitio oficial de Ezequiel &quot;Keki&quot; Piovi, mediocampista de Estudiantes de La Plata. Estadísticas, trayectoria, videos, fotos, prensa y contacto." />
     <meta name="author" content="Ezequiel Piovi" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href="https://ezequiel-piovi.netlify.app/" />
 
-    <!-- Open Graph -->
+    <!-- Íconos (logo del navbar) -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Open Graph (WhatsApp, Facebook, LinkedIn) -->
     <meta property="og:type" content="profile" />
-    <meta property="og:title" content="Ezequiel Piovi — Jugador Profesional" />
-    <meta property="og:description" content="Estadísticas, highlights y galería del mediocampista argentino de Estudiantes de La Plata." />
-    <meta property="og:url" content="https://ezequiel-piovi.netlify.app/" />
-    <meta property="og:image" content="https://ezequiel-piovi.netlify.app/og-image.webp" />
+    <meta property="og:site_name" content="Ezequiel Piovi" />
     <meta property="og:locale" content="es_AR" />
-    <meta property="og:site_name" content="Ezequiel Piovi — Sitio Oficial" />
+    <meta property="og:url" content="https://ezequiel-piovi.netlify.app/" />
+    <meta property="og:title" content="Ezequiel Piovi | Mediocampista de Estudiantes de La Plata" />
+    <meta property="og:description" content="Estadísticas, trayectoria, videos, fotos, prensa y contacto del mediocampista argentino." />
+    <meta property="og:image" content="https://ezequiel-piovi.netlify.app/og-image.jpg" />
+    <meta property="og:image:secure_url" content="https://ezequiel-piovi.netlify.app/og-image.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Ezequiel Piovi con la camiseta de Estudiantes de La Plata, junto a su nombre y su posición" />
+    <meta property="profile:first_name" content="Ezequiel" />
+    <meta property="profile:last_name" content="Piovi" />
+    <meta property="profile:username" content="kekipiovi18" />
 
-    <!-- Twitter Card -->
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Ezequiel Piovi — Jugador Profesional" />
-    <meta name="twitter:description" content="Sitio oficial del mediocampista argentino de Estudiantes de La Plata. Estadísticas, highlights y contacto." />
-    <meta name="twitter:image" content="https://ezequiel-piovi.netlify.app/og-image.webp" />
+    <meta name="twitter:title" content="Ezequiel Piovi | Mediocampista de Estudiantes de La Plata" />
+    <meta name="twitter:description" content="Estadísticas, trayectoria, videos, fotos, prensa y contacto del mediocampista argentino." />
+    <meta name="twitter:image" content="https://ezequiel-piovi.netlify.app/og-image.jpg" />
+    <meta name="twitter:image:alt" content="Ezequiel Piovi con la camiseta de Estudiantes de La Plata, junto a su nombre y su posición" />
 
-    <!-- Schema.org JSON-LD -->
+    <!-- Datos estructurados: sitio + página de perfil + persona -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Ezequiel Piovi",
-      "alternateName": ["Keki Piovi", "Lucas Ezequiel Piovi"],
-      "jobTitle": "Futbolista Profesional",
-      "description": "Mediocampista argentino que actualmente juega en Estudiantes de La Plata, Liga Profesional de Argentina.",
-      "nationality": {
-        "@type": "Country",
-        "name": "Argentina"
-      },
-      "birthDate": "1992-08-20",
-      "birthPlace": {
-        "@type": "Place",
-        "name": "Morón, Buenos Aires, Argentina"
-      },
-      "height": "1.70 m",
-      "weight": "72 kg",
-      "affiliation": {
-        "@type": "SportsTeam",
-        "name": "Estudiantes de La Plata",
-        "sport": "Fútbol"
-      },
-      "url": "https://ezequiel-piovi.netlify.app/",
-      "sameAs": [
-        "https://www.instagram.com/kekipiovi18/",
-        "https://www.transfermarkt.com.ar/ezequiel-piovi/profil/spieler/487346"
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://ezequiel-piovi.netlify.app/#website",
+          "url": "https://ezequiel-piovi.netlify.app/",
+          "name": "Ezequiel Piovi",
+          "inLanguage": "es-AR"
+        },
+        {
+          "@type": "ProfilePage",
+          "@id": "https://ezequiel-piovi.netlify.app/#profile",
+          "url": "https://ezequiel-piovi.netlify.app/",
+          "name": "Ezequiel Piovi | Mediocampista de Estudiantes de La Plata",
+          "inLanguage": "es-AR",
+          "isPartOf": { "@id": "https://ezequiel-piovi.netlify.app/#website" },
+          "primaryImageOfPage": "https://ezequiel-piovi.netlify.app/og-image.jpg",
+          "mainEntity": { "@id": "https://ezequiel-piovi.netlify.app/#person" }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://ezequiel-piovi.netlify.app/#person",
+          "name": "Ezequiel Piovi",
+          "givenName": "Ezequiel",
+          "familyName": "Piovi",
+          "alternateName": ["Keki Piovi", "Lucas Ezequiel Piovi"],
+          "jobTitle": "Futbolista profesional, mediocampista",
+          "description": "Mediocampista argentino de Estudiantes de La Plata. Campeón de la Copa Sudamericana 2023 con Liga de Quito.",
+          "image": "https://ezequiel-piovi.netlify.app/og-image.jpg",
+          "url": "https://ezequiel-piovi.netlify.app/",
+          "birthDate": "1992-08-20",
+          "birthPlace": { "@type": "Place", "name": "Morón, Buenos Aires, Argentina" },
+          "nationality": { "@type": "Country", "name": "Argentina" },
+          "height": { "@type": "QuantitativeValue", "value": 1.70, "unitCode": "MTR" },
+          "weight": { "@type": "QuantitativeValue", "value": 72, "unitCode": "KGM" },
+          "affiliation": { "@type": "SportsTeam", "name": "Estudiantes de La Plata", "sport": "Fútbol" },
+          "award": [
+            "Copa Sudamericana 2023",
+            "Torneo Clausura 2025",
+            "Once ideal de la Copa Sudamericana 2023",
+            "Mejor volante central de la LigaPro Serie A 2023",
+            "Mejor volante defensivo de la LigaPro Serie A 2024"
+          ],
+          "sameAs": [
+            "https://www.instagram.com/kekipiovi18/",
+            "https://www.transfermarkt.com.ar/ezequiel-piovi/profil/spieler/487346"
+          ]
+        }
       ]
     }
     </script>
@@ -71,6 +108,10 @@
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <h1>Ezequiel Piovi</h1>
+      <p>Sitio oficial de Ezequiel "Keki" Piovi, mediocampista argentino de Estudiantes de La Plata. Activá JavaScript para ver estadísticas, videos, fotos, prensa y contacto.</p>
+    </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

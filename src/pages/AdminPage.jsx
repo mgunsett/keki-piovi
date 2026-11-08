@@ -380,6 +380,19 @@ export default function AdminPage() {
   const [tabIndex,    setTabIndex]    = useState(0)
   const toast = useToast()
 
+  // El panel no debe indexarse: robots noindex mientras está abierto
+  useEffect(() => {
+    const prevTitle = document.title
+    document.title = 'Panel de administración | Ezequiel Piovi'
+    const robots = document.querySelector('meta[name="robots"]')
+    const prevRobots = robots?.getAttribute('content')
+    robots?.setAttribute('content', 'noindex, nofollow')
+    return () => {
+      document.title = prevTitle
+      if (robots && prevRobots) robots.setAttribute('content', prevRobots)
+    }
+  }, [])
+
   useEffect(() => {
     if (!isFirebaseConfigured) { setLoading(false); return }
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {

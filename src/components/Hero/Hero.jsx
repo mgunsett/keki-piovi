@@ -210,6 +210,8 @@ export default function Hero() {
           <Image
             className="player-photo"
             src={playerData.image}
+            fetchpriority="high"
+            decoding="async"
             alt={`${playerData.displayName}, ${playerData.position.toLowerCase()} profesional de ${playerData.currentClub}`}
             h="100%"
             w="auto"
