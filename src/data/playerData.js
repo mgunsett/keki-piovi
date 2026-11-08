@@ -66,6 +66,10 @@ import image48 from '@assets/gallery/image48.webp'
 import image49 from '@assets/gallery/image49.webp'
 import image50 from '@assets/gallery/image50.webp'
 import image51 from '@assets/gallery/image51.webp'
+import image52 from '@assets/gallery/image52.webp'
+import image53 from '@assets/gallery/image53.webp'
+import image54 from '@assets/gallery/image54.webp'
+import image55 from '@assets/gallery/image55.webp'
 //Prensa
 import logo1 from '@assets/logos/logo1.webp'
 import logo2 from '@assets/logos/logo2.webp'
@@ -282,16 +286,19 @@ export const playerData = {
         { src: image16, alt: 'Keki Piovi controla la pelota en el clásico ante Gimnasia' },
         { src: image17, alt: 'Keki Piovi conduce la pelota en un partido de Copa Libertadores', pos: '40% center' },
         { src: image20, alt: 'Keki Piovi, de espaldas con la 21, saluda al entrenador tras un partido', pos: 'center 22%' },
-        { src: image22, alt: 'Formación titular de Estudiantes en la Copa Libertadores' },
+        { src: image55, alt: 'Keki Piovi entre el humo de la tribuna en un partido de Estudiantes', pos: 'center 35%' },
         { src: image50, alt: 'Keki Piovi le pega de volea ante Boca con la tribuna de Estudiantes de fondo', pos: '62% 40%' },
         { src: image2, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
         { src: image45, alt: 'Keki Piovi junto a la pelota en un partido ante River', pos: '44% center' },
         { src: image13, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
-        { src: image46, alt: 'Keki Piovi da indicaciones antes de un tiro libre ante River', pos: 'center 40%' },
+        { src: image22, alt: 'Formación titular de Estudiantes en la Copa Libertadores' },
+        { src: image53, alt: 'Keki Piovi llega al estadio con la delegación de Estudiantes', pos: '48% 30%' },
         { src: image18, alt: 'Keki Piovi encara ante Corinthians por la Copa Libertadores', pos: '60% center' },
         { src: image3, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
         { src: image21, alt: 'Keki Piovi festeja con sus compañeros de Estudiantes', pos: 'center 35%' },
+        { src: image46, alt: 'Keki Piovi da indicaciones antes de un tiro libre ante River', pos: 'center 40%' },
         { src: image12, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
+        { src: image54, alt: 'Keki Piovi sonríe al llegar al estadio con el mate en la mano', pos: 'center 22%' },
         { src: image19, alt: 'Keki Piovi con la pelota en un partido de la Liga Profesional', pos: '45% center' },
         { src: image5, alt: 'Keki Piovi jugando para Estudiantes de La Plata' },
         { src: image23, alt: 'Keki Piovi en una pausa del partido con la camiseta de Estudiantes', pos: '42% center' },
@@ -313,6 +320,7 @@ export const playerData = {
         { src: image25, alt: 'Keki Piovi en la entrada en calor con el plantel de Estudiantes', pos: 'center 4%' },
         { src: image26, alt: 'Keki Piovi sonríe durante la entrada en calor', pos: 'center 25%' },
         { src: image47, alt: 'Keki Piovi elonga junto al plantel antes de un partido', pos: 'center 35%' },
+        { src: image52, alt: 'Keki Piovi trota en la entrada en calor con la remera de Estudiantes', pos: 'center 20%' },
         { src: image48, alt: 'Keki Piovi le pega a la pelota en la entrada en calor', pos: '50% center' },
         { src: image51, alt: 'Keki Piovi toca la pelota en la entrada en calor', pos: '52% center' },
         { src: image7, alt: 'Keki Piovi en la entrada en calor antes de un partido', pos: 'center 30%' },
