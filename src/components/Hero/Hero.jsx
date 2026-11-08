@@ -11,10 +11,6 @@ import { u, LANDSCAPE, heroUnitVars, SV_VARS } from '../../utils/heroUnits'
 
 gsap.registerPlugin(ScrollTrigger)
 
-
-// Textos, íconos y espaciados del Hero usan u(): no cambian de tamaño con el
-// zoom del navegador (ver utils/heroUnits). El nombre ya escala en vw.
-
 function PlayerPanel() {
   const [amber] = useToken('colors', ['brand.amber'])
   return (
@@ -157,10 +153,8 @@ export default function Hero() {
             filter="grayscale(100%) contrast(1.05)"
           />
         </Box>
-        
-        {/* Segunda foto de fondo — sector derecho, detrás y a la derecha del jugador.
-            Mismo tratamiento que la anterior. Solo desktop: en mobile/tablet y en
-            horizontal el jugador ocupa ese sector y la foto quedaría tapada. */}
+          
+        {/* Foto de fondo 2 — fundida con el fondo */}
         <Box
           position="absolute"
           zIndex={0}
@@ -188,10 +182,8 @@ export default function Hero() {
           />
         </Box>
 
-        {/* Player photo
-            Anclada abajo y dimensionada por alto (la foto es vertical, ~0.43 de proporción):
-            - mobile/tablet: arranca a la altura de "EZEQUIEL" y termina sobre el strip de partidos
-            - desktop: a la derecha del nombre, con el balón apoyado cerca del borde inferior */}
+        {/* Player photo */}
+
         <Box
           ref={photoRef}
           position="absolute"
@@ -200,7 +192,7 @@ export default function Hero() {
           bottom={{ base: u(138), md: u(168), lg: 'calc(5 * var(--sv))' }}
           right={{ base: '1%', md: '7%', lg: 'auto' }}
           left={{ base: 'auto', lg: '56%' }}
-          h={{ lg: 'calc(84 * var(--sv))' }}
+          h={{base: 'calc(74 * var(--sv))', lg: 'calc(84 * var(--sv))' }}
           w={{ base: 'auto', lg: 'min(30vw, calc(36 * var(--sv)))' }}
           maxW={{ base: '62vw', md: '46vw', lg: 'none' }}
           display="flex"
@@ -285,7 +277,7 @@ export default function Hero() {
         <Box
           className="player-info"
           position="absolute"
-          bottom={{ base: '40%', md: '40%', lg: '18%' }}
+          bottom={{ base: '35%', md: '40%', lg: '18%' }}
           left={{ base: '5%', lg: '15%' }}
           zIndex={15}
           sx={{ [LANDSCAPE]: { bottom: '10%', left: '6%' } }}
