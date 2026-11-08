@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 
-Sitemap: https://ezequiel-piovi.netlify.app/sitemap.xml
+Sitemap: https://kekipiovi.com/sitemap.xml
