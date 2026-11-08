@@ -44,7 +44,7 @@ export function VideoCard({ video, onOpen }) {
         },
       }}
     >
-      <AspectRatio ratio={9 / 16}>
+      <AspectRatio ratio={{ base: 9 / 17, md: 9 / 16 }}>
         <Box
           position="relative"
           overflow="hidden"

@@ -168,7 +168,7 @@ export default function VideosSection() {
             {videos.map((v) => (
               // Tope por alto de viewport: la card (9:16) nunca supera ~78vh
               <Box key={v.id} flex="1 1 0"
-                   maxW={{ md: 'min(340px, calc(70vh * 9 / 16))', lg: 'min(400px, calc(78vh * 9 / 16))' }}>
+                   maxW={{md: 'min(340px, calc(70vh * 9 / 16))', lg: 'min(400px, calc(78vh * 9 / 16))' }}>
                 <VideoCard video={v} onOpen={setOpenVideo} />
               </Box>
             ))}
@@ -176,7 +176,7 @@ export default function VideosSection() {
 
           {/* Mobile: slider con swipe */}
           <Box display={{ base: 'block', md: 'none' }}>
-            <Flex align="stretch" gap={3} pl={2}>
+            <Flex align="stretch" gap={1} pl={2}>
             <InstagramRail width="48px" />
             <Flex
               ref={sliderRef}
@@ -195,8 +195,8 @@ export default function VideosSection() {
               }}
             >
               {videos.map((v) => (
-                <Box key={v.id} flex="0 0 82%" scrollSnapAlign="center">
-                  <VideoCard video={v} onOpen={setOpenVideo} />
+                <Box key={v.id} flex="0 0 92%" scrollSnapAlign="center">
+                  <VideoCard video={v} onOpen={setOpenVideo}/>
                 </Box>
               ))}
             </Flex>

@@ -18,7 +18,7 @@ const WIDTH_RATIO = 1.2
 // En mobile el espaciado entre letras tiene tope (en em) para que no queden tan separadas;
 // el alto restante lo completa el usuario (@kekipiovi18), que solo se muestra en mobile.
 const MOBILE_MAX_SPACING = 0.14
-const HANDLE_GAP = 12
+const HANDLE_GAP = 20
 
 // Ajusta la palabra para que ocupe exactamente el alto disponible:
 // primero el tamaño según el ancho; el alto que sobra se reparte en el espaciado entre letras.
@@ -86,7 +86,7 @@ export function InstagramRail({ width }) {
         },
       }}
     >
-      <Flex h="100%" direction="column" align="center" gap={{ base: 3, md: 4 }} py="6px" overflow="hidden" aria-hidden="true">
+      <Flex h="100%" direction="column" align="center" gap={{ base: 2, md: 4 }} py="6px" overflow="hidden" aria-hidden="true">
         <Flex
           className="rail-logo"
           flexShrink={0}
@@ -99,12 +99,12 @@ export function InstagramRail({ width }) {
           justify="center"
           transition="background-color .25s ease"
         >
-          <Box as={FaInstagram} boxSize={{ base: '18px', md: '54px' }} transform="rotate(270deg)" />
+          <Box as={FaInstagram} boxSize={{ base: '28px', md: '54px' }} transform="rotate(270deg)" />
         </Flex>
 
         {/* La palabra ocupa todo el alto restante: el tamaño y el espaciado se ajustan en useFitWord.
             En mobile, debajo va el usuario para completar el alto sin separar tanto las letras. */}
-        <Flex ref={wrapRef} flex="1" w="100%" minH={0} direction="column" align="center" justify="center" gap={`${HANDLE_GAP}px`}>
+        <Flex ref={wrapRef} flex="1" w="100%" minH={0} direction="column" align="center" justify="flex-start" gap={`${HANDLE_GAP}px`}>
           <Text
             ref={wordRef}
             className="rail-word"
