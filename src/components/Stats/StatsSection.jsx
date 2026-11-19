@@ -4,6 +4,8 @@ import { useInView, useReducedMotion } from 'framer-motion'
 import { FiChevronDown } from 'react-icons/fi'
 import useScrubReveal from '../../hooks/useScrubReveal'
 import { playerData as P } from '../../data/playerData'
+import useSeasonStats from '../../hooks/useSeasonStats'
+import { seasonTiles, seasonTitle } from '../../lib/seasonTiles'
 
 const GOLD = '#D9BE7E'
 const GOLD_DEEP = '#B89B5E'
@@ -128,12 +130,21 @@ function PitchCard() {
 }
 
 // ── Última temporada ─────────────────────────────────────────
+// Datos de la API que van en dorado, como los destacados de playerData.
+const HIGHLIGHT = new Set(['Valoración', 'Pases clave'])
+
 function SeasonCard() {
+  // Temporada en curso desde API-Football; sin datos, los valores fijos.
+  const season = useSeasonStats()
+  const items = season
+    ? seasonTiles(season).map((t) => ({ ...t, highlight: HIGHLIGHT.has(t.label) }))
+    : P.seasonStats
+
   return (
     <Box>
-      <CardTitle>Última temporada</CardTitle>
+      <CardTitle>{seasonTitle(season, 'Última temporada')}</CardTitle>
       <Grid as="ul" listStyleType="none" templateColumns="1fr 1fr" mt={4}>
-        {P.seasonStats.map((s, i) => (
+        {items.map((s, i) => (
           <Box
             as="li"
             key={s.label}
@@ -141,7 +152,7 @@ function SeasonCard() {
             pr={i % 2 === 0 ? 4 : 0}
             pl={i % 2 === 1 ? 5 : 0}
             borderRight={i % 2 === 0 ? `1px solid ${LINE}` : 'none'}
-            borderBottom={i < P.seasonStats.length - 2 ? `1px solid ${LINE}` : 'none'}
+            borderBottom={i < items.length - 2 ? `1px solid ${LINE}` : 'none'}
           >
             <Text fontFamily="heading" fontSize={{ base: '48px', lg: '54px' }} lineHeight={0.9}
                   color={s.highlight ? 'brand.amber' : 'brand.bone'} sx={{ fontVariantNumeric: 'tabular-nums' }}>
