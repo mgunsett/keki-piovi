@@ -132,11 +132,11 @@ export const playerData = {
   // highlight: se muestran en rojo en la ficha (los números que mejor lo definen)
   seasonStats: [
     { label: 'Recuperos', value: 82, highlight: true },
-    { label: 'Partidos', value: 15 },
-    { label: 'Minutos jugados', value: "1.726'" },
-    { label: 'Valoración', value: 7.9, highlight: true },
-    { label: 'Tiros al arco', value: 17 },
-    { label: 'Asistencias', value: 1 },
+    { label: 'Partidos', value: 42 },
+    { label: 'Minutos jugados', value: "3.393'" },
+    { label: 'Valoración', value: 8.4, highlight: true },
+    { label: 'Tiros al arco', value: 8 },
+    { label: 'Asistencias', value: 2 },
   ],
 
   clubs: [
@@ -145,7 +145,7 @@ export const playerData = {
       country: 'Argentina',
       years: '2025 — Actualidad',
       logo: escudoEstudiantes,
-      titles: ['Torneo Clausura 2025', 'Trofeo de Campeones 2025'],
+      titles: ['Torneo Clausura 2025', 'Trofeo de Campeones 2025', 'Supercopa Argentina 2026'],
       info: '',
     },
     {
