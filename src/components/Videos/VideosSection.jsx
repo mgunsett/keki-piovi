@@ -9,6 +9,7 @@ import { playerData } from '../../data/playerData'
 import useScrubReveal from '../../hooks/useScrubReveal'
 import { VideoCard } from './VideoCard'
 import { InstagramRail } from './InstagramRail'
+import { HighlightVideo } from './HighlightVideo'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -162,6 +163,9 @@ export default function VideosSection() {
 
         {/* ── Cards ── */}
         <Box ref={wrapRef} position="relative">
+          {/* Video principal (YouTube) arriba de los reels */}
+          <HighlightVideo />
+
           {/* Desktop: riel de Instagram + cards en fila (el riel toma la altura de las cards) */}
           <Flex display={{ base: 'none', md: 'flex' }} justify="center" align="stretch" gap={{ md: 3, lg: 6 }}>
             <InstagramRail width={{ md: '64px', lg: '84px' }} />

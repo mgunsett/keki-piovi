@@ -199,6 +199,16 @@ export const playerData = {
     },
   ],
 
+  // Video principal de la sección Videos (YouTube). youtubeId: en https://www.youtube.com/watch?v=XXXX es "XXXX"
+  highlight: {
+    youtubeId: 'LHTMl7EpG8M',
+    title: 'Compacto 2026',
+    source: 'LED Sports',
+    date: 'Nov 2026',
+    cover: image4,
+    coverPos: 'center 40%',
+  },
+
   videos: [
     {
       id: 'v0',
