@@ -1,5 +1,5 @@
 import { Box, Text } from '@chakra-ui/react'
-import useCountdown, { pad2 } from '../../hooks/useCountdown'
+import useCountdown, { pad2, matchPhase } from '../../hooks/useCountdown'
 import { libertadores } from '../../data/libertadoresData'
 
 export const prefersReducedMotion = () =>
@@ -30,16 +30,17 @@ export function useFinalCountdown() {
     { value: pad2(c.minutes), label: 'min' },
     { value: pad2(c.seconds), label: 'seg' },
   ]
-  const statusText =
-    c.status === 'today' ? 'Hoy se juega la final' : c.status === 'past' ? 'La final ya se jugó' : null
-  return { ...c, units, statusText }
+  const live = c.status === 'live'
+  const phase = live ? matchPhase(c.elapsedMin) : null
+  const statusText = c.status === 'past' ? 'La final ya se jugó' : null
+  return { ...c, units, live, phase, statusText }
 }
 
 // Texto accesible del countdown (los dígitos que cambian cada segundo van aria-hidden)
 export function CountdownSrText({ c }) {
   return (
     <Text as="span" srOnly>
-      {c.statusText ?? `Faltan ${c.days} días y ${c.hours} horas para la final`}
+      {c.statusText ?? (c.live ? 'La final se está jugando ahora' : `Faltan ${c.days} días y ${c.hours} horas para la final`)}
     </Text>
   )
 }

@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { Box, Flex, Grid, Text, Image } from '@chakra-ui/react'
+import { keyframes } from '@emotion/react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { libertadores as L } from '../../data/libertadoresData'
@@ -9,6 +10,10 @@ gsap.registerPlugin(ScrollTrigger)
 
 const GOLD = '#D9BE7E'
 const GOLD_DEEP = '#B89B5E'
+// Sello "En juego": entra una sola vez; el punto late mientras dura el partido
+const stampIn = keyframes`from { opacity: 0; scale: 1.25 } to { opacity: 1; scale: 1 }`
+const ping = keyframes`from { transform: scale(1); opacity: .7 } to { transform: scale(3.2); opacity: 0 }`
+const EASE = 'cubic-bezier(0.23, 1, 0.32, 1)'
 const GALLERY_POSITIONS = ['center 30%', 'center 30%', 'center 80%', 'center 90%', 'center 80%']
 
 export default function LibertadoresSection() {
@@ -149,27 +154,63 @@ export default function LibertadoresSection() {
               ))}
             </Grid>
 
-            {/* Countdown */}
+            {/* Countdown: al llegar a cero queda apagado y aparece el sello "En juego" */}
             <Box mt={{ base: 8, lg: 10 }}>
               <time dateTime={L.final.kickoff}>
                 <CountdownSrText c={c} />
                 {c.statusText ? (
                   <Text fontFamily="heading" fontSize="5xl" color={GOLD} lineHeight={1}>{c.statusText}</Text>
                 ) : (
-                  <Flex aria-hidden="true" align="stretch">
-                    {c.units.map((u, i) => (
-                      <Box key={u.label} pr={{ base: 4, lg: 7 }} pl={i ? { base: 4, lg: 7 } : 0}
-                           borderLeft={i ? '1px solid' : 'none'} borderColor="whiteAlpha.200">
-                        <Text fontFamily="heading" fontSize={{ base: '5xl', lg: '7xl' }} lineHeight={0.9}
-                              color="brand.bone" sx={{ fontVariantNumeric: 'tabular-nums' }}>
-                          {u.value}
-                        </Text>
-                        <Text fontFamily="mono" fontSize="xs" color="brand.gray" mt={1}>{u.label}</Text>
-                      </Box>
-                    ))}
-                  </Flex>
+                  <Box position="relative" display="inline-block" maxW="100%">
+                    <Flex aria-hidden="true" align="stretch">
+                      {c.units.map((u, i) => (
+                        <Box key={u.label} pr={{ base: 3, lg: 7 }} pl={i ? { base: 3, lg: 7 } : 0}
+                             borderLeft={i ? '1px solid' : 'none'} borderColor="whiteAlpha.200">
+                          <Text fontFamily="heading" fontSize={{ base: '5xl', lg: '7xl' }} lineHeight={0.9}
+                                color={c.live ? 'rgba(243,238,227,0.22)' : 'brand.bone'}
+                                transition={`color 0.6s ${EASE}`}
+                                sx={{ fontVariantNumeric: 'tabular-nums' }}>
+                            {u.value}
+                          </Text>
+                          <Text fontFamily="mono" fontSize="xs" mt={1}
+                                color={c.live ? 'rgba(163,155,146,0.5)' : 'brand.gray'}>{u.label}</Text>
+                        </Box>
+                      ))}
+                    </Flex>
+                    {c.live && (
+                      <Flex
+                        aria-hidden="true"
+                        position="absolute" left="50%" top="42%"
+                        transform="translate(-50%, -50%) rotate(-6deg)"
+                        align="center" gap={3} whiteSpace="nowrap"
+                        bg="brand.amber" borderRadius="8px"
+                        px={{ base: 4, lg: 5 }} pt={{ base: '8px', lg: '10px' }} pb={{ base: '6px', lg: '8px' }}
+                        boxShadow="0 18px 40px -12px rgba(239,45,56,0.6)"
+                        sx={{
+                          animation: `${stampIn} 0.7s ${EASE} both`,
+                          '@media (prefers-reduced-motion: reduce)': { animation: 'none' },
+                        }}
+                      >
+                        <Box position="relative" w="12px" h="12px" borderRadius="full" bg="brand.bone">
+                          <Box position="absolute" inset={0} borderRadius="full" bg="brand.bone"
+                               sx={{
+                                 animation: `${ping} 1.6s ${EASE} infinite`,
+                                 '@media (prefers-reduced-motion: reduce)': { animation: 'none' },
+                               }} />
+                        </Box>
+                        <Text fontFamily="heading" fontSize={{ base: '34px', lg: '46px' }} lineHeight={1}
+                              letterSpacing="0.04em" color="brand.bone">En juego</Text>
+                      </Flex>
+                    )}
+                  </Box>
                 )}
               </time>
+              {c.live && c.phase && (
+                <Text aria-hidden="true" fontFamily="mono" fontSize={{ base: 'sm', lg: 'md' }} color="brand.gray" mt={4}>
+                  <Text as="b" color="brand.bone" fontWeight={600}>{c.phase.label}</Text>
+                  {c.phase.minute ? ` · min. ${c.phase.minute}` : ''}{c.phase.exact ? '' : ' aprox.'}
+                </Text>
+              )}
             </Box>
 
             {/* Estrellas */}
